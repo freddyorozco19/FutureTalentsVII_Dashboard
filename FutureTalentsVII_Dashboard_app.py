@@ -14,4 +14,5 @@ from io import BytesIO
 import pandas as pd
 import numpy as np
 
-
+#make it look nice from the start
+st.set_page_config(layout='wide')
