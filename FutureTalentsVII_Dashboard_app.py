@@ -47,15 +47,13 @@ prop3 = font_manager.FontProperties(fname=font_path2)
 
 #Data
 df = pd.read_excel("MatchesData/matches.xlsx")
-st.dataframe(df)
-st.title("DF")
+
+st.title("DaF")
 df['FieldXfrom'] = (df['FieldXfrom']*105)/1
 df['FieldYfrom'] = (df['FieldYfrom']*68)/1
 df['FieldXto'] = (df['FieldXto']*105)/1
 df['FieldYto'] = (df['FieldYto']*68)/1
-
-
-
+st.dataframe(df)
 
 selbox01, selbox02, selbox03 = st.columns(3)
 
