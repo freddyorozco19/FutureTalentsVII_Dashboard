@@ -30,6 +30,9 @@ import requests
 from PIL import Image
 from matplotlib.patches import Rectangle
 
+#make it look nice from the start
+st.set_page_config(layout='wide')
+
 #####################################################################################################################################################
 
 font_path = 'Resources/keymer-bold.otf'  # Your font path goes here
@@ -52,8 +55,7 @@ df['FieldXto'] = (df['FieldXto']*105)/1
 df['FieldYto'] = (df['FieldYto']*68)/1
 
 
-#make it look nice from the start
-st.set_page_config(layout='wide')
+
 
 selbox01, selbox02, selbox03 = st.columns(3)
 
