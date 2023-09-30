@@ -16,3 +16,6 @@ import numpy as np
 
 #make it look nice from the start
 st.set_page_config(layout='wide')
+
+Lista_Partidos = ['Fecha 1', 'Fecha 2']
+st.selectbox("Seleccione partido:", Lista_Partidos) 
