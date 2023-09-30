@@ -44,6 +44,11 @@ prop3 = font_manager.FontProperties(fname=font_path2)
 
 #Data
 df = pd.read_excel("MatchesData/matches.xlsx")
+df['FieldXfrom'] = (df['FieldXfrom']*105)/1
+df['FieldYfrom'] = (df['FieldYfrom']*68)/1
+df['FieldXto'] = (df['FieldXto']*105)/1
+df['FieldYto'] = (df['FieldYto']*68)/1
+
 
 #make it look nice from the start
 st.set_page_config(layout='wide')
@@ -85,4 +90,5 @@ ax53.set_facecolor("#000")
 #df = df[(df['EfectiveMinute'] >= EfectMinSel[0]) & (df['EfectiveMinute'] <= EfectMinSel[1])]
 dfKK = df
 
+ax.scatter(df['FieldXfrom'], df['FieldYfrom'], color = colorviz, edgecolors='w', s=30, zorder=2, alpha=0.2)
 st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
