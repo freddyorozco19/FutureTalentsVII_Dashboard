@@ -90,5 +90,5 @@ ax53.set_facecolor("#000")
 #df = df[(df['EfectiveMinute'] >= EfectMinSel[0]) & (df['EfectiveMinute'] <= EfectMinSel[1])]
 dfKK = df
 
-ax.scatter(df['FieldXfrom'], df['FieldYfrom'], color = colorviz, edgecolors='w', s=30, zorder=2, alpha=0.2)
+ax.scatter(df['FieldXfrom'], df['FieldYfrom'], color = "#FF0046", edgecolors='w', s=30, zorder=2, alpha=0.2)
 st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
