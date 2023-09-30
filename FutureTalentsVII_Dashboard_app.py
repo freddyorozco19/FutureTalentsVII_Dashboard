@@ -14,6 +14,10 @@ from io import BytesIO
 import pandas as pd
 import numpy as np
 
+
+#Data
+df = pd.read_excel("MatchesData/matches.xlsx")
+
 #make it look nice from the start
 st.set_page_config(layout='wide')
 
@@ -23,6 +27,6 @@ with selbox01:
   Lista_Partidos = ['Fecha 1', 'Fecha 2']
   st.selectbox("Choose matchday:", Lista_Partidos) 
 with selbox02:
-#Player_Lst = df['Players'].drop_duplicates()
-  Player_Lst = ['Player 1', 'Player 2', '9-Ben Youssouf Kamate']
+  Player_Lst = df['Players'].drop_duplicates()
+  #Player_Lst = ['Player 1', 'Player 2', '9-Ben Youssouf Kamate']
   st.selectbox("Choose player:", Player_Lst)
