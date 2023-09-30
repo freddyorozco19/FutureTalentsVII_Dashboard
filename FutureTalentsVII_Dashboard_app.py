@@ -61,7 +61,7 @@ with selbox01:
   st.selectbox("Choose matchday:", Lista_Partidos) 
 with selbox03:
   Team_Lst = df['Team'].drop_duplicates().tolist()
-  TeamSel = st.selectbox("Choose team:", Team_Lst
+  TeamSel = st.selectbox("Choose team:", Team_Lst)
   df = df[df['Team'] == TeamSel].reset_index(drop=True)
 with selbox02:
   Player_Lst = df['Players'].drop_duplicates().tolist()
