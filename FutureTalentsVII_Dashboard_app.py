@@ -48,7 +48,7 @@ prop3 = font_manager.FontProperties(fname=font_path2)
 #Data
 df = pd.read_excel("MatchesData/matches.xlsx")
 
-st.title("DaFf")
+st.title("DaFfS")
 df['FieldXfrom'] = (df['FieldXfrom']*105)/1
 df['FieldYfrom'] = (df['FieldYfrom']*68)/1
 df['FieldXto'] = (df['FieldXto']*105)/1
@@ -60,9 +60,10 @@ with selbox01:
   Lista_Partidos = ['Fecha 1', 'Fecha 2']
   st.selectbox("Choose matchday:", Lista_Partidos) 
 with selbox02:
-  Player_Lst = df['Players'].drop_duplicates()
+  Player_Lst = df['Players'].drop_duplicates().tolist()
   #Player_Lst = ['Player 1', 'Player 2', '9-Ben Youssouf Kamate']
-  st.selectbox("Choose player:", Player_Lst)
+  PlayerSel = st.selectbox("Choose player:", Player_Lst)
+  df = df[df['Players'] == PlayerSel].reset_index(drop=True)
 
 
 
