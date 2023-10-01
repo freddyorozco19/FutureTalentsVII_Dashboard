@@ -54,6 +54,18 @@ df['FieldYfrom'] = (df['FieldYfrom']*68)/1
 df['FieldXto'] = (df['FieldXto']*105)/1
 df['FieldYto'] = (df['FieldYto']*68)/1
 
+teamsearchbox01, teamsearchbox02, teamsearchbox03 = st.columns(3)
+with teamsearchbox01:
+  Team_Lst = df['Team'].drop_duplicates().tolist()
+  TeamSel = st.selectbox("Choose team:", Team_Lst)
+  df = df[df['Team'] == TeamSel].reset_index(drop=True)
+with teamsearchbox02:
+  Positions_List = df['DEF', 'MED' 'DEL']
+  PositionsSel = st.selectbox("Choose position:", Positions_List)
+with teamsearchbox03:
+  Player_Lst = df['Players'].drop_duplicates().tolist()
+  PlayerSel = st.selectbox("Choose player:", Player_Lst)
+  df = df[df['Players'] == PlayerSel].reset_index(drop=True)
 selbox01, selbox02, selbox03 = st.columns(3)
 
 with selbox01:
@@ -62,12 +74,11 @@ with selbox01:
 with selbox02:
   Team_Lst = df['Team'].drop_duplicates().tolist()
   TeamSel = st.selectbox("Choose team:", Team_Lst)
-  df = df[df['Team'] == TeamSel].reset_index(drop=True)
+  #df = df[df['Team'] == TeamSel].reset_index(drop=True)
 with selbox03:
   Player_Lst = df['Players'].drop_duplicates().tolist()
-  #Player_Lst = ['Player 1', 'Player 2', '9-Ben Youssouf Kamate']
   PlayerSel = st.selectbox("Choose player:", Player_Lst)
-  df = df[df['Players'] == PlayerSel].reset_index(drop=True)
+  #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
 
 
 
