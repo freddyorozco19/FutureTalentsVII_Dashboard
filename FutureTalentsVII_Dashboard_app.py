@@ -49,7 +49,7 @@ from streamlit_option_menu import option_menu
 
 # 1. as sidebar menu
 with st.sidebar:
-    with open("Resources/logo.jpg", "rb") as f:
+    with open("Resources/logobk.png", "rb") as f:
             data = base64.b64encode(f.read()).decode("utf-8")
         
             st.sidebar.markdown(
