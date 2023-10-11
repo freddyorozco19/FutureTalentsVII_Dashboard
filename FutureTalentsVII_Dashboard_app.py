@@ -49,6 +49,17 @@ from streamlit_option_menu import option_menu
 
 # 1. as sidebar menu
 with st.sidebar:
+    with open("Resources/win.png", "rb") as f:
+            data = base64.b64encode(f.read()).decode("utf-8")
+        
+            st.sidebar.markdown(
+                f"""
+                <div style="display:table;margin-top:-20%">
+                    <img src="data:image/png;base64,{data}" width="300">
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
     selected = option_menu("Main Menu", ["Rankings", 'Player Search'], 
         icons=['trophy', 'search'], menu_icon="cast", default_index=1)
     
