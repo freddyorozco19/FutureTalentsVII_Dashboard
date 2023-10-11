@@ -60,8 +60,8 @@ with st.sidebar:
                 """,
                 unsafe_allow_html=True,
             )
-    selected = option_menu("Main Menu", ["Rankings", 'Player Search'], 
-        icons=['trophy', 'search'], menu_icon="cast", default_index=1)
+    selected = option_menu("", ["Rankings", 'Player Search'], 
+        icons=['trophy', 'search'], default_index=1)
     
 
 # 2. horizontal menu
