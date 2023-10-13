@@ -61,7 +61,8 @@ with st.sidebar:
                 unsafe_allow_html=True,
             )
     selected = option_menu("", ["Rankings", 'Player Search'], 
-        icons=['trophy', 'search'], default_index=1)
+        icons=['trophy', 'search'], default_index=1, styles={
+            "nav-link": {"font-size": "20px"}})
     
 
 # 2. horizontal menu
