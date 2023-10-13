@@ -175,3 +175,4 @@ if selected == "Player Search":
         st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
     with pltmain02:
         st.dataframe(df)
+    st.markdown("""----""")
