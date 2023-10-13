@@ -55,7 +55,7 @@ with st.sidebar:
             st.sidebar.markdown(
                 f"""
                 <div style="display:table;margin-top:-20%">
-                    <img src="data:image/png;base64,{data}" width="300">
+                    <img src="data:image/png;base64,{data}" width="200">
                 </div>
                 """,
                 unsafe_allow_html=True,
