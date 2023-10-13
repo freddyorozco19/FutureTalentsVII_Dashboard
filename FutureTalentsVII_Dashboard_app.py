@@ -62,7 +62,7 @@ with st.sidebar:
             )
     selected = option_menu("", ["Rankings", 'Player Search'], 
         icons=['trophy', 'search'], default_index=1, styles={
-            "nav-link": {"font-size": "20px"}})
+            "nav-link": {"font-size": "10px"}})
     
 
 # 2. horizontal menu
