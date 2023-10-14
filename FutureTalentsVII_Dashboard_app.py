@@ -110,6 +110,7 @@ with st.sidebar:
     event_counts = df.groupby(['Players', 'Team'])['Action'].value_counts().unstack(fill_value=0)
     columnsevents = event_counts.columns.tolist()
 if selected == "Rankings":
+    st.title("RANKINGS")
     st.markdown("""----""")
     st.write(event_counts)
     st.markdown("""----""")
