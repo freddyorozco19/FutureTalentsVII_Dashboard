@@ -60,7 +60,7 @@ with st.sidebar:
                 """,
                 unsafe_allow_html=True,
             )
-    selected = option_menu("", ["Rankings", 'Player Search'], 
+    selected = option_menu("", ["Rankings", "Player Search", "Comparison"], 
         icons=['trophy', 'search'], default_index=1, styles={
             "nav-link": {"font-size": "15px"}})
     
