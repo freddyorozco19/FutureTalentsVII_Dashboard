@@ -139,7 +139,7 @@ if selected == "Rankings":
         ax.barh(players_teams, event_counts[MetricSel], color="#FF0050")
         st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
     with p02:
-        st.write(event_counts[MetricSel)
+        st.write(event_counts[MetricSel])
 if selected == "Player Search":
     
     #Data
