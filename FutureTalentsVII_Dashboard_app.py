@@ -125,7 +125,7 @@ if selected == "Rankings":
         PositionsSel = st.selectbox("Choose index:", Positions_List)
     with metricsearchbox03:
       Player_Lst = df['Players'].drop_duplicates().tolist()
-      PlayerSel = st.selectbox("Choose player:", Player_Lst)
+      PlayerSel = st.selectbox("Choose range:", Player_Lst)
       #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     p01, p02 = st.columns(2)
     with p01:
