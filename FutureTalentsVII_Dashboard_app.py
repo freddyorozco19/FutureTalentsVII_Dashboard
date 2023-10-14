@@ -127,7 +127,11 @@ if selected == "Rankings":
       Player_Lst = df['Players'].drop_duplicates().tolist()
       PlayerSel = st.selectbox("Choose player:", Player_Lst)
       #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
-    
+    fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
+    ax.axis("off")
+    fig.patch.set_visible(False)
+    players_teams = [f'{player} - {team}' for player, team in event_counts.index]
+    ax.barh(players_teams, events[' Pass'], color='blue', label='Pass')
 if selected == "Player Search":
     
     #Data
@@ -152,11 +156,7 @@ if selected == "Player Search":
       PlayerSel = st.selectbox("Choose player:", Player_Lst)
       df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     st.markdown("""----""")
-    fig, ax = plt.subplots(figsize=(8, 8), dpi = 800)
-    ax.axis("off")
-    fig.patch.set_visible(False)
-    players_teams = [f'{player} - {team}' for player, team in event_counts.index]
-    ax.barh(players_teams, events[' Pass'], color='blue', label='Pass')
+   
     #selbox01, selbox02, selbox03 = st.columns(3)
     #with selbox01:
     #  Lista_Partidos = ['Fecha 1', 'Fecha 2']
