@@ -127,15 +127,19 @@ if selected == "Rankings":
       Player_Lst = df['Players'].drop_duplicates().tolist()
       PlayerSel = st.selectbox("Choose player:", Player_Lst)
       #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
-    fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
-    ax.axis("off")
-    fig.patch.set_visible(False)
-    players_teams = [f'{player} - {team}' for player, team in event_counts.index]
-    #events = event_counts[MetricSel].head(-5)
-    event_counts = event_counts.sort_values(by=MetricSel, axis=0, ascending=True)
-    #event_counts = event_counts.head(10)
-    ax.barh(players_teams, event_counts[MetricSel], color="#FF0050")
-    st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
+    p01, p02 = st.columns(2)
+    with p01:
+        fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
+        ax.axis("off")
+        fig.patch.set_visible(False)
+        players_teams = [f'{player} - {team}' for player, team in event_counts.index]
+        #events = event_counts[MetricSel].head(-5)
+        event_counts = event_counts.sort_values(by=MetricSel, axis=0, ascending=True)
+        #event_counts = event_counts.head(10)
+        ax.barh(players_teams, event_counts[MetricSel], color="#FF0050")
+        st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
+    with p02:
+        st.write(event_counts[MetricSel)
 if selected == "Player Search":
     
     #Data
