@@ -110,6 +110,9 @@ with st.sidebar:
     event_counts = df.groupby(['Players', 'Team'])['Action'].value_counts().unstack(fill_value=0)
     columnsevents = event_counts.columns.tolist()
 if selected == "Rankings":
+    st.markdown("""----""")
+    st.write(event_counts)
+    st.markdown("""----""")
     metricsearchbox01, metricsearchbox02, metricsearchbox03 = st.columns(3)
     with metricsearchbox01:
         #Team_Lst = df['Team'].drop_duplicates().tolist()
@@ -123,7 +126,7 @@ if selected == "Rankings":
       Player_Lst = df['Players'].drop_duplicates().tolist()
       PlayerSel = st.selectbox("Choose player:", Player_Lst)
       #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
-    st.write(event_counts)
+    
 if selected == "Player Search":
     
     #Data
