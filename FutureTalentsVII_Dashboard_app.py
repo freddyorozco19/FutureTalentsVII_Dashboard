@@ -132,7 +132,8 @@ if selected == "Rankings":
     fig.patch.set_visible(False)
     players_teams = [f'{player} - {team}' for player, team in event_counts.index]
     #events = event_counts[MetricSel].head(-5)
-    event_counts = event_counts.sort_values(by=MetricSel, axis=0, ascending=False)
+    event_counts = event_counts.sort_values(by=MetricSel, axis=0, ascending=True)
+    event_counts = event_counts.head(10)
     ax.barh(players_teams, event_counts[MetricSel], color="#FF0050")
     st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
 if selected == "Player Search":
