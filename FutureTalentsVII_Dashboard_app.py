@@ -121,8 +121,8 @@ if selected == "Rankings":
         MetricSel = st.selectbox("Choose metric:", Metric_Lst)
         #event_counts = event_counts[event_counts[MetricSel]].reset_index(drop=True)
     with metricsearchbox02:
-      Positions_List = ['DEF', 'MED' 'DEL']
-      PositionsSel = st.selectbox("Choose position:", Positions_List)
+        Positions_List = ['DEF', 'MED' 'DEL']
+        PositionsSel = st.selectbox("Choose position:", Positions_List)
     with metricsearchbox03:
       Player_Lst = df['Players'].drop_duplicates().tolist()
       PlayerSel = st.selectbox("Choose player:", Player_Lst)
