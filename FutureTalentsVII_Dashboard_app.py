@@ -132,6 +132,7 @@ if selected == "Rankings":
     fig.patch.set_visible(False)
     players_teams = [f'{player} - {team}' for player, team in event_counts.index]
     ax.barh(players_teams, event_counts['Aerial duel'], color='blue', label='Pass')
+    st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
 if selected == "Player Search":
     
     #Data
