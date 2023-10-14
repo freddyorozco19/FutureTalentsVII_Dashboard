@@ -209,3 +209,9 @@ if selected == "Player Search":
     with pltmain02:
         st.dataframe(df)
     st.markdown("""----""")
+    metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
+    with metricplayerbox01:
+        #Team_Lst = df['Team'].drop_duplicates().tolist()
+        Metric_Lst = columnsevents
+        MetricSel = st.selectbox("Choose metric:", Metric_Lst)
+    st.markdown("""----""")
