@@ -131,7 +131,7 @@ if selected == "Rankings":
     ax.axis("off")
     fig.patch.set_visible(False)
     players_teams = [f'{player} - {team}' for player, team in event_counts.index]
-    ax.barh(players_teams, event_counts[' Pass'], color='blue', label='Pass')
+    ax.barh(players_teams, event_counts['Aerial duel'], color='blue', label='Pass')
 if selected == "Player Search":
     
     #Data
