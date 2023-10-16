@@ -164,8 +164,8 @@ if selected == "Player Search":
       PlayerSel = st.selectbox("Choose player:", Player_Lst)
       df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     st.markdown("""----""")   
-    st.write(PlayerSel)
-   
+    st.title(PlayerSel)
+    st.markdown("""----""")
     #selbox01, selbox02, selbox03 = st.columns(3)
     #with selbox01:
     #  Lista_Partidos = ['Fecha 1', 'Fecha 2']
