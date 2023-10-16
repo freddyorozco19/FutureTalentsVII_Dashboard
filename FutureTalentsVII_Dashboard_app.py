@@ -163,7 +163,8 @@ if selected == "Player Search":
       Player_Lst = df['Players'].drop_duplicates().tolist()
       PlayerSel = st.selectbox("Choose player:", Player_Lst)
       df = df[df['Players'] == PlayerSel].reset_index(drop=True)
-    st.markdown("""----""")
+    st.markdown("""----""")   
+    st.write(PlayerSel)
    
     #selbox01, selbox02, selbox03 = st.columns(3)
     #with selbox01:
