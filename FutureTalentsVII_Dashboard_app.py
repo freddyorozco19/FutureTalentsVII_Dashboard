@@ -541,11 +541,11 @@ if selected == "Player Search":
                 ax9.set_ylim(0,20)
                 ax9.axis("off")
                 ax9.scatter(26.25, 12, marker='s', color='#9F9F9F', s=300)
-                ax9.text(26.25, 2, 'PASES EFECTIVOS', color='#9F9F9F', fontproperties=prop2, ha='center', fontsize=9)
+                ax9.text(26.25, 2, 'SUCCESSFUL PASSES', color='#9F9F9F', fontproperties=prop2, ha='center', fontsize=9)
                 ax9.scatter(52.5, 12, marker='s', color=colorviz, s=300)
-                ax9.text(52.5, 2, 'PASES PROGRESIVOS', color=colorviz, fontproperties=prop2, ha='center', fontsize=9)
+                ax9.text(52.5, 2, 'PROGRESSIVE PASSES', color=colorviz, fontproperties=prop2, ha='center', fontsize=9)
                 ax9.scatter(78.75, 12, marker='s', color='#C7B200', s=300)
-                ax9.text(78.75, 2, 'PASES CLAVES', color='#C7B200', fontproperties=prop2, ha='center', fontsize=9)
+                ax9.text(78.75, 2, 'KEY PASSES', color='#C7B200', fontproperties=prop2, ha='center', fontsize=9)
 
                 st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png") 
 
@@ -570,9 +570,7 @@ if selected == "Player Search":
                 dff = dfprog[(dfprog['Index'] == 'Miss')].reset_index(drop=True)
                 ##dfw = dfprog[(dfprog['Event'] == 'Successful passes') | (dfprog['Event'] == 'Key Passes') | (dfprog['Event'] == 'Assists') | (dfprog['Event'] == 'Successful open play crosses') | (dfprog['Event'] == 'Successful set play crosses')].reset_index(drop=True)
                 ##dff = dfprog[(dfprog['Event'] == 'Unsuccessful passes') | (dfprog['Event'] == 'Unsuccessful open play crosses') | (dfprog['Event'] == 'Unsuccessful set play crosses')].reset_index(drop=True)
-                st.write(dfprog)
-                st.write(dfw)
-                st.write(dff)
+
                 pitch = Pitch(pitch_color='None', pitch_type='custom', line_zorder=1, linewidth=1, goal_type='box', pitch_length=105, pitch_width=68)
                 pitch.draw(ax=ax)
                 
