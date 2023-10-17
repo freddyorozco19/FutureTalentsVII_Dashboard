@@ -432,6 +432,8 @@ if selected == "Player Search":
                 ##dfast = df[df['Event'] == 'Assists']
                 ##dfkey = df[df['Event'] == 'Key Passes']
                 ##dfpas = df[(df['Event'] == 'Successful passes') | (df['Event'] == 'Successful open play crosses') | (df['Event'] == 'Successful set play crosses')]
+                dfpas = df[df['Action'] == 'Pass'].reset_index(drop=True)
+                dfkey = df[df['Action'] == 'Type pass'].reset_index(drop=True)
                 
                 #Progressive
                 df['Beginning'] = np.sqrt(np.square(105-df['X1']) + np.square(34-df['Y1']))
