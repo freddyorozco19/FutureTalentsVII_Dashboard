@@ -216,11 +216,11 @@ if selected == "Player Search":
     df['Y2'] = (df['Y2']*68)/1
     ###Convert for left attack-side
     for index, row in df.iterrows():
-    if row['Atack side'] == 'Left':
-        df.at[index, 'X1'] = 105 - row['X1']
-        df.at[index, 'Y1'] = 68 - row['Y1']
-        df.at[index, 'X2'] = 105 - row['X2']
-        df.at[index, 'Y2'] = 68 - row['Y2']
+        if row['Atack side'] == 'Left':
+            df.at[index, 'X1'] = 105 - row['X1']
+            df.at[index, 'Y1'] = 68 - row['Y1']
+            df.at[index, 'X2'] = 105 - row['X2']
+            df.at[index, 'Y2'] = 68 - row['Y2']
 
     teamsearchbox01, teamsearchbox02, teamsearchbox03 = st.columns(3)
     with teamsearchbox01:
