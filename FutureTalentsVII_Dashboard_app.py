@@ -235,6 +235,10 @@ if selected == "Player Search":
         #st.dataframe(dfDOWN)
         ###df = df[(df['EfectiveMinute'] >= EfectMinSel[0]) & (df['EfectiveMinute'] <= EfectMinSel[1])]
         dfKK = df
+        df = df.rename(columns={'FieldXfrom': 'X1',
+                                        'FieldYfrom': 'Y1',
+                                        'FieldXto': 'X2',
+                                        'FieldYfrom': 'Y2'})
         st.write(df)
         #ax.scatter(df['FieldXfrom'], df['FieldYfrom'], color = "#FF0046", edgecolors='w', s=30, zorder=2, alpha=0.2)
         #st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
@@ -246,10 +250,7 @@ if selected == "Player Search":
                 #df = df[df['Event'] != 'Assists'].reset_index(drop=True)
                 dfKKcleaned = df
                 scaler  = StandardScaler()
-                df = df.rename(columns={'FieldXfrom': 'X1',
-                                        'FieldYfrom': 'Y1',
-                                        'FieldXto': 'X2',
-                                        'FieldYfrom': 'Y2'})
+                
                 
                 defpoints1 = df[['X1', 'Y1']].values
                 defpoints2 = scaler.fit_transform(defpoints1)
