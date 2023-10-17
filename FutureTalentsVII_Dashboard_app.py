@@ -457,7 +457,7 @@ if selected == "Player Search":
                     ax9.set_ylim(0,10)
                     st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
         with pltmain02:
-            #st.dataframe(df)
+            st.dataframe(df)
     elif EventlstSel == 'Passes':
         pltmnop11, pltmnop12, pltmnop13 = st.columns(3)
         with pltmnop11:
