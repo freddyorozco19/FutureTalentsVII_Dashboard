@@ -205,10 +205,15 @@ if selected == "Player Search":
     df = pd.read_excel("MatchesData/all_matches_16102023_215800.xlsx")
     st.title("Search Player")
 
-    df['FieldXfrom'] = (df['FieldXfrom']*105)/1
-    df['FieldYfrom'] = (df['FieldYfrom']*68)/1
-    df['FieldXto'] = (df['FieldXto']*105)/1
-    df['FieldYto'] = (df['FieldYto']*68)/1
+    #df['FieldXfrom'] = (df['FieldXfrom']*105)/1
+    #df['FieldYfrom'] = (df['FieldYfrom']*68)/1
+    #df['FieldXto'] = (df['FieldXto']*105)/1
+    #df['FieldYto'] = (df['FieldYto']*68)/1
+
+    df['X1'] = (df['X1']*105)/1
+    df['Y1'] = (df['Y1']*68)/1
+    df['X2'] = (df['X2']*105)/1
+    df['Y2'] = (df['Y2']*68)/1
 
     teamsearchbox01, teamsearchbox02, teamsearchbox03 = st.columns(3)
     with teamsearchbox01:
@@ -260,10 +265,10 @@ if selected == "Player Search":
     #  Player_Lst = df['Players'].drop_duplicates().tolist()
     #  PlayerSel = st.selectbox("Choose player:", Player_Lst)
     #  #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
-    df = df.rename(columns={'FieldXfrom': 'X1',
-                                    'FieldYfrom': 'Y1',
-                                    'FieldXto': 'X2',
-                                    'FieldYto': 'Y2'})
+    ##df = df.rename(columns={'FieldXfrom': 'X1',
+    ##                                'FieldYfrom': 'Y1',
+    ##                                'FieldXto': 'X2',
+    ##                                'FieldYto': 'Y2'})
     if EventlstSel == 'Actions':     
         pltmnop01, pltmnop02, pltmnop03 = st.columns(3)
         with pltmnop01:
