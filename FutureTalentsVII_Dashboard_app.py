@@ -167,6 +167,7 @@ if selected == "Player Search":
     st.title(PlayerSel)
     st.subtitle(TeamSel)
     st.markdown("""----""")
+    st.title("ACTIONS")
     with st.form(key='formpltev'):
         pltev01, pltev02, pltev03 = st.columns(3)
         with pltev01:
