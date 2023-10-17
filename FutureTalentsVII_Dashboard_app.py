@@ -297,7 +297,7 @@ if selected == "Player Search":
                 st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
         elif OptionPlotSel == 'Heatmap - Zones':
 
-                df = df[df['Event'] != 'Assists'].reset_index(drop=True)
+                #df = df[df['Event'] != 'Assists'].reset_index(drop=True)
                 dfKKcleaned = df
                 # Definir los colores base con transparencias diferentes
                 red = [0.0705882352941176, 0.0705882352941176, 0.0784313725490196, 0]   # 121214
@@ -325,7 +325,7 @@ if selected == "Player Search":
 
                 st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
         elif OptionPlotSel == 'Heatmap - Gaussian':
-                df = df[df['Event'] != 'Assists'].reset_index(drop=True)
+                #df = df[df['Event'] != 'Assists'].reset_index(drop=True)
                 dfKKcleaned = df
                 # Definir los colores base con transparencias diferentes
                 red = [0.0705882352941176, 0.0705882352941176, 0.0784313725490196, 0.3]   # Rojo opaco
@@ -350,7 +350,7 @@ if selected == "Player Search":
                 ax9.set_ylim(0,10)
                 st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
         elif OptionPlotSel == 'Heatmap - Kernel':
-                df = df[df['Event'] != 'Assists'].reset_index(drop=True)
+                #df = df[df['Event'] != 'Assists'].reset_index(drop=True)
                 dfKKcleaned = df
                 # Definir los colores base con transparencias diferentes
                 red = [0.0705882352941176, 0.0705882352941176, 0.0784313725490196, 0.3]   # Rojo opaco
