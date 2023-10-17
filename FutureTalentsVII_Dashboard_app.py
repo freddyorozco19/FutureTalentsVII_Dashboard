@@ -605,7 +605,7 @@ if selected == "Player Search":
                 pitch = Pitch(pitch_color='None', pitch_type='custom', line_zorder=1, linewidth=1, goal_type='box', pitch_length=105, pitch_width=68)
                 pitch.draw(ax=ax)
             with pltmain12:
-                st.dataframe(df[['ActionID', 'Event', 'Minute', 'EfectiveMinute', 'PlayerID', 'Player', 'Team', 'X1', 'Y1', 'X2', 'Y2']])
+                st.dataframe(df)
 
     st.markdown("""----""")
     metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
