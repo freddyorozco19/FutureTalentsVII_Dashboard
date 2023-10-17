@@ -165,8 +165,9 @@ with st.sidebar:
 #                        on_change=on_change, key='menu_5', orientation="horizontal")
 #selected5
 
-#Data
-df = pd.read_excel("MatchesData/matches.xlsx")
+###Data
+##df = pd.read_excel("MatchesData/matches.xlsx")
+df = pd.read_excel("MatchesData/all_matches_16102023_215800.xlsx")
 df['Index'] = df['Index'].fillna("")
 df['Event'] = df['Action'] + ' - ' + df['Index']
 
