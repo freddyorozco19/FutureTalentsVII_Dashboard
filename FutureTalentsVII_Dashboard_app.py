@@ -178,13 +178,13 @@ if selected == "Player Search":
         with pltev02:
             LstTeam = df['Team'].drop_duplicates()
             LstTeamsel = st.selectbox('Seleccionar equipo:', LstTeam)
-            df = df[df['Team'] == LstTeamsel].reset_index(drop=True)
+            #df = df[df['Team'] == LstTeamsel].reset_index(drop=True)
             #st.dataframe(dfDOWN)
         with pltev03:
-            LstPlayer = df['Player'].drop_duplicates()
+            LstPlayer = df['Players'].drop_duplicates()
             LstPlayer = LstPlayer.tolist()
             PlayerPltSel = st.selectbox('Seleccionar jugador:', LstPlayer)
-            df = df[df['Player'] == PlayerPltSel].reset_index(drop=True)
+            #df = df[df['Players'] == PlayerPltSel].reset_index(drop=True)
             #st.dataframe(dfDOWN)
         submit_button_pltev = st.form_submit_button(label='Aceptar')
     #selbox01, selbox02, selbox03 = st.columns(3)
