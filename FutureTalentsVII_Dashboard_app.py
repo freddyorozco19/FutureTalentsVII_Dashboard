@@ -167,7 +167,10 @@ with st.sidebar:
 
 #Data
 df = pd.read_excel("MatchesData/matches.xlsx")
-event_counts = df.groupby(['Players', 'Team'])['Action'].value_counts().unstack(fill_value=0)
+df['Index'] = df['Index'].fillna("")
+df['Event'] = df['Action'] + ' - ' + df['Index']
+
+event_counts = df.groupby(['Players', 'Team'])['Event'].value_counts().unstack(fill_value=0)
 columnsevents = event_counts.columns.tolist()
 if selected == "Rankings":
     st.title("RANKINGS")
