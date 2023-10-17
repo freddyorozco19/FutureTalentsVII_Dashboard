@@ -293,6 +293,95 @@ if selected == "Player Search":
                 ax9.scatter(8, 5, s=320, color=ColorOptionSel, edgecolors='#FFFFFF', lw=1, ls='--', marker='h')
                 ax9.text(8, -0.5, 'TERRITORIO\nRECURRENTE', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
                 st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
+        elif OptionPlotSel == 'Heatmap - Zones':
+
+                df = df[df['Event'] != 'Assists'].reset_index(drop=True)
+                dfKKcleaned = df
+                # Definir los colores base con transparencias diferentes
+                red = [0.0705882352941176, 0.0705882352941176, 0.0784313725490196, 0]   # 121214
+                green = [0.6, 0.1098039215686275, 0.2431372549019608, 0.6]   # 991C3E
+                blue = [1, 0, 0.2745098039215686, 0.8]   # FF0046
+                # Crear una lista de los colores y las posiciones en el colormap
+                colors = [red, green, blue]
+                positions = [0, 0.5, 1]
+                # Crear el colormap continuo con transparencias
+                cmaps = LinearSegmentedColormap.from_list('my_colormap', colors, N=256)
+                path_eff = [path_effects.Stroke(linewidth=2, foreground='black'), path_effects.Normal()]
+                bin_statistic = pitch.bin_statistic_positional(df.X1, df.Y1, statistic='count', positional='full', normalize=True)
+                pitch.heatmap_positional(bin_statistic, ax=ax, cmap=cmaps, edgecolors='#524F50', linewidth=1)
+                pitch.scatter(df.X1, df.Y1, c='w', s=15, alpha=0.02, ax=ax)
+                labels = pitch.label_heatmap(bin_statistic, color='#f4edf0', fontsize=14, fontproperties=prop2, ax=ax, ha='center', va='center', str_format='{:.0%}', path_effects=path_eff)
+                ax.text(52.5,70, "" + PlayerPltSel.upper() + " - " + str(len(dfKKcleaned)) + " TOQUES", c='w', fontsize=10, fontproperties=prop2, ha='center')
+                ax9 = fig.add_axes([0.14,0.15,0.20,0.07])
+                ax9.scatter(6.75,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=1.0)
+                ax9.scatter(5.00,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=0.6)
+                ax9.scatter(3.25,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=0.2)
+                ax9.text(5, 0, '-  ACCIONES REALIZADAS  +', c='w', fontproperties=prop2, fontsize=9, ha='center')
+                ax9.axis("off")
+                ax9.set_xlim(0,10)
+                ax9.set_ylim(0,10)
+
+                st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
+        elif OptionPlotSel == 'Heatmap - Gaussian':
+                df = df[df['Event'] != 'Assists'].reset_index(drop=True)
+                dfKKcleaned = df
+                # Definir los colores base con transparencias diferentes
+                red = [0.0705882352941176, 0.0705882352941176, 0.0784313725490196, 0.3]   # Rojo opaco
+                green = [1, 0, 0.2745098039215686, 1]   # Verde semitransparente
+                blue = [1, 0.5490196078431373, 0.6745098039215686, 1]   # Azul semitransparente    
+                # Crear una lista de los colores y las posiciones en el colormap
+                colors = [red, green, blue]
+                positions = [0, 0.5, 1]
+                # Crear el colormap continuo con transparencias
+                cmaps = LinearSegmentedColormap.from_list('my_colormap', colors, N=256)
+                bin_statistic = pitch.bin_statistic(df['X1'], df['Y1'], statistic='count', bins=(120, 80))
+                bin_statistic['statistic'] = gaussian_filter(bin_statistic['statistic'], 4)
+                pcm = pitch.heatmap(bin_statistic, ax=ax, cmap=cmaps, edgecolors=(0,0,0,0), zorder=-2)    
+                ax.text(52.5,70, "" + PlayerPltSel.upper() + " - " + str(len(dfKKcleaned)) + " TOQUES", c='w', fontsize=10, fontproperties=prop2, ha='center')
+                ax9 = fig.add_axes([0.14,0.15,0.20,0.07])
+                ax9.scatter(6.75,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=1.0)
+                ax9.scatter(5.00,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=0.6)
+                ax9.scatter(3.25,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=0.2)
+                ax9.text(5, 0, '-  ACCIONES REALIZADAS  +', c='w', fontproperties=prop2, fontsize=9, ha='center')
+                ax9.axis("off")
+                ax9.set_xlim(0,10)
+                ax9.set_ylim(0,10)
+                st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
+        elif OptionPlotSel == 'Heatmap - Kernel':
+                df = df[df['Event'] != 'Assists'].reset_index(drop=True)
+                dfKKcleaned = df
+                # Definir los colores base con transparencias diferentes
+                red = [0.0705882352941176, 0.0705882352941176, 0.0784313725490196, 0.3]   # Rojo opaco
+                green = [1, 0, 0.2745098039215686, 1]   # Verde semitransparente
+                blue = [1, 0.5490196078431373, 0.6745098039215686, 1]   # Azul semitransparente    
+                # Crear una lista de los colores y las posiciones en el colormap
+                colors = [red, green, blue]
+                positions = [0, 0.5, 1]
+                # Crear el colormap continuo con transparencias
+                cmaps = LinearSegmentedColormap.from_list('my_colormap', colors, N=256)
+                #bin_statistic = pitch.bin_statistic(df['X1'], df['Y1'], statistic='count', bins=(120, 80))
+                #bin_statistic['statistic'] = gaussian_filter(bin_statistic['statistic'], 4)
+                kde = pitch.kdeplot(dfKKcleaned.X1, dfKKcleaned.Y1, ax=ax,
+                    # fill using 100 levels so it looks smooth
+                    fill=True, levels=500,
+                    # shade the lowest area so it looks smooth
+                    # so even if there are no events it gets some color
+                    thresh=0,
+                    cut=1, alpha=0.7, zorder=-2,  # extended the cut so it reaches the bottom edge
+                    cmap=cmaps)
+
+                
+                #pcm = pitch.heatmap(bin_statistic, ax=ax, cmap=cmaps, edgecolors=(0,0,0,0), zorder=-2)    
+                ax.text(52.5,70, "" + PlayerPltSel.upper() + " - " + str(len(dfKKcleaned)) + " TOQUES", c='w', fontsize=10, fontproperties=prop2, ha='center')
+                ax9 = fig.add_axes([0.14,0.15,0.20,0.07])
+                ax9.scatter(6.75,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=1.0)
+                ax9.scatter(5.00,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=0.6)
+                ax9.scatter(3.25,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=0.2)
+                ax9.text(5, 0, '-  ACCIONES REALIZADAS  +', c='w', fontproperties=prop2, fontsize=9, ha='center')
+                ax9.axis("off")
+                ax9.set_xlim(0,10)
+                ax9.set_ylim(0,10)
+                st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
     with pltmain02:
         st.dataframe(df)
     st.markdown("""----""")
