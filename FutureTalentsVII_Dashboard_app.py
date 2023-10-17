@@ -205,7 +205,8 @@ if selected == "Player Search":
             OptionPlot = ['Territory Actions', 'Heatmap - Zones', 'Heatmap - Gaussian', 'Heatmap - Kernel']
             OptionPlotSel = st.selectbox('Seleccionar tipo gráfico:', OptionPlot)
         with pltmnop02:
-            EfectMinSel = st.slider('Seleccionar rango de partido:', 0, MaxAddMin, (0, MaxAddMin))
+            #EfectMinSel = st.slider('Seleccionar rango de partido:', 0, MaxAddMin, (0, MaxAddMin))
+            EfectMinSel = st.slider('Seleccionar rango de partido:', 0, 90, (0, 90))
         with pltmnop03:
             ColorOptionSel = st.color_picker('Selecciona color:', '#FF0046')
     pltmain01, pltmain02 = st.columns(2)
