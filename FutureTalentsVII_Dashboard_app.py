@@ -165,6 +165,7 @@ if selected == "Player Search":
       df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     st.markdown("""----""")   
     st.title(PlayerSel)
+    st.subtitle(TeamSel)
     st.markdown("""----""")
     with st.form(key='formpltev'):
         pltev01, pltev02, pltev03 = st.columns(3)
