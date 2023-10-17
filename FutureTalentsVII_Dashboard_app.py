@@ -392,7 +392,7 @@ if selected == "Player Search":
             OptionPlot = ['Passes Map', 'Progressive Passes Map', 'Passes to Final Third Map', 'Passes to Penalty Area', 'xT Passes Map']
             OptionPlotSel = st.selectbox('Choose viz:', OptionPlot)
         with pltmnop12:
-            EfectMinSel = st.slider('Seleccionar rango de partido:', 0, MaxAddMin, (0, MaxAddMin))
+            EfectMinSel = st.slider('Seleccionar rango de partido:', 0, 90, (0, 90))
         with pltmnop13:
                 MetOption = ['Pases Claves', 'Asistencias']
                 MetOptionSel = st.selectbox('Choose metric:', MetOption)
@@ -604,8 +604,8 @@ if selected == "Player Search":
             if OptionPlotSel == 'xT Passes Map':
                 pitch = Pitch(pitch_color='None', pitch_type='custom', line_zorder=1, linewidth=1, goal_type='box', pitch_length=105, pitch_width=68)
                 pitch.draw(ax=ax)
-            with pltmain12:
-                st.dataframe(df)
+    with pltmain12:
+        st.dataframe(df)
 
     st.markdown("""----""")
     metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
