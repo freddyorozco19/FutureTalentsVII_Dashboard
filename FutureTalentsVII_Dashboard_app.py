@@ -424,12 +424,13 @@ if selected == "Player Search":
             dfKK = df
             colorviz="#FF0046"
             if OptionPlotSel == 'Passes Map':
-                df = df[(df['Event'] == 'Successful passes') | (df['Event'] == 'Key Passes') | (df['Event'] == 'Assists') | (df['Event'] == 'Successful open play crosses') | (df['Event'] == 'Successful set play crosses')].reset_index()
+                ##df = df[(df['Event'] == 'Successful passes') | (df['Event'] == 'Key Passes') | (df['Event'] == 'Assists') | (df['Event'] == 'Successful open play crosses') | (df['Event'] == 'Successful set play crosses')].reset_index()
                 dfKKK = df
-                dfKKK = df.drop_duplicates(subset=['X1', 'Y1', 'X2', 'Y2'], keep='last')
-                dfast = df[df['Event'] == 'Assists']
-                dfkey = df[df['Event'] == 'Key Passes']
-                dfpas = df[(df['Event'] == 'Successful passes') | (df['Event'] == 'Successful open play crosses') | (df['Event'] == 'Successful set play crosses')]
+                df = df[(df['Action'] == 'Pass') | (df['Action'] == 'Type pass')].reset_index(drop=True)
+                ##dfKKK = df.drop_duplicates(subset=['X1', 'Y1', 'X2', 'Y2'], keep='last')
+                ##dfast = df[df['Event'] == 'Assists']
+                ##dfkey = df[df['Event'] == 'Key Passes']
+                ##dfpas = df[(df['Event'] == 'Successful passes') | (df['Event'] == 'Successful open play crosses') | (df['Event'] == 'Successful set play crosses')]
                 
                 #Progressive
                 df['Beginning'] = np.sqrt(np.square(105-df['X1']) + np.square(34-df['Y1']))
