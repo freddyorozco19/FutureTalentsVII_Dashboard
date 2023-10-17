@@ -199,7 +199,15 @@ if selected == "Player Search":
     #  Player_Lst = df['Players'].drop_duplicates().tolist()
     #  PlayerSel = st.selectbox("Choose player:", Player_Lst)
     #  #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
-    
+    if EventlstSel == 'Acciones':     
+        pltmnop01, pltmnop02, pltmnop03 = st.columns(3)
+        with pltmnop01:
+            OptionPlot = ['Territory Actions', 'Heatmap - Zones', 'Heatmap - Gaussian', 'Heatmap - Kernel']
+            OptionPlotSel = st.selectbox('Seleccionar tipo gráfico:', OptionPlot)
+        with pltmnop02:
+            EfectMinSel = st.slider('Seleccionar rango de partido:', 0, MaxAddMin, (0, MaxAddMin))
+        with pltmnop03:
+            ColorOptionSel = st.color_picker('Selecciona color:', '#FF0046')
     pltmain01, pltmain02 = st.columns(2)
     with pltmain01:
         fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
