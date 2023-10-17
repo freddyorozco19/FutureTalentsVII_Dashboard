@@ -172,23 +172,23 @@ if selected == "Player Search":
         pltev01, pltev02, pltev03 = st.columns(3)
         with pltev01:
             Eventlst = ['Acciones', 'Pases', 'Remates', 'Regates', 'Recuperaciones']
-            EventlstSel = st.selectbox('Seleccionar evento:', Eventlst)
+            EventlstSel = st.selectbox('Choose metric:', Eventlst)
             #st.dataframe(dfDOWN)
     #with pltev02:
         #Typelst = ['Mapa de Acciones', 'Territorio de Acciones', 'Mapa de Calor Acciones - JdP', 'Mapa de Calor Acciones - Bins']
         #st.selectbox('Seleccionar tipo gráfico:', Typelst)
         with pltev02:
             LstTeam = df['Team'].drop_duplicates()
-            LstTeamsel = st.selectbox('Seleccionar equipo:', LstTeam)
+            LstTeamsel = st.selectbox('Choose team:', LstTeam)
             #df = df[df['Team'] == LstTeamsel].reset_index(drop=True)
             #st.dataframe(dfDOWN)
         with pltev03:
             LstPlayer = df['Players'].drop_duplicates()
             LstPlayer = LstPlayer.tolist()
-            PlayerPltSel = st.selectbox('Seleccionar jugador:', LstPlayer)
+            PlayerPltSel = st.selectbox('Choose player:', LstPlayer)
             #df = df[df['Players'] == PlayerPltSel].reset_index(drop=True)
             #st.dataframe(dfDOWN)
-        submit_button_pltev = st.form_submit_button(label='Aceptar')
+        submit_button_pltev = st.form_submit_button(label='OK')
     #selbox01, selbox02, selbox03 = st.columns(3)
     #with selbox01:
     #  Lista_Partidos = ['Fecha 1', 'Fecha 2']
@@ -225,7 +225,7 @@ if selected == "Player Search":
         ax29.set_ylim(0,10)
         ax29.annotate('', xy=(2, 6), xytext=(8, 6), arrowprops=dict(arrowstyle='<-', ls= '-', lw = 1, color = (1,1,1,0.5)))
         ##ax29.annotate(s='', xy=(2, 5), xytext=(8, 5), arrowprops=dict(arrowstyle='<-', ls= '-', lw = 1, color = (1,1,1,0.5)))
-        ax29.text(5, 2, 'Dirección campo de juego', fontproperties=prop3, c=(1,1,1,0.5), fontsize=10, ha='center')
+        ax29.text(5, 2, 'Attack Direction', fontproperties=prop3, c=(1,1,1,0.5), fontsize=10, ha='center')
         #Adding winstats logo
         ax53 = fig.add_axes([0.82, 0.14, 0.05, 0.05])
         url53 = "https://i.postimg.cc/R0QjGByL/sZggzUM.png"
