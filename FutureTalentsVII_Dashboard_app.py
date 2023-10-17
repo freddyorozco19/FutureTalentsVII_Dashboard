@@ -201,6 +201,10 @@ if selected == "Player Search":
     #  Player_Lst = df['Players'].drop_duplicates().tolist()
     #  PlayerSel = st.selectbox("Choose player:", Player_Lst)
     #  #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
+    df = df.rename(columns={'FieldXfrom': 'X1',
+                                    'FieldYfrom': 'Y1',
+                                    'FieldXto': 'X2',
+                                    'FieldYto': 'Y2'})
     if EventlstSel == 'Actions':     
         pltmnop01, pltmnop02, pltmnop03 = st.columns(3)
         with pltmnop01:
@@ -237,10 +241,7 @@ if selected == "Player Search":
             #st.dataframe(dfDOWN)
             ###df = df[(df['EfectiveMinute'] >= EfectMinSel[0]) & (df['EfectiveMinute'] <= EfectMinSel[1])]
             dfKK = df
-            df = df.rename(columns={'FieldXfrom': 'X1',
-                                    'FieldYfrom': 'Y1',
-                                    'FieldXto': 'X2',
-                                    'FieldYto': 'Y2'})
+            
             ##st.write(df)
             ##ax.scatter(df['FieldXfrom'], df['FieldYfrom'], color = "#FF0046", edgecolors='w', s=30, zorder=2, alpha=0.2)
             ##st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
