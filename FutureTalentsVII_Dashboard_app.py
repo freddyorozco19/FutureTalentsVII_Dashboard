@@ -171,7 +171,7 @@ if selected == "Player Search":
     with st.form(key='formpltev'):
         pltev01, pltev02, pltev03 = st.columns(3)
         with pltev01:
-            Eventlst = ['Acciones', 'Pases', 'Remates', 'Regates', 'Recuperaciones']
+            Eventlst = ['Actions', 'Passes', 'Shots', 'Dribbles', 'Recoveries']
             EventlstSel = st.selectbox('Choose metric:', Eventlst)
             #st.dataframe(dfDOWN)
     #with pltev02:
@@ -201,16 +201,16 @@ if selected == "Player Search":
     #  Player_Lst = df['Players'].drop_duplicates().tolist()
     #  PlayerSel = st.selectbox("Choose player:", Player_Lst)
     #  #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
-    if EventlstSel == 'Acciones':     
+    if EventlstSel == 'Actions':     
         pltmnop01, pltmnop02, pltmnop03 = st.columns(3)
         with pltmnop01:
             OptionPlot = ['Territory Actions', 'Heatmap - Zones', 'Heatmap - Gaussian', 'Heatmap - Kernel']
-            OptionPlotSel = st.selectbox('Seleccionar tipo gráfico:', OptionPlot)
+            OptionPlotSel = st.selectbox('Choose viz:', OptionPlot)
         with pltmnop02:
             #EfectMinSel = st.slider('Seleccionar rango de partido:', 0, MaxAddMin, (0, MaxAddMin))
             EfectMinSel = st.slider('Seleccionar rango de partido:', 0, 90, (0, 90))
         with pltmnop03:
-            ColorOptionSel = st.color_picker('Selecciona color:', '#FF0046')
+            ColorOptionSel = st.color_picker('Choose color:', '#FF0046')
     pltmain01, pltmain02 = st.columns(2)
     with pltmain01:
         fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
@@ -291,7 +291,7 @@ if selected == "Player Search":
                 ax9.set_xlim(0,10)
                 ax9.set_ylim(0,10)
                 ax9.scatter(2, 5, s=120, color=ColorOptionSel, edgecolors='#FFFFFF', lw=1)
-                ax9.text(2, -0.5, 'ACCIONES \nREALIZADAS', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
+                ax9.text(2, -0.5, 'TOUCHES', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
                 ax9.scatter(8, 5, s=320, color=ColorOptionSel, edgecolors='#FFFFFF', lw=1, ls='--', marker='h')
                 ax9.text(8, -0.5, 'TERRITORIO\nRECURRENTE', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
                 st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
@@ -318,7 +318,7 @@ if selected == "Player Search":
                 ax9.scatter(6.75,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=1.0)
                 ax9.scatter(5.00,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=0.6)
                 ax9.scatter(3.25,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=0.2)
-                ax9.text(5, 0, '-  ACCIONES REALIZADAS  +', c='w', fontproperties=prop2, fontsize=9, ha='center')
+                ax9.text(5, 0, '-  TOUCHES  +', c='w', fontproperties=prop2, fontsize=9, ha='center')
                 ax9.axis("off")
                 ax9.set_xlim(0,10)
                 ax9.set_ylim(0,10)
@@ -344,7 +344,7 @@ if selected == "Player Search":
                 ax9.scatter(6.75,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=1.0)
                 ax9.scatter(5.00,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=0.6)
                 ax9.scatter(3.25,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=0.2)
-                ax9.text(5, 0, '-  ACCIONES REALIZADAS  +', c='w', fontproperties=prop2, fontsize=9, ha='center')
+                ax9.text(5, 0, '-  TOUCHES  +', c='w', fontproperties=prop2, fontsize=9, ha='center')
                 ax9.axis("off")
                 ax9.set_xlim(0,10)
                 ax9.set_ylim(0,10)
@@ -379,7 +379,7 @@ if selected == "Player Search":
                 ax9.scatter(6.75,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=1.0)
                 ax9.scatter(5.00,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=0.6)
                 ax9.scatter(3.25,5, c=ColorOptionSel, marker='h', s=400, edgecolors='#121214', alpha=0.2)
-                ax9.text(5, 0, '-  ACCIONES REALIZADAS  +', c='w', fontproperties=prop2, fontsize=9, ha='center')
+                ax9.text(5, 0, '-  TOUCHES  +', c='w', fontproperties=prop2, fontsize=9, ha='center')
                 ax9.axis("off")
                 ax9.set_xlim(0,10)
                 ax9.set_ylim(0,10)
