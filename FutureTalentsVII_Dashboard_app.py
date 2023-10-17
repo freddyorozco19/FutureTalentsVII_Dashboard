@@ -239,15 +239,15 @@ if selected == "Player Search":
                                 'FieldYfrom': 'Y1',
                                 'FieldXto': 'X2',
                                 'FieldYto': 'Y2'})
-        st.write(df)
-        #ax.scatter(df['FieldXfrom'], df['FieldYfrom'], color = "#FF0046", edgecolors='w', s=30, zorder=2, alpha=0.2)
-        #st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
+        ##st.write(df)
+        ##ax.scatter(df['FieldXfrom'], df['FieldYfrom'], color = "#FF0046", edgecolors='w', s=30, zorder=2, alpha=0.2)
+        ##st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
         if OptionPlotSel == 'Territory Actions': 
                 
                 ##df = df.drop_duplicates(subset=['X1', 'Y1', 'X2', 'Y2'], keep='last')
                 ##dfKKcleaned = df
                 
-                #df = df[df['Event'] != 'Assists'].reset_index(drop=True)
+                ##df = df[df['Event'] != 'Assists'].reset_index(drop=True)
                 dfKKcleaned = df
                 scaler  = StandardScaler()
                 
