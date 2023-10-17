@@ -568,7 +568,7 @@ if selected == "Player Search":
                 
                 pitch.lines(x1k, y1k, x2k, y2k, cmap=get_continuous_cmap(hex_list1), ax=ax, lw=2, comet=True, transparent=True, zorder=10) 
                 ax.scatter(x2k, y2k, color="#C7B200", edgecolors='#121214', zorder=5, lw=0.5)
-                ax.text(52.5,70, "" + PlayerPltSel.upper() + " - " + str(len(dfKKK)) + " PASES COMPLETOS", c='w', fontsize=10, fontproperties=prop2, ha='center')
+                ax.text(52.5,70, "" + PlayerPltSel.upper() + " - " + str(len(df)) + " PASES COMPLETOS", c='w', fontsize=10, fontproperties=prop2, ha='center')
                 ax9 = fig.add_axes([0.20,0.14,0.63,0.07])
                 ax9.set_xlim(0,105)
                 ax9.set_ylim(0,20)
