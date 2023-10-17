@@ -508,7 +508,7 @@ if selected == "Player Search":
             ax29.set_ylim(0,10)
             ax29.annotate('', xy=(2, 6), xytext=(8, 6), arrowprops=dict(arrowstyle='<-', ls= '-', lw = 1, color = (1,1,1,0.5)))
             #ax29.annotate(s='', xy=(2, 5), xytext=(8, 5), arrowprops=dict(arrowstyle='<-', ls= '-', lw = 1, color = (1,1,1,0.5)))
-            ax29.text(5, 2, 'Dirección campo de juego', fontproperties=prop3, c=(1,1,1,0.5), fontsize=10, ha='center')
+            ax29.text(5, 2, 'Attack Direction', fontproperties=prop3, c=(1,1,1,0.5), fontsize=10, ha='center')
             #Adding winstats logo
             ax53 = fig.add_axes([0.82, 0.14, 0.05, 0.05])
             url53 = "https://i.postimg.cc/R0QjGByL/sZggzUM.png"
@@ -623,13 +623,15 @@ if selected == "Player Search":
                 ax9.text(72.5, 0, 'UNSUCCESSFUL\nPROGRESSIVE PASSES', color='#9F9F9F', fontproperties=prop2, ha='center', fontsize=9)
                 st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png") 
             if OptionPlotSel == 'Passes to Final Third Map':
-                #df = df[(df['Event'] == 'Successful passes') | (df['Event'] == 'Key Passes') | (df['Event'] == 'Assists') | (df['Event'] == 'Successful open play crosses') | (df['Event'] == 'Successful set play crosses') | (df['Event'] == 'Unsuccessful passes') | (df['Event'] == 'Unsuccessful open play crosses') | (df['Event'] == 'Unsuccessful set play crosses')].reset_index()
-                #df = df[(df['X1'] <= 70) & (df['X2'] >= 70)].reset_index(drop=True)
-
-                dfwin = df[(df['Event'] == 'Successful passes') | (df['Event'] == 'Key Passes') | (df['Event'] == 'Assists') | (df['Event'] == 'Successful open play crosses') | (df['Event'] == 'Successful set play crosses')].reset_index(drop=True)
-                dffail = df[(df['Event'] == 'Unsuccessful passes') | (df['Event'] == 'Unsuccessful open play crosses') | (df['Event'] == 'Unsuccessful set play crosses')].reset_index(drop=True)
+                ##df = df[(df['Event'] == 'Successful passes') | (df['Event'] == 'Key Passes') | (df['Event'] == 'Assists') | (df['Event'] == 'Successful open play crosses') | (df['Event'] == 'Successful set play crosses') | (df['Event'] == 'Unsuccessful passes') | (df['Event'] == 'Unsuccessful open play crosses') | (df['Event'] == 'Unsuccessful set play crosses')].reset_index()
+                ##df = df[(df['X1'] <= 70) & (df['X2'] >= 70)].reset_index(drop=True)
+                df = df_backup
+                df = df[(df['Action'] == 'Pass') | (df['Action'] == 'Type pass')].reset_index(drop=True)
+                df = df[(df['X1'] <= 70) & (df['X2'] >= 70)].reset_index(drop=True)
+                ##dfwin = df[(df['Event'] == 'Successful passes') | (df['Event'] == 'Key Passes') | (df['Event'] == 'Assists') | (df['Event'] == 'Successful open play crosses') | (df['Event'] == 'Successful set play crosses')].reset_index(drop=True)
+                ##dffail = df[(df['Event'] == 'Unsuccessful passes') | (df['Event'] == 'Unsuccessful open play crosses') | (df['Event'] == 'Unsuccessful set play crosses')].reset_index(drop=True)
                 dfKKK = df
-                dfKKK = df.drop_duplicates(subset=['X1', 'Y1', 'X2', 'Y2'], keep='last')
+                ##dfKKK = df.drop_duplicates(subset=['X1', 'Y1', 'X2', 'Y2'], keep='last')
                 
                 pitch = Pitch(pitch_color='None', pitch_type='custom', line_zorder=1, linewidth=1, goal_type='box', pitch_length=105, pitch_width=68)
                 pitch.draw(ax=ax)
