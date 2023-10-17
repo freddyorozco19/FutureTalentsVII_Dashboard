@@ -267,7 +267,7 @@ if selected == "Player Search":
                 #st.write(defpoints)
 
                 hull = ConvexHull(df[['X1','Y1']])        
-                ax.scatter(df9['X1'], df9['Y1'], color = colorviz, edgecolors='w', s=30, zorder=2, alpha=0.2)
+                ax.scatter(df9['X1'], df9['Y1'], color = ColorOptionSel, edgecolors='w', s=30, zorder=2, alpha=0.2)
                 #Loop through each of the hull's simplices
                 for simplex in hull.simplices:
                     #Draw a black line between each
