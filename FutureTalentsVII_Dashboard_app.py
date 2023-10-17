@@ -255,6 +255,7 @@ if selected == "Player Search":
     st.subheader(TeamSel)
     st.markdown("""----""")
     st.title("ACTIONS")
+    st.markdown(f'<style>{css}</style>',unsafe_allow_html=True)
     with st.form(key='formpltev'):
         pltev01, pltev02, pltev03 = st.columns(3)
         with pltev01:
@@ -276,7 +277,7 @@ if selected == "Player Search":
             #df = df[df['Players'] == PlayerPltSel].reset_index(drop=True)
             #st.dataframe(dfDOWN)
         submit_button_pltev = st.form_submit_button(label='OK')
-    st.markdown(f'<style>{css}</style>',unsafe_allow_html=True)
+    
     #selbox01, selbox02, selbox03 = st.columns(3)
     #with selbox01:
     #  Lista_Partidos = ['Fecha 1', 'Fecha 2']
