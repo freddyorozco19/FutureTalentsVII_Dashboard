@@ -164,22 +164,6 @@ with st.sidebar:
 #                        icons=['house', 'cloud-upload', "list-task", 'gear'],
 #                        on_change=on_change, key='menu_5', orientation="horizontal")
 #selected5
-css='''
-    [data-testid="metric-container"] {
-        width: fit-content;
-        margin: auto;
-    }
-    
-    [data-testid="metric-container"] > div {
-        width: fit-content;
-        margin: auto;
-    }
-    
-    [data-testid="metric-container"] label {
-        width: fit-content;
-        margin: auto;
-    }
-    '''    
 #Data
 df = pd.read_excel("MatchesData/matches.xlsx")
 event_counts = df.groupby(['Players', 'Team'])['Action'].value_counts().unstack(fill_value=0)
@@ -276,6 +260,7 @@ if selected == "Player Search":
             #df = df[df['Players'] == PlayerPltSel].reset_index(drop=True)
             #st.dataframe(dfDOWN)
         submit_button_pltev = st.form_submit_button(label='OK')
+    st.markdown(f'<style>{css}</style>',unsafe_allow_html=True)
     #selbox01, selbox02, selbox03 = st.columns(3)
     #with selbox01:
     #  Lista_Partidos = ['Fecha 1', 'Fecha 2']
