@@ -164,10 +164,26 @@ with st.sidebar:
 #                        icons=['house', 'cloud-upload', "list-task", 'gear'],
 #                        on_change=on_change, key='menu_5', orientation="horizontal")
 #selected5
+ css='''
+    [data-testid="metric-container"] {
+        width: fit-content;
+        margin: auto;
+    }
+    
+    [data-testid="metric-container"] > div {
+        width: fit-content;
+        margin: auto;
+    }
+    
+    [data-testid="metric-container"] label {
+        width: fit-content;
+        margin: auto;
+    }
+    '''    
 #Data
-    df = pd.read_excel("MatchesData/matches.xlsx")
-    event_counts = df.groupby(['Players', 'Team'])['Action'].value_counts().unstack(fill_value=0)
-    columnsevents = event_counts.columns.tolist()
+df = pd.read_excel("MatchesData/matches.xlsx")
+event_counts = df.groupby(['Players', 'Team'])['Action'].value_counts().unstack(fill_value=0)
+columnsevents = event_counts.columns.tolist()
 if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
