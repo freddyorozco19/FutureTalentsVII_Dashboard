@@ -457,7 +457,7 @@ if selected == "Player Search":
                     ax9.set_ylim(0,10)
                     st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
         with pltmain02:
-            st.dataframe(df)
+            #st.dataframe(df)
     elif EventlstSel == 'Passes':
         pltmnop11, pltmnop12, pltmnop13 = st.columns(3)
         with pltmnop11:
@@ -468,8 +468,8 @@ if selected == "Player Search":
         with pltmnop13:
                 MetOption = ['Pases Claves', 'Asistencias']
                 MetOptionSel = st.selectbox('Choose metric:', MetOption)
-    pltmain11, pltmain12 = st.columns(2)
-    with pltmain11:
+        pltmain11, pltmain12 = st.columns(2)
+        with pltmain11:
             fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
             ax.axis("off")
             fig.patch.set_visible(False)
@@ -687,8 +687,8 @@ if selected == "Player Search":
             if OptionPlotSel == 'xT Passes Map':
                 pitch = Pitch(pitch_color='None', pitch_type='custom', line_zorder=1, linewidth=1, goal_type='box', pitch_length=105, pitch_width=68)
                 pitch.draw(ax=ax)
-    with pltmain12:
-        st.dataframe(df)
+        with pltmain12:
+            st.dataframe(df)
 
     st.markdown("""----""")
     metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
