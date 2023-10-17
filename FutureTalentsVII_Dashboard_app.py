@@ -205,7 +205,7 @@ if selected == "Player Search":
     ##df = pd.read_excel("MatchesData/matches.xlsx")
     df = pd.read_excel("MatchesData/all_matches_16102023_215800.xlsx")
     st.title("Search Player")
-
+    st.markdown("<style> div { text-align: center } </style>", unsafe_allow_html=True)
     #df['FieldXfrom'] = (df['FieldXfrom']*105)/1
     #df['FieldYfrom'] = (df['FieldYfrom']*68)/1
     #df['FieldXto'] = (df['FieldXto']*105)/1
@@ -255,7 +255,6 @@ if selected == "Player Search":
         margin: auto;
     }
     '''
-    st.markdown(f'<style>{css}</style>',unsafe_allow_html=True)
     st.markdown(f'<style>{css}</style>',unsafe_allow_html=True)
     st.markdown("""----""")
     st.title("ACTIONS")
