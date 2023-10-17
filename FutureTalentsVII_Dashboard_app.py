@@ -164,7 +164,7 @@ with st.sidebar:
 #                        icons=['house', 'cloud-upload', "list-task", 'gear'],
 #                        on_change=on_change, key='menu_5', orientation="horizontal")
 #selected5
- css='''
+css='''
     [data-testid="metric-container"] {
         width: fit-content;
         margin: auto;
