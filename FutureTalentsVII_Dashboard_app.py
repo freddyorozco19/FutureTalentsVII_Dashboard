@@ -240,12 +240,17 @@ if selected == "Player Search":
         #st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
         if OptionPlotSel == 'Territory Actions': 
                 
-                #df = df.drop_duplicates(subset=['X1', 'Y1', 'X2', 'Y2'], keep='last')
-                #dfKKcleaned = df
+                ##df = df.drop_duplicates(subset=['X1', 'Y1', 'X2', 'Y2'], keep='last')
+                ##dfKKcleaned = df
                 
-                df = df[df['Event'] != 'Assists'].reset_index(drop=True)
+                #df = df[df['Event'] != 'Assists'].reset_index(drop=True)
                 dfKKcleaned = df
                 scaler  = StandardScaler()
+                df = df.rename(columns={'FieldXfrom': 'X1',
+                                        'FieldYfrom': 'Y1',
+                                        'FieldXto': 'X2',
+                                        'FieldYfrom': 'Y2'})
+                
                 defpoints1 = df[['X1', 'Y1']].values
                 defpoints2 = scaler.fit_transform(defpoints1)
                 df2 = pd.DataFrame(defpoints2, columns = ['Xstd', 'Ystd'])
