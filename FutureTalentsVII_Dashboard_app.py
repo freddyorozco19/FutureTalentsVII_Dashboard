@@ -565,7 +565,8 @@ if selected == "Player Search":
                 dff = dfprog[(dfprog['Index'] == 'Miss')].reset_index(drop=True)
                 ##dfw = dfprog[(dfprog['Event'] == 'Successful passes') | (dfprog['Event'] == 'Key Passes') | (dfprog['Event'] == 'Assists') | (dfprog['Event'] == 'Successful open play crosses') | (dfprog['Event'] == 'Successful set play crosses')].reset_index(drop=True)
                 ##dff = dfprog[(dfprog['Event'] == 'Unsuccessful passes') | (dfprog['Event'] == 'Unsuccessful open play crosses') | (dfprog['Event'] == 'Unsuccessful set play crosses')].reset_index(drop=True)
-                
+                st.write(dfw)
+                st.write(dff)
                 pitch = Pitch(pitch_color='None', pitch_type='custom', line_zorder=1, linewidth=1, goal_type='box', pitch_length=105, pitch_width=68)
                 pitch.draw(ax=ax)
                 
