@@ -387,7 +387,7 @@ if selected == "Player Search":
                     ax9.scatter(2, 5, s=120, color=ColorOptionSel, edgecolors='#FFFFFF', lw=1)
                     ax9.text(2, -0.5, 'TOUCHES', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
                     ax9.scatter(8, 5, s=320, color=ColorOptionSel, edgecolors='#FFFFFF', lw=1, ls='--', marker='h')
-                    ax9.text(8, -0.5, 'TERRITORIO\nRECURRENTE', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
+                    ax9.text(8, -0.5, 'ACTION TERRITORY', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
                     st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
             elif OptionPlotSel == 'Heatmap - Zones':
     
