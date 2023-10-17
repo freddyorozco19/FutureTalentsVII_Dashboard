@@ -164,8 +164,8 @@ if selected == "Player Search":
       PlayerSel = st.selectbox("Choose player:", Player_Lst)
       df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     st.markdown("""----""")   
-    st.title(PlayerSel)
-    st.subtitle(TeamSel)
+    st.header(PlayerSel)
+    st.subheader(TeamSel)
     st.markdown("""----""")
     st.title("ACTIONS")
     with st.form(key='formpltev'):
