@@ -1109,7 +1109,7 @@ if selected == "Player Search":
                     fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
                     ax.axis("off")
                     fig.patch.set_visible(False)
-                    soc_pitch_divisions(ax2, grids = True)
+                    soc_pitch_divisions(ax, grids = True)
                     st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
         with pltmain02:
             st.dataframe(df)
