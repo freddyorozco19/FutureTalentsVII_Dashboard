@@ -218,8 +218,6 @@ if selected == "Rankings":
         colors = colorlist((1, 0, 0.3137254901960784, 0), (1, 0, 0.3137254901960784, 1), 10)
         #PLY = event_counts['Players'].tail(10).str.upper()
         Z = event_counts[MetricSel].tail(10)
-        st.write(players_teams)
-        st.write(Z)
         ax.barh(players_teams, Z, edgecolor=(1,1,1,0.5), lw = 1, color=colors)
         mplt.setp(ax.get_yticklabels(), fontproperties=prop2, fontsize=18, color='#FFF')
         mplt.setp(ax.get_xticklabels(), fontproperties=prop2, fontsize=20, color=(1,1,1,1))
@@ -233,7 +231,7 @@ if selected == "Rankings":
                 ax.spines[x].set_visible(False)
         st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
     with p02:
-        st.write(event_counts[MetricSel].tail(10))
+        st.write(event_counts[MetricSel][-10:])
 if selected == "Player Search":
     ###Data
     ##df = pd.read_excel("MatchesData/matches.xlsx")
