@@ -207,7 +207,7 @@ if selected == "Rankings":
         ##fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
         ##ax.axis("off")
         ##fig.patch.set_visible(False)
-        fig, ax = mplt.subplots(figsize = (10,10), dpi=600)
+        fig, ax = mplt.subplots(figsize = (10,12), dpi=600)
         fig.set_facecolor('#011E37')
         ax.patch.set_facecolor('#011E37')
         event_counts = event_counts.sort_values(by=[MetricSel], ascending=True)
