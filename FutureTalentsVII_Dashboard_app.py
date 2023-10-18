@@ -513,6 +513,7 @@ if selected == "Player Search":
             #EfectMinSel = st.slider('Seleccionar rango de partido:', 0, 90, (0, 90))
         #with pltmnop03:
             #ColorOptionSel = st.color_picker('Choose color:', '#FF0046')
+        ColorOptionSel = "#FF0050"
         pltmain01, pltmain02 = st.columns(2)
         with pltmain01:
             fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
