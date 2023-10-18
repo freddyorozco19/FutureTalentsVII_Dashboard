@@ -179,17 +179,177 @@ with st.sidebar:
 
 ###Data
 ##df = pd.read_excel("MatchesData/matches.xlsx")
-df = pd.read_excel("MatchesData/all_matches_prueba.xlsx")
+df = pd.read_excel("MatchesData/all_matches_prueba2.xlsx")
 df['Index'] = df['Index'].fillna("")
 df['Event'] = df['Action'] + ' - ' + df['Index']
+df['PlayerID'] = df['Players']+'-'+df['Team']
+event_counts = df.groupby(['PlayerID'])['Event'].agg('count').reset_index()
+event_counts2 = df.groupby(['PlayerID'])['Event'].value_counts().unstack(fill_value=0)
+#PASS FILTER
+df = df[(df['Action'] == 'Pass') | (df['Action'] == 'Type pass')].reset_index(drop=True)
+df_backup = df
+#PROGRESSIVE PASSES
+df = df_backup
+df['Beginning'] = np.sqrt(np.square(105-df['X1']) + np.square(34-df['Y1']))
+df['Ending']    = np.sqrt(np.square(105-df['X2']) + np.square(34-df['Y2']))
+df['Prog'] = (df['Ending']) / (df['Beginning'])
+df['Progress']  = [(df['Ending'][x]) / (df['Beginning'][x]) <= 0.80 for x in range(len(df.Beginning))]
+dfprog = df[df['Progress'] == True].reset_index(drop=True)
+dfprogF = dfprog[dfprog['Index'] == 'Miss'].reset_index(drop=True)
+dfprogW = dfprog[(dfprog['Index'] == 'Assist') | (dfprog['Index'] == 'Key') | (dfprog['Index'] == 'Second assist') | (dfprog['Index'] == 'Complete')].reset_index(drop=True)
+dfprg = dfprog.groupby(['PlayerID', 'Team'])['Index'].agg('count').reset_index()
+dfprg.columns = ['PlayerID', 'Team', 'Total Progressive Passes']
+dfprg = dfprg.sort_values('Total Progressive Passes', ascending=False)
+dfprg0 = dfprg
+dfprgs = dfprogW.groupby(['PlayerID', 'Team'])['Index'].agg('count').reset_index()
+dfprgs.columns = ['PlayerID', 'Team', 'Successful Progressive Passes']
+dfprgs = dfprgs.sort_values('Successful Progressive Passes', ascending=False)
+dfprgsF = dfprogF.groupby(['PlayerID', 'Team'])['Index'].agg('count').reset_index()
+dfprgsF.columns = ['PlayerID', 'Team', 'Unsuccessful Progressive Passes']
+dfprgsF = dfprgsF.sort_values('Unsuccessful Progressive Passes', ascending=False)
+dfprgA = dfprg.merge(dfprgs[['PlayerID', 'Successful Progressive Passes']], on='PlayerID', how='outer')
+dfprgB = dfprgA.merge(dfprgsF[['PlayerID', 'Unsuccessful Progressive Passes']], on='PlayerID', how='outer')
+dfprgB = dfprgB.fillna(0)
+dfprgB['% Successful Progressive Passes'] = round((dfprgB['Successful Progressive Passes']*100)/dfprgB['Total Progressive Passes'])
+##PASSES TO FINAL THIRD
+df = df_backup
+df = df[(df['X1'] <= 70) & (df['X2'] >= 70)].reset_index(drop=True)
+dfpatofithSP = df[(df['Index'] == 'Assist') | (df['Index'] == 'Key') | (df['Index'] == 'Second assist') | (df['Index'] == 'Complete')].reset_index(drop=True)
+dfpatofithUP = df[df['Index'] == 'Miss'].reset_index(drop=True)
+dfpatofith = df.groupby(['PlayerID', 'Team'])['Index'].agg('count').reset_index()
+dfpatofith.columns = ['PlayerID', 'Team', 'Total Passes to Final Third']
+dfpatofith = dfpatofith.sort_values('Total Passes to Final Third', ascending=False)
+dfpatofithW = dfpatofithSP.groupby(['PlayerID', 'Team'])['Index'].agg('count').reset_index()
+dfpatofithW.columns = ['PlayerID', 'Team', 'Successful Passes to Final Third']
+dfpatofithW = dfpatofithW.sort_values(by="Successful Passes to Final Third", ascending=False).reset_index(drop=True)
+dfpatofithF = dfpatofithUP.groupby(['PlayerID', 'Team'])['Index'].agg('count').reset_index()
+dfpatofithF.columns = ['PlayerID', 'Team', 'Unsuccessful Passes to Final Third']
+dfpatofithF = dfpatofithF.sort_values(by="Unsuccessful Passes to Final Third", ascending=False).reset_index(drop=True)
+dfpatofithA = dfpatofith.merge(dfpatofithW[['PlayerID', 'Successful Passes to Final Third']], on='PlayerID', how='left')
+dfpatofithB = dfpatofithA.merge(dfpatofithF[['PlayerID', 'Unsuccessful Passes to Final Third']], on='PlayerID', how='left')
+dfpatofithB = dfpatofithB.fillna(0)
+dfpatofithB['% Successful Passes to Final Third'] = round((dfpatofithB['Successful Passes to Final Third']*100)/dfpatofithB['Total Passes to Final Third'])
+##PASSES TO PENALTY AREA
+df = df_backup
+# Coordenadas del cuadrilátero
+x1_cuadrilatero, y1_cuadrilatero = 88.5, 13.84
+x2_cuadrilatero, y2_cuadrilatero = 105, 13.84
+x3_cuadrilatero, y3_cuadrilatero = 88.5, 54.16
+x4_cuadrilatero, y4_cuadrilatero = 105, 54.16
+# Primera condición: X1, Y1 deben estar por fuera del cuadrilátero
+condicion1 = (
+  (df['X1'] < x1_cuadrilatero) |    # X1 debe ser menor que x1_cuadrilatero
+  (df['Y1'] < y1_cuadrilatero) |    # Y1 debe ser menor que y1_cuadrilatero
+  (df['X1'] > x4_cuadrilatero) |    # X1 debe ser mayor que x4_cuadrilatero
+  (df['Y1'] > y3_cuadrilatero)      # Y1 debe ser mayor que y3_cuadrilatero
+)
+# Segunda condición: X2, Y2 deben estar por dentro del cuadrilátero
+condicion2 = (
+  (df['X2'] >= x1_cuadrilatero) &   # X2 debe ser mayor o igual que x1_cuadrilatero
+  (df['Y2'] >= y1_cuadrilatero) &   # Y2 debe ser mayor o igual que y1_cuadrilatero
+  (df['X2'] <= x4_cuadrilatero) &   # X2 debe ser menor o igual que x4_cuadrilatero
+  (df['Y2'] <= y3_cuadrilatero)     # Y2 debe ser menor o igual que y3_cuadrilatero
+)
+# Aplicar las condiciones para filtrar el DataFrame
+df = df[condicion1 & condicion2]
+dfpasspenareaSP = df[(df['Index'] == 'Assist') | (df['Index'] == 'Key') | (df['Index'] == 'Second assist') | (df['Index'] == 'Complete')].reset_index(drop=True)
+dfpasspenareaUP = df[df['Index'] == 'Miss'].reset_index(drop=True)
+dfpasspenarea = df.groupby(['PlayerID', 'Team'])['Index'].agg('count').reset_index()
+dfpasspenarea.columns = ['PlayerID', 'Team', 'Total Passes to Penalty Area']
+dfpasspenarea = dfpasspenarea.sort_values('Total Passes to Penalty Area', ascending=False)
+dfpasspenareaW = dfpasspenareaSP.groupby(['PlayerID', 'Team'])['Index'].agg('count').reset_index()
+dfpasspenareaW.columns = ['PlayerID', 'Team', 'Successful Passes to Penalty Area']
+dfpasspenareaW = dfpasspenareaW.sort_values(by="Successful Passes to Penalty Area", ascending=False).reset_index(drop=True)
+dfpasspenareaF = dfpasspenareaUP.groupby(['PlayerID', 'Team'])['Index'].agg('count').reset_index()
+dfpasspenareaF.columns = ['PlayerID', 'Team', 'Unsuccessful Passes to Penalty Area']
+dfpasspenareaF = dfpasspenareaF.sort_values(by="Unsuccessful Passes to Penalty Area", ascending=False).reset_index(drop=True)
+dfpasspenareaA = dfpasspenarea.merge(dfpasspenareaW[['PlayerID', 'Successful Passes to Penalty Area']], on='PlayerID', how='left')
+dfpasspenareaB = dfpasspenareaA.merge(dfpasspenareaF[['PlayerID', 'Unsuccessful Passes to Penalty Area']], on='PlayerID', how='left')
+dfpasspenareaB = dfpasspenareaB.fillna(0)
+dfpasspenareaB['% Successful Passes to Penalty Area'] = round((dfpasspenareaB['Successful Passes to Penalty Area']*100)/dfpasspenareaB['Total Passes to Penalty Area'])
+##LONG PASSES
+df = df_backup
+df['Distancia'] = np.sqrt((df['X2'] - df['X1'])**2 + (df['Y2'] - df['Y1'])**2)
+df = df[df['Distancia'] > 30]
+dfpasslargesSP = df[(df['Index'] == 'Assist') | (df['Index'] == 'Key') | (df['Index'] == 'Second assist') | (df['Index'] == 'Complete')].reset_index(drop=True)
+dfpasslargesUP = df[df['Index'] == 'Miss'].reset_index(drop=True)
+dfpasslarges = df.groupby(['PlayerID', 'Team'])['Index'].agg('count').reset_index()
+dfpasslarges.columns = ['PlayerID', 'Team', 'Total Long Passes']
+dfpasslarges = dfpasslarges.sort_values('Total Long Passes', ascending=False)
+dfpasslargesW = dfpasslargesSP.groupby(['PlayerID', 'Team'])['Index'].agg('count').reset_index()
+dfpasslargesW.columns = ['PlayerID', 'Team', 'Successful Long Passes']
+dfpasslargesW = dfpasslargesW.sort_values(by="Successful Long Passes", ascending=False).reset_index(drop=True)
+dfpasslargesF = dfpasslargesUP.groupby(['PlayerID', 'Team'])['Index'].agg('count').reset_index()
+dfpasslargesF.columns = ['PlayerID', 'Team', 'Unsuccessful Long Passes']
+dfpasslargesF = dfpasslargesF.sort_values(by="Unsuccessful Long Passes", ascending=False).reset_index(drop=True)
+dfpasslargesA = dfpasslarges.merge(dfpasslargesW[['PlayerID', 'Successful Long Passes']], on='PlayerID', how='left')
+dfpasslargesB = dfpasslargesA.merge(dfpasslargesF[['PlayerID', 'Unsuccessful Long Passes']], on='PlayerID', how='left')
+dfpasslargesB = dfpasslargesB.fillna(0)
+dfpasslargesB['% Successful Long Passes'] = round((dfpasslargesB['Successful Long Passes']*100)/dfpasslargesB['Total Long Passes'])
+##TOUCHES (FILTER)
+df = dfORIGINAL
+df_backup2 = df
+##TOUCHES
+df = df_backup2
+dftouches = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftouches.columns = ['PlayerID', 'Team', 'Touches']
+dftouches = dftouches.sort_values('Touches', ascending=False)
+##TOUCHES IN FINAL THIRD
+df = df_backup2
+df = df[(df['X1'] <= 70) & (df['X2'] >= 70)].reset_index(drop=True)
+dftouchesfinthird = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftouchesfinthird.columns = ['PlayerID', 'Team', 'Touches in Final Third']
+dftouchesfinthird = dftouchesfinthird.sort_values('Touches in Final Third', ascending=False)
+##TOUCHES IN PENALTY AREA
+df = df_backup2
+df = df[(df['X1'] >= 88.5) & (df['Y1'] >= 13.84) & (df['Y2'] <= 54.16)].reset_index(drop=True)
+dftouchespenarea = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftouchespenarea.columns = ['PlayerID', 'Team', 'Touches in Penalty Area']
+dftouchespenarea = dftouchespenarea.sort_values('Touches in Penalty Area', ascending=False)
+##CARRIES (FILTER)
+df = dfORIGINAL
+df = df[(df['Action'] == 'Carries')].reset_index(drop=True)
+df_backup3 = df
+#CARRIES TO SECOND HALF
+df = df_backup3
+df = df[(df['X1'] <= 52.5) & (df['X2'] >= 52.5)].reset_index(drop=True)
+dfcarriestohalfpitch = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dfcarriestohalfpitch.columns = ['PlayerID', 'Team', 'Carries to Second Half']
+dfcarriestohalfpitch = dfcarriestohalfpitch.sort_values('Carries to Second Half', ascending=False)
+##CARRIES TO FINAL THIRD
+df = df_backup3
+df = df[(df['X1'] <= 70) & (df['X2'] >= 70)].reset_index(drop=True)
+dfcarriestofinthird = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dfcarriestofinthird.columns = ['PlayerID', 'Team', 'Carries to Final Third']
+dfcarriestofinthird = dfcarriestofinthird.sort_values('Carries to Final Third', ascending=False)
+##CARRIES TO PENALTY AREA
+df = df_backup3
+df = df[(df['X1'] >= 88.5) & (df['Y1'] >= 13.84) & (df['Y2'] <= 54.16)].reset_index(drop=True)
+dfcarriestopenarea = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dfcarriestopenarea.columns = ['PlayerID', 'Team', 'Carries to Penalty Area']
+dfcarriestopenarea = dfcarriestopenarea.sort_values('Carries to Penalty Area', ascending=False)
+##JOIN DATAFRAMES##
+dfTotalA = dfprgB.merge(dfpatofithB[['PlayerID', 'Total Passes to Final Third', 'Successful Passes to Final Third', 'Unsuccessful Passes to Final Third', '% Successful Passes to Final Third']], on='PlayerID', how='outer')
+dfTotalB = dfTotalA.merge(dfpasspenareaB[['PlayerID', 'Total Passes to Penalty Area', 'Successful Passes to Penalty Area', 'Unsuccessful Passes to Penalty Area', '% Successful Passes to Penalty Area']], on='PlayerID', how='outer')
+dfTotalC = dfTotalB.merge(dfpasslargesB[['PlayerID', 'Total Long Passes', 'Successful Long Passes', 'Unsuccessful Long Passes', '% Successful Long Passes']], on='PlayerID', how='outer')
+dfTotalD = dfTotalC.merge(dftouches[['PlayerID', 'Touches']], on='PlayerID', how='outer')
+dfTotalE = dfTotalD.merge(dftouchesfinthird[['PlayerID', 'Touches in Final Third']], on='PlayerID', how='outer')
+dfTotalF = dfTotalE.merge(dftouchespenarea[['PlayerID', 'Touches in Penalty Area']], on='PlayerID', how='outer')
+dfTotalG = dfTotalF.merge(dfcarriestohalfpitch[['PlayerID', 'Carries to Second Half']], on='PlayerID', how='outer')
+dfTotalH = dfTotalG.merge(dfcarriestofinthird[['PlayerID', 'Carries to Final Third']], on='PlayerID', how='outer')
+dfTotalI = dfTotalH.merge(dfcarriestopenarea[['PlayerID', 'Carries to Penalty Area']], on='PlayerID', how='outer')
+merged_df = event_counts2.reset_index().merge(dfTotalI, on='PlayerID', how='outer')
+df = merged_df
 
-event_counts = df.groupby(['Players', 'Team'])['Event'].value_counts().unstack(fill_value=0)
+
+
+#event_counts = df.groupby(['Players', 'Team'])['Event'].value_counts().unstack(fill_value=0)
 columnsevents = event_counts.columns.tolist()
 if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
-    st.write(event_counts)
-    st.write(len(event_counts))
+    st.write(df)
+    #st.write(len(event_counts))
     st.markdown("""----""")
     metricsearchbox01, metricsearchbox02, metricsearchbox03 = st.columns(3)
     with metricsearchbox01:
