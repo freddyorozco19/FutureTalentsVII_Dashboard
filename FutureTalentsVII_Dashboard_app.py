@@ -235,6 +235,7 @@ if selected == "Rankings":
     with p02:
         event_counts2 = event_counts.sort_values(by=[MetricSel], ascending=False)
         st.write(event_counts2[MetricSel])
+st.divider()
 if selected == "Player Search":
     ###Data
     ##df = pd.read_excel("MatchesData/matches.xlsx")
