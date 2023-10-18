@@ -996,7 +996,7 @@ if selected == "Player Search":
                     ##names_iniciales = names_iniciales.squeeze().tolist()
                     #ax.text(meanposx, meanposy, iniciales, color='k', fontproperties=prop2, fontsize=13, zorder=34, ha='center', va='center')
                     ax.scatter(df['X1'], df['Y1'], color = ColorOptionSel, edgecolors='w', s=30, zorder=2, alpha=0.2)
-                    ax.text(52.5,70, "" + PlayerPltSel.upper() + " - " + str(len(dfKKcleaned)) + " TOUCHES", c='w', fontsize=10, fontproperties=prop2, ha='center')
+                    ax.text(52.5,70, "" + PlayerPltSel.upper() + " - " + str(len(df)) + " RECOVERIES", c='w', fontsize=10, fontproperties=prop2, ha='center')
                     ##Adding title
                     ax9 = fig.add_axes([0.17,0.16,0.20,0.07])
                     ax9.axis("off")
