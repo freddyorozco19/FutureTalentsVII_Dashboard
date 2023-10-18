@@ -1110,16 +1110,15 @@ if selected == "Player Search":
                     ax.axis("off")
                     fig.patch.set_visible(False)
                     soc_pitch_divisions(ax, grids = True)
-
+                    df = df_backup
+                    df = df[df['Action'] == 'Shot'].reset_index(drop=True)
                     y_bins = [105] + [105 - 5.5*x for x in range(1,10)] + [45]
                     x_bins = [68] + [68 - 6.8*x for x in range(1,10)] + [0]
                     
                     x_bins.sort()
                     y_bins.sort()
                     
-                    
                     df["bins_x"] = pd.cut(df["X1"], bins = x_bins)
-                    
                     df["bins_y"] = pd.cut(df["Y1"], bins = y_bins)
                     
                     #Group and sum xGOT by side and location
@@ -1127,7 +1126,7 @@ if selected == "Player Search":
                         df.groupby(
                             ["bins_x", "bins_y"], 
                             observed = True
-                        )["Event"].count()
+                        )["Action"].count()
                         .reset_index()
                     )
                     
@@ -1141,12 +1140,12 @@ if selected == "Player Search":
                     
                     
                     example_df = df_teams
-                    total_example = example_df["Event"].sum()
+                    total_example = example_df["Action"].sum()
                     
                     # Compute share of xGOT as a % of total
                     example_df = (
                         example_df
-                        .assign(COUNT_share = lambda x: x.Event/total_example)
+                        .assign(COUNT_share = lambda x: x.Action/total_example)
                     )
                     # Scale data to the maximum value to get a nice color scale
                     example_df = (
