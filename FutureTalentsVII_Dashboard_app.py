@@ -966,37 +966,38 @@ if selected == "Player Search":
 
                     dfKKcleaned = df
                     df = df[df['Action'] == 'Recovery'].reset_index(drop=True)
-                    scaler  = StandardScaler()
-                    defpoints1 = df[['X1', 'Y1']].values
-                    defpoints2 = scaler.fit_transform(defpoints1)
-                    df2 = pd.DataFrame(defpoints2, columns = ['Xstd', 'Ystd'])
-                    df3 = pd.concat([df, df2], axis=1)
-                    df5=df3
-                    df3 = df3[df3['Xstd'] <= 1]
-                    df3 = df3[df3['Xstd'] >= -1]
-                    df3 = df3[df3['Ystd'] <= 1]
-                    df3 = df3[df3['Ystd'] >= -1].reset_index()
-                    df9 = df
-                    df = df3
-                    defpoints = df[['X1', 'Y1']].values
-                    hull = ConvexHull(df[['X1','Y1']])        
-                    ax.scatter(df9['X1'], df9['Y1'], color = ColorOptionSel, edgecolors='w', s=30, zorder=2, alpha=0.2)
-                    #Loop through each of the hull's simplices
-                    for simplex in hull.simplices:
-                        #Draw a black line between each
-                        ax.plot(defpoints[simplex, 0], defpoints[simplex, 1], '#BABABA', lw=2, zorder = 1, ls='--')
-                    ax.fill(defpoints[hull.vertices,0], defpoints[hull.vertices,1], ColorOptionSel, alpha=0.7)
-                    meanposx = df9['X1'].mean()
-                    meanposy = df9['Y1'].mean()
-                    ax.scatter(meanposx, meanposy, s=1000, color="w", edgecolors=ColorOptionSel, lw=2.5, zorder=25, alpha=0.95)
-                    names = PlayerPltSel.split()
-                    iniciales = ""
-                    for name in names:
-                       iniciales += name[0] 
-                    #names_iniciales = names_iniciales.squeeze().tolist()
-                    ax.text(meanposx, meanposy, iniciales, color='k', fontproperties=prop2, fontsize=13, zorder=34, ha='center', va='center')
+                    #scaler  = StandardScaler()
+                    #defpoints1 = df[['X1', 'Y1']].values
+                    #defpoints2 = scaler.fit_transform(defpoints1)
+                    #df2 = pd.DataFrame(defpoints2, columns = ['Xstd', 'Ystd'])
+                    #df3 = pd.concat([df, df2], axis=1)
+                    #df5=df3
+                    #df3 = df3[df3['Xstd'] <= 1]
+                    #df3 = df3[df3['Xstd'] >= -1]
+                    #df3 = df3[df3['Ystd'] <= 1]
+                    #df3 = df3[df3['Ystd'] >= -1].reset_index()
+                    #df9 = df
+                    #df = df3
+                    #defpoints = df[['X1', 'Y1']].values
+                    #hull = ConvexHull(df[['X1','Y1']])        
+                    #ax.scatter(df9['X1'], df9['Y1'], color = ColorOptionSel, edgecolors='w', s=30, zorder=2, alpha=0.2)
+                    ##Loop through each of the hull's simplices
+                    #for simplex in hull.simplices:
+                    #    #Draw a black line between each
+                    #    ax.plot(defpoints[simplex, 0], defpoints[simplex, 1], '#BABABA', lw=2, zorder = 1, ls='--')
+                    #ax.fill(defpoints[hull.vertices,0], defpoints[hull.vertices,1], ColorOptionSel, alpha=0.7)
+                    #meanposx = df9['X1'].mean()
+                    #meanposy = df9['Y1'].mean()
+                    #ax.scatter(meanposx, meanposy, s=1000, color="w", edgecolors=ColorOptionSel, lw=2.5, zorder=25, alpha=0.95)
+                    #names = PlayerPltSel.split()
+                    #iniciales = ""
+                    #for name in names:
+                    #   iniciales += name[0] 
+                    ##names_iniciales = names_iniciales.squeeze().tolist()
+                    #ax.text(meanposx, meanposy, iniciales, color='k', fontproperties=prop2, fontsize=13, zorder=34, ha='center', va='center')
+                    ax.scatter(df['X1'], df['Y1'], color = ColorOptionSel, edgecolors='w', s=30, zorder=2, alpha=0.2)
                     ax.text(52.5,70, "" + PlayerPltSel.upper() + " - " + str(len(dfKKcleaned)) + " TOUCHES", c='w', fontsize=10, fontproperties=prop2, ha='center')
-                    #Adding title
+                    ##Adding title
                     ax9 = fig.add_axes([0.17,0.16,0.20,0.07])
                     ax9.axis("off")
                     ax9.set_xlim(0,10)
