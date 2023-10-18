@@ -1120,8 +1120,7 @@ if selected == "Player Search":
                     
                     df["bins_x"] = pd.cut(df["X1"], bins = x_bins)
                     df["bins_y"] = pd.cut(df["Y1"], bins = y_bins)
-                    st.write(df)
-                    #Group and sum xGOT by side and location
+                    ##Group and sum xGOT by side and location
                     df_teams = (
                         df.groupby(
                             ["bins_x", "bins_y"], 
@@ -1136,9 +1135,7 @@ if selected == "Player Search":
                         sort_values(by = ["bins_y", "bins_x"]).
                         reset_index(drop = True)
                     )
-                    
-                    
-                    
+                                        
                     example_df = df_teams
                     total_example = example_df["Action"].sum()
                     
@@ -1152,8 +1149,6 @@ if selected == "Player Search":
                         example_df
                         .assign(COUNT_scaled = lambda x: x.COUNT_share/x.COUNT_share.max())
                     )
-                    
-
                     
                     counter = 0
                     for X, Y in zip(example_df["bins_x"], example_df["bins_y"]):
@@ -1187,15 +1182,24 @@ if selected == "Player Search":
                             )
                     
                         counter += 1
-
+                    auxtitle = ax.text(5, 106.5, ""+str(len(df))+" - SHOTS",c='w', fontproperties=prop2, fontsize=11, ha='center', va='center')
                     ##Adding winstats logo
-                    ax53 = fig.add_axes([0.82, 0.14, 0.05, 0.05])
+                    ax53 = fig.add_axes([0.82, 0.12, 0.05, 0.05])
                     url53 = "https://i.postimg.cc/R0QjGByL/sZggzUM.png"
                     response = requests.get(url53)
                     img = Image.open(BytesIO(response.content))
                     ax53.imshow(img)
                     ax53.axis("off")
                     ax53.set_facecolor("#000")
+                    #Adding colorbar
+                    ax9 = fig.add_axes([0.145,0.14,0.20,0.07])
+                    ax9.scatter(6.75,5, c=colorviz, marker='h', s=400, edgecolors='#121214', alpha=1)
+                    ax9.scatter(5.00,5, c=colorviz, marker='h', s=400, edgecolors='#121214', alpha=0.7)
+                    ax9.scatter(3.25,5, c=colorviz, marker='h', s=400, edgecolors='#121214', alpha=0.2)
+                    ax9.text(5, 0.5, '-  SHOTS  +',c='w', fontproperties=prop2, fontsize=9.5, ha='center')
+                    ax9.axis("off")
+                    ax9.set_xlim(0,10)
+                    ax9.set_ylim(0,10)
                     st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
         with pltmain02:
             st.dataframe(df)
