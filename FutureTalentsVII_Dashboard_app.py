@@ -919,7 +919,7 @@ if selected == "Player Search":
                 ax9.scatter(32.5, 15, marker='s', color=colorviz, s=300)
                 ax9.text(32.5, 0, 'SUCCESSFUL\nPASSES', color=colorviz, fontproperties=prop2, ha='center', fontsize=9)
                 ax9.scatter(72.5, 15, marker='s', color='#9F9F9F', s=300)
-                ax9.text(72.5, 0, 'UNSUCCESSFUL\nPASSESL', color='#9F9F9F', fontproperties=prop2, ha='center', fontsize=9)
+                ax9.text(72.5, 0, 'UNSUCCESSFUL\nPASSES', color='#9F9F9F', fontproperties=prop2, ha='center', fontsize=9)
                 st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png") 
             if OptionPlotSel == 'xT Passes Map':
                 pitch = Pitch(pitch_color='None', pitch_type='custom', line_zorder=1, linewidth=1, goal_type='box', pitch_length=105, pitch_width=68)
