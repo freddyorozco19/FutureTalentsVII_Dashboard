@@ -865,6 +865,8 @@ if selected == "Player Search":
             if OptionPlotSel == 'Passes to Penalty Area':
                 #df = df[(df['Event'] == 'Successful passes') | (df['Event'] == 'Key Passes') | (df['Event'] == 'Assists') | (df['Event'] == 'Successful open play crosses') | (df['Event'] == 'Successful set play crosses') | (df['Event'] == 'Unsuccessful passes') | (df['Event'] == 'Unsuccessful open play crosses') | (df['Event'] == 'Unsuccessful set play crosses')].reset_index()
                 #dfKKK = df.drop_duplicates(subset=['X1', 'Y1', 'X2', 'Y2'], keep='last')
+                df = df_backup
+                df = df[(df['Action'] == 'Pass') | (df['Action'] == 'Type pass')].reset_index(drop=True)
                 # Coordenadas del cuadrilátero
                 x1_cuadrilatero, y1_cuadrilatero = 88.5, 13.84
                 x2_cuadrilatero, y2_cuadrilatero = 105, 13.84
