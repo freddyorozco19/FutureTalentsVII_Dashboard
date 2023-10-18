@@ -197,8 +197,7 @@ if selected == "Rankings":
         MetricSel = st.selectbox("Choose metric:", Metric_Lst)
         #event_counts = event_counts[event_counts[MetricSel]].reset_index(drop=True)
     with metricsearchbox02:
-        Positions_List = ['DEF', 'MED' 'DEL']
-        PositionsSel = st.selectbox("Choose index:", Positions_List)
+        minsel = st.slider('Filter by minutes (%):', 0, 100)
     with metricsearchbox03:
       Player_Lst = df['Players'].drop_duplicates().tolist()
       PlayerSel = st.selectbox("Choose range:", Player_Lst)
@@ -208,7 +207,7 @@ if selected == "Rankings":
         ##fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
         ##ax.axis("off")
         ##fig.patch.set_visible(False)
-        fig, ax = plt.subplots(figsize = (12,12), dpi=600)
+        fig, ax = mplt.subplots(figsize = (12,12), dpi=600)
         fig.set_facecolor('#011E37')
         ax.patch.set_facecolor('#011E37')
         event_counts = event_counts.sort_values(by=[MetricSel], ascending=True)
