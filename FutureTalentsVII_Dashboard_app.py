@@ -377,7 +377,7 @@ if selected == "Rankings":
         fig, ax = mplt.subplots(figsize = (10,13), dpi=600)
         fig.set_facecolor('#151517')
         ax.patch.set_facecolor('#151517')
-        event_counts = event_counts.sort_values(by=[MetricSel], ascending=True)
+        event_counts2 = event_counts2.sort_values(by=[MetricSel], ascending=True)
         #players_teams = [f'{player} - {team}' for player, team in event_counts[-10:].index]
         #events = event_counts[MetricSel].head(-5)
         #players_teams = players_teams.str.upper()
@@ -386,7 +386,7 @@ if selected == "Rankings":
         #event_counts = event_counts.head(10)
         colors = colorlist((1, 0, 0.3137254901960784, 0), (1, 0, 0.3137254901960784, 1), 10)
         PLY = df['PlayerID'].tail(10).str.upper()
-        Z = event_counts[MetricSel].tail(10)
+        Z = event_counts2[MetricSel].tail(10)
         ax.barh(PLY, Z, edgecolor=(1,1,1,0.5), lw = 1, color=colors)
         mplt.setp(ax.get_yticklabels(), fontproperties=prop2, fontsize=18, color='#FFF')
         mplt.setp(ax.get_xticklabels(), fontproperties=prop2, fontsize=20, color=(1,1,1,1))
