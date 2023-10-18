@@ -231,7 +231,8 @@ if selected == "Rankings":
                 ax.spines[x].set_visible(False)
         st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
     with p02:
-        st.write(event_counts[MetricSel][-10:])
+        event_counts2 = event_counts.sort_values(by=[MetricSel], ascending=False)
+        st.write(event_counts2[MetricSel])
 if selected == "Player Search":
     ###Data
     ##df = pd.read_excel("MatchesData/matches.xlsx")
