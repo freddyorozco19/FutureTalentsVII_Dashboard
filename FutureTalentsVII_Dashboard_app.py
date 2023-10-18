@@ -208,10 +208,10 @@ if selected == "Rankings":
         fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
         ax.axis("off")
         fig.patch.set_visible(False)
-        players_teams = [f'{player} - {team}' for player, team in event_counts.index]
+        #players_teams = [f'{player} - {team}' for player, team in event_counts.index]
         #events = event_counts[MetricSel].head(-5)
         event_counts = event_counts.sort_values(by=[MetricSel], ascending=True)
-        
+        st.write(event_counts['Players'])
         #event_counts = event_counts.head(10)
         colors = colorlist((1, 0, 0.3137254901960784, 0), (1, 0, 0.3137254901960784, 1), 10)
         PLY = event_counts['Players'].tail(10).str.upper()
