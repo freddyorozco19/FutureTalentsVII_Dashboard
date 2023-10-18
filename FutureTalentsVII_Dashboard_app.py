@@ -404,7 +404,7 @@ if selected == "Rankings":
         st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
     with p02:
         event_counts22 = df000.sort_values(by=[MetricSel], ascending=False)
-        st.write(event_counts22['PlayerID', MetricSel])
+        st.write(event_counts22[['PlayerID', MetricSel]])
 st.divider()
 if selected == "Player Search":
     ###Data
