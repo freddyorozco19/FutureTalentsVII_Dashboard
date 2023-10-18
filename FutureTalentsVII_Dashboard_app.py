@@ -1112,9 +1112,9 @@ if selected == "Player Search":
                     soc_pitch_divisions(ax, grids = True)
                     df = df_backup
                     df = df[df['Action'] == 'Shot'].reset_index(drop=True)
+                    df.rename(columns={'X1':'Y1', 'Y1':'X1'}, inplace=True)
                     y_bins = [105] + [105 - 5.5*x for x in range(1,10)] + [45]
                     x_bins = [68] + [68 - 6.8*x for x in range(1,10)] + [0]
-                    
                     x_bins.sort()
                     y_bins.sort()
                     
