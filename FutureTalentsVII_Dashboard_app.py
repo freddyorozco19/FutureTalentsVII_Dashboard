@@ -346,7 +346,7 @@ dfTotalH = dfTotalG.merge(dfcarriestofinthird[['PlayerID', 'Carries to Final Thi
 dfTotalI = dfTotalH.merge(dfcarriestopenarea[['PlayerID', 'Carries to Penalty Area']], on='PlayerID', how='outer')
 merged_df = event_counts2.reset_index().merge(dfTotalI, on='PlayerID', how='outer')
 df = merged_df
-
+df = df.fillna(0)
 
 
 #event_counts = df.groupby(['Players', 'Team'])['Event'].value_counts().unstack(fill_value=0)
