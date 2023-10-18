@@ -1110,6 +1110,94 @@ if selected == "Player Search":
                     ax.axis("off")
                     fig.patch.set_visible(False)
                     soc_pitch_divisions(ax, grids = True)
+
+                    y_bins = [105] + [105 - 5.5*x for x in range(1,10)] + [45]
+                    x_bins = [68] + [68 - 6.8*x for x in range(1,10)] + [0]
+                    
+                    x_bins.sort()
+                    y_bins.sort()
+                    
+                    
+                    df["bins_x"] = pd.cut(df["X1"], bins = x_bins)
+                    
+                    df["bins_y"] = pd.cut(df["Y1"], bins = y_bins)
+                    
+                    #Group and sum xGOT by side and location
+                    df_teams = (
+                        df.groupby(
+                            ["bins_x", "bins_y"], 
+                            observed = True
+                        )["Event"].count()
+                        .reset_index()
+                    )
+                    
+                    # And we sort it based on the bins_y and bins_x columns
+                    df_teams = (
+                        df_teams.
+                        sort_values(by = ["bins_y", "bins_x"]).
+                        reset_index(drop = True)
+                    )
+                    
+                    
+                    
+                    example_df = df_teams
+                    total_example = example_df["Event"].sum()
+                    
+                    # Compute share of xGOT as a % of total
+                    example_df = (
+                        example_df
+                        .assign(COUNT_share = lambda x: x.Event/total_example)
+                    )
+                    # Scale data to the maximum value to get a nice color scale
+                    example_df = (
+                        example_df
+                        .assign(COUNT_scaled = lambda x: x.COUNT_share/x.COUNT_share.max())
+                    )
+                    
+                    
+                    
+                    
+                    counter = 0
+                    for X, Y in zip(example_df["bins_x"], example_df["bins_y"]):
+                    	#This colours our bins
+                        ax2.fill_between(
+                            x = [X.left, X.right],
+                            y1 = Y.left,
+                            y2 = Y.right,
+                            color = "#FF0046",
+                            alpha = example_df["COUNT_scaled"].iloc[counter],
+                            zorder = -1,
+                            lw = 0
+                        )
+                    	
+                        # Fancy annotations cuz why not?
+                        if example_df['COUNT_share'].iloc[counter] > .005:
+                            text_ = ax2.annotate(
+                                xy = (X.right - (X.right - X.left)/2, Y.right - (Y.right - Y.left)/2),
+                                text = f"{example_df['COUNT_share'].iloc[counter]:.0%}",
+                                fontproperties=prop2,
+                                ha = "center",
+                                va = "center",
+                                color = "w",
+                                size = 14,
+                                weight = "bold",
+                                zorder = 3
+                            )
+                    
+                            text_.set_path_effects(
+                                [path_effects.Stroke(linewidth=0.75, foreground="k"), path_effects.Normal()]
+                            )
+                    
+                        counter += 1
+
+                    ##Adding winstats logo
+                    ax53 = fig.add_axes([0.82, 0.14, 0.05, 0.05])
+                    url53 = "https://i.postimg.cc/R0QjGByL/sZggzUM.png"
+                    response = requests.get(url53)
+                    img = Image.open(BytesIO(response.content))
+                    ax53.imshow(img)
+                    ax53.axis("off")
+                    ax53.set_facecolor("#000")
                     st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
         with pltmain02:
             st.dataframe(df)
