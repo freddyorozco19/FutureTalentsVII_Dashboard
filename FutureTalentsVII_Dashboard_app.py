@@ -231,6 +231,13 @@ df['X1'] = (df['X1']*105)/1
 df['Y1'] = (df['Y1']*68)/1
 df['X2'] = (df['X2']*105)/1
 df['Y2'] = (df['Y2']*68)/1
+###Convert for left attack-side
+for index, row in df.iterrows():
+    if row['Atack side'] == 'Left':
+        df.at[index, 'X1'] = 105 - row['X1']
+        df.at[index, 'Y1'] = 68 - row['Y1']
+        df.at[index, 'X2'] = 105 - row['X2']
+        df.at[index, 'Y2'] = 68 - row['Y2']
 
 df['Index'] = df['Index'].fillna("")
 df['Event'] = df['Action'] + ' - ' + df['Index']
