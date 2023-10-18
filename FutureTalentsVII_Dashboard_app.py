@@ -1120,7 +1120,7 @@ if selected == "Player Search":
                     
                     df["bins_x"] = pd.cut(df["X1"], bins = x_bins)
                     df["bins_y"] = pd.cut(df["Y1"], bins = y_bins)
-                    
+                    st.write(df)
                     #Group and sum xGOT by side and location
                     df_teams = (
                         df.groupby(
