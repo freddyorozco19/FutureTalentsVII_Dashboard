@@ -167,7 +167,7 @@ with st.sidebar:
 
 ###Data
 ##df = pd.read_excel("MatchesData/matches.xlsx")
-df = pd.read_excel("MatchesData/all_matches_16102023_215800.xlsx")
+df = pd.read_excel("MatchesData/all_matches_prueba.xlsx")
 df['Index'] = df['Index'].fillna("")
 df['Event'] = df['Action'] + ' - ' + df['Index']
 
