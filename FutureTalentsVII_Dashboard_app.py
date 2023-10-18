@@ -1182,7 +1182,7 @@ if selected == "Player Search":
                             )
                     
                         counter += 1
-                    auxtitle = ax.text(5, 106.5, ""+str(len(df))+" - SHOTS",c='w', fontproperties=prop2, fontsize=11, ha='center', va='center')
+                    auxtitle = ax.text(52.5, 111, "" + PlayerPltSel.upper() + " - " + str(len(df)) + "SHOTS",c='w', fontproperties=prop2, fontsize=11, ha='center', va='center')
                     ##Adding winstats logo
                     ax53 = fig.add_axes([0.82, 0.12, 0.05, 0.05])
                     url53 = "https://i.postimg.cc/R0QjGByL/sZggzUM.png"
@@ -1192,7 +1192,7 @@ if selected == "Player Search":
                     ax53.axis("off")
                     ax53.set_facecolor("#000")
                     #Adding colorbar
-                    ax9 = fig.add_axes([0.125,0.12,0.20,0.07])
+                    ax9 = fig.add_axes([0.12,0.12,0.20,0.07])
                     ax9.scatter(6.75,5, c="#FF0050", marker='h', s=400, edgecolors='#121214', alpha=1)
                     ax9.scatter(5.00,5, c="#FF0050", marker='h', s=400, edgecolors='#121214', alpha=0.7)
                     ax9.scatter(3.25,5, c="#FF0050", marker='h', s=400, edgecolors='#121214', alpha=0.2)
