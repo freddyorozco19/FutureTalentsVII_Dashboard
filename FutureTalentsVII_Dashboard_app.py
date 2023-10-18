@@ -205,9 +205,12 @@ if selected == "Rankings":
       #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     p01, p02 = st.columns(2)
     with p01:
-        fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
-        #ax.axis("off")
-        fig.patch.set_visible(False)
+        ##fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
+        ##ax.axis("off")
+        ##fig.patch.set_visible(False)
+        fig, ax = plt.subplots(figsize = (12,12), dpi=600)
+        fig.set_facecolor('#011E37')
+        ax.patch.set_facecolor('#011E37')
         event_counts = event_counts.sort_values(by=[MetricSel], ascending=True)
         players_teams = [f'{player} - {team}' for player, team in event_counts[-10:].index]
         #events = event_counts[MetricSel].head(-5)
