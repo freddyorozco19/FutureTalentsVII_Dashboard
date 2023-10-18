@@ -206,7 +206,7 @@ if selected == "Rankings":
     p01, p02 = st.columns(2)
     with p01:
         fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
-        ax.axis("off")
+        #ax.axis("off")
         fig.patch.set_visible(False)
         event_counts = event_counts.sort_values(by=[MetricSel], ascending=True)
         players_teams = [f'{player} - {team}' for player, team in event_counts[:10].index]
