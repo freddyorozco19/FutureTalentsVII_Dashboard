@@ -978,7 +978,7 @@ if selected == "Player Search":
     if EventlstSel == 'Recoveries':     
         pltmnop01_recoveries, pltmnop02_recoveries, pltmnop03_recoveries = st.columns(3)
         with pltmnop01_recoveries:
-            OptionPlot = ['Recoveries Location', 'Heatmap - Zones', 'Heatmap - Gaussian', 'Heatmap - Kernel']
+            OptionPlot = ['Recoveries Location', 'Heatmap - Zones']
             OptionPlotSel = st.selectbox('Choose viz:', OptionPlot)
         ColorOptionSel = "#FF0050"
         pltmain01, pltmain02 = st.columns(2)
@@ -1101,7 +1101,7 @@ if selected == "Player Search":
                     ax9.set_xlim(0,10)
                     ax9.set_ylim(0,10)
                     ax9.scatter(2, 5, s=120, color=ColorOptionSel, edgecolors='#FFFFFF', lw=1)
-                    ax9.text(2, -0.5, 'SHOTS', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
+                    ax9.text(2, -0.5, 'SHOTS\nLOCATION', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
                     #ax9.scatter(8, 5, s=320, color=ColorOptionSel, edgecolors='#FFFFFF', lw=1, ls='--', marker='h')
                     #ax9.text(8, -0.5, 'RECOVERIES\nTERRITORY', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
                     st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
