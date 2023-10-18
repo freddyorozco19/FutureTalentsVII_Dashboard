@@ -392,7 +392,7 @@ if selected == "Rankings":
         ax.barh(PLY, Z, edgecolor=(1,1,1,0.5), lw = 1, color=colors)
         mplt.setp(ax.get_yticklabels(), fontproperties=prop2, fontsize=18, color='#FFF')
         mplt.setp(ax.get_xticklabels(), fontproperties=prop2, fontsize=20, color=(1,1,1,1))
-        mplt.xlabel(MetricSel.upper(), color = 'w', fontproperties=prop2, fontsize=15, labelpad=20)
+        mplt.xlabel(MetricSel.upper(), color = 'w', fontproperties=prop2, fontsize=18, labelpad=30)
         #ax.set_xticks([0, 5, 10])
         #ax.set_xlim(0, 18)
         ax.tick_params(axis='y', which='major', pad=15)
