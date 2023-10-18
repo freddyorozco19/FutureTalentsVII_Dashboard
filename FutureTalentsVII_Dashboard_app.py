@@ -400,8 +400,8 @@ if selected == "Rankings":
                 ax.spines[x].set_visible(False)
         st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
     with p02:
-        event_counts2 = event_counts.sort_values(by=[MetricSel], ascending=False)
-        st.write(event_counts2[MetricSel])
+        event_counts22 = event_counts2.sort_values(by=[MetricSel], ascending=False)
+        st.write(event_counts22[MetricSel])
 st.divider()
 if selected == "Player Search":
     ###Data
