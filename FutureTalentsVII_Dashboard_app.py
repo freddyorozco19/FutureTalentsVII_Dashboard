@@ -200,7 +200,10 @@ if selected == "Rankings":
         #events = event_counts[MetricSel].head(-5)
         event_counts = event_counts.sort_values(by=MetricSel, axis=0, ascending=True)
         #event_counts = event_counts.head(10)
-        ax.barh(players_teams, event_counts[MetricSel], color="#FF0050")
+        colors = colorlist((1, 0, 0.3137254901960784, 0), (1, 0, 0.3137254901960784, 1), 10)
+        player_teams = player_teams.tail(10).str.upper()
+        Z = event_counts[MetricSel].tail(10)
+        ax.barh(player_teams, Z, edgecolor=(1,1,1,0.5), lw = 1, color=colors)
         st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
     with p02:
         st.write(event_counts[MetricSel])
