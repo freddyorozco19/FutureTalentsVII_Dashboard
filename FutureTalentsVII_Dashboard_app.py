@@ -213,7 +213,7 @@ if selected == "Rankings":
         event_counts = event_counts.sort_values(by=[MetricSel], ascending=True)
         players_teams = [f'{player} - {team}' for player, team in event_counts[-10:].index]
         #events = event_counts[MetricSel].head(-5)
-        players_teams = players_teams.str.upper()
+        #players_teams = players_teams.str.upper()
         ##st.write(event_counts.columns)
         ##st.write(players_teams)
         #event_counts = event_counts.head(10)
