@@ -1061,6 +1061,8 @@ if selected == "Player Search":
         with pltmnop01_shots:
             OptionPlot = ['Shots Location', 'Shots Heatmap']
             OptionPlotSel = st.selectbox('Choose viz:', OptionPlot)
+        with pltmnop02_shots:
+            Sel = st.slider('Expected Goals (xG):', 0, 10, (0, 10))
         ColorOptionSel = "#FF0050"
         pltmain01, pltmain02 = st.columns(2)
         with pltmain01:
