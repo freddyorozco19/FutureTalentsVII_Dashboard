@@ -379,7 +379,6 @@ if selected == "Rankings":
         fig.set_facecolor('#151517')
         ax.patch.set_facecolor('#151517')
         df = df.sort_values(by=[MetricSel], ascending=True)
-        st.write(df)
         #players_teams = [f'{player} - {team}' for player, team in event_counts[-10:].index]
         #events = event_counts[MetricSel].head(-5)
         #players_teams = players_teams.str.upper()
