@@ -1059,7 +1059,7 @@ if selected == "Player Search":
     elif EventlstSel == 'Shots':
         pltmnop01_shots, pltmnop02_shots, pltmnop03_shots = st.columns(3)
         with pltmnop01_shots:
-            OptionPlot = ['Shots Location', 'Shots Heatmap', 'Heatmap - Gaussian', 'Heatmap - Kernel']
+            OptionPlot = ['Shots Location', 'Shots Heatmap']
             OptionPlotSel = st.selectbox('Choose viz:', OptionPlot)
         ColorOptionSel = "#FF0050"
         pltmain01, pltmain02 = st.columns(2)
