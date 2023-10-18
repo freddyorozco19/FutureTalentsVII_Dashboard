@@ -1153,13 +1153,12 @@ if selected == "Player Search":
                         .assign(COUNT_scaled = lambda x: x.COUNT_share/x.COUNT_share.max())
                     )
                     
-                    
-                    
+
                     
                     counter = 0
                     for X, Y in zip(example_df["bins_x"], example_df["bins_y"]):
                     	#This colours our bins
-                        ax2.fill_between(
+                        ax.fill_between(
                             x = [X.left, X.right],
                             y1 = Y.left,
                             y2 = Y.right,
@@ -1171,7 +1170,7 @@ if selected == "Player Search":
                     	
                         # Fancy annotations cuz why not?
                         if example_df['COUNT_share'].iloc[counter] > .005:
-                            text_ = ax2.annotate(
+                            text_ = ax.annotate(
                                 xy = (X.right - (X.right - X.left)/2, Y.right - (Y.right - Y.left)/2),
                                 text = f"{example_df['COUNT_share'].iloc[counter]:.0%}",
                                 fontproperties=prop2,
