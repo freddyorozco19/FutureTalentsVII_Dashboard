@@ -503,6 +503,7 @@ if selected == "Player Search":
     ##                                'FieldYfrom': 'Y1',
     ##                                'FieldXto': 'X2',
     ##                                'FieldYto': 'Y2'})
+    dfORIGINAL = df
     if EventlstSel == 'Actions':     
         pltmnop01, pltmnop02, pltmnop03 = st.columns(3)
         with pltmnop01:
@@ -721,6 +722,7 @@ if selected == "Player Search":
             ax53.set_facecolor("#000")
             ##st.dataframe(dfDOWN)
             ##df = df[(df['EfectiveMinute'] >= EfectMinSel[0]) & (df['EfectiveMinute'] <= EfectMinSel[1])]
+            df = dfORIGINAL
             df_backup = df
             colorviz="#FF0046"
             if OptionPlotSel == 'Passes Map':
@@ -926,7 +928,84 @@ if selected == "Player Search":
                 pitch.draw(ax=ax)
         with pltmain12:
             st.dataframe(df)
+    if EventlstSel == 'Recoveries':     
+        pltmnop01_recoveries, pltmnop02_recoveries, pltmnop03_recoveries = st.columns(3)
+        with pltmnop01_recoveries:
+            OptionPlot = ['Territory Recoveries', 'Heatmap - Zones', 'Heatmap - Gaussian', 'Heatmap - Kernel']
+            OptionPlotSel = st.selectbox('Choose viz:', OptionPlot)
+        ColorOptionSel = "#FF0050"
+        pltmain01, pltmain02 = st.columns(2)
+        with pltmain01:
+            fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
+            ax.axis("off")
+            fig.patch.set_visible(False)
+            pitch = Pitch(pitch_color='None', pitch_type='custom', line_zorder=1, linewidth=0.5, goal_type='box', pitch_length=105, pitch_width=68)
+            pitch.draw(ax=ax)
+            #Adding directon arrow
+            ax29 = fig.add_axes([0.368,0.22,0.3,0.05])
+            ax29.axis("off")
+            ax29.set_xlim(0,10)
+            ax29.set_ylim(0,10)
+            ax29.annotate('', xy=(2, 6), xytext=(8, 6), arrowprops=dict(arrowstyle='<-', ls= '-', lw = 1, color = (1,1,1,0.5)))
+            ##ax29.annotate(s='', xy=(2, 5), xytext=(8, 5), arrowprops=dict(arrowstyle='<-', ls= '-', lw = 1, color = (1,1,1,0.5)))
+            ax29.text(5, 2, 'Attack Direction', fontproperties=prop3, c=(1,1,1,0.5), fontsize=10, ha='center')
+            #Adding winstats logo
+            ax53 = fig.add_axes([0.82, 0.14, 0.05, 0.05])
+            url53 = "https://i.postimg.cc/R0QjGByL/sZggzUM.png"
+            response = requests.get(url53)
+            img = Image.open(BytesIO(response.content))
+            ax53.imshow(img)
+            ax53.axis("off")
+            ax53.set_facecolor("#000")
+            #st.dataframe(dfDOWN)
+            ###df = df[(df['EfectiveMinute'] >= EfectMinSel[0]) & (df['EfectiveMinute'] <= EfectMinSel[1])]
+            df = dfORIGINAL
+            dfKK = df
+            df_backup = df
+            if OptionPlotSel == 'Territory Recoveries': 
 
+                    dfKKcleaned = df
+                    df = df[df['Action'] == 'Recovery'].reset_index(drop=True)
+                    scaler  = StandardScaler()
+                    defpoints1 = df[['X1', 'Y1']].values
+                    defpoints2 = scaler.fit_transform(defpoints1)
+                    df2 = pd.DataFrame(defpoints2, columns = ['Xstd', 'Ystd'])
+                    df3 = pd.concat([df, df2], axis=1)
+                    df5=df3
+                    df3 = df3[df3['Xstd'] <= 1]
+                    df3 = df3[df3['Xstd'] >= -1]
+                    df3 = df3[df3['Ystd'] <= 1]
+                    df3 = df3[df3['Ystd'] >= -1].reset_index()
+                    df9 = df
+                    df = df3
+                    defpoints = df[['X1', 'Y1']].values
+                    hull = ConvexHull(df[['X1','Y1']])        
+                    ax.scatter(df9['X1'], df9['Y1'], color = ColorOptionSel, edgecolors='w', s=30, zorder=2, alpha=0.2)
+                    #Loop through each of the hull's simplices
+                    for simplex in hull.simplices:
+                        #Draw a black line between each
+                        ax.plot(defpoints[simplex, 0], defpoints[simplex, 1], '#BABABA', lw=2, zorder = 1, ls='--')
+                    ax.fill(defpoints[hull.vertices,0], defpoints[hull.vertices,1], ColorOptionSel, alpha=0.7)
+                    meanposx = df9['X1'].mean()
+                    meanposy = df9['Y1'].mean()
+                    ax.scatter(meanposx, meanposy, s=1000, color="w", edgecolors=ColorOptionSel, lw=2.5, zorder=25, alpha=0.95)
+                    names = PlayerPltSel.split()
+                    iniciales = ""
+                    for name in names:
+                       iniciales += name[0] 
+                    #names_iniciales = names_iniciales.squeeze().tolist()
+                    ax.text(meanposx, meanposy, iniciales, color='k', fontproperties=prop2, fontsize=13, zorder=34, ha='center', va='center')
+                    ax.text(52.5,70, "" + PlayerPltSel.upper() + " - " + str(len(dfKKcleaned)) + " TOUCHES", c='w', fontsize=10, fontproperties=prop2, ha='center')
+                    #Adding title
+                    ax9 = fig.add_axes([0.17,0.16,0.20,0.07])
+                    ax9.axis("off")
+                    ax9.set_xlim(0,10)
+                    ax9.set_ylim(0,10)
+                    ax9.scatter(2, 5, s=120, color=ColorOptionSel, edgecolors='#FFFFFF', lw=1)
+                    ax9.text(2, -0.5, 'RECOVERIES', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
+                    ax9.scatter(8, 5, s=320, color=ColorOptionSel, edgecolors='#FFFFFF', lw=1, ls='--', marker='h')
+                    ax9.text(8, -0.5, 'RECOVERIES\nTERRITORY', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
+                    st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
     st.markdown("""----""")
     metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
     with metricplayerbox01:
