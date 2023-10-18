@@ -219,6 +219,16 @@ if selected == "Rankings":
         #PLY = event_counts['Players'].tail(10).str.upper()
         Z = event_counts[MetricSel].tail(10)
         ax.barh(players_teams, Z, edgecolor=(1,1,1,0.5), lw = 1, color=colors)
+        plt.setp(ax.get_yticklabels(), fontproperties=prop2, fontsize=18, color='#FFF')
+        plt.setp(ax.get_xticklabels(), fontproperties=prop2, fontsize=20, color=(1,1,1,1))
+        plt.xlabel(metsel, color = 'w', fontproperties=prop2, fontsize=15, labelpad=20)
+        #ax.set_xticks([0, 5, 10])
+        #ax.set_xlim(0, 18)
+        ax.tick_params(axis='y', which='major', pad=15)
+        spines = ['top','bottom','left','right']
+        for x in spines:
+            if x in spines:
+                ax.spines[x].set_visible(False)
         st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
     with p02:
         st.write(event_counts[MetricSel])
