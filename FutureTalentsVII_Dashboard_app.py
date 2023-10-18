@@ -350,7 +350,7 @@ df = merged_df
 
 
 #event_counts = df.groupby(['Players', 'Team'])['Event'].value_counts().unstack(fill_value=0)
-columnsevents = df.columns.tolist()
+columnsevents = df.columns[1:].tolist()
 st.write(columnsevents)
 if selected == "Rankings":
     st.title("RANKINGS")
