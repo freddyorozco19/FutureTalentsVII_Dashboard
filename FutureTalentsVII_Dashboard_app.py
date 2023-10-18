@@ -114,6 +114,53 @@ def colorlist(color1, color2, num):
         result = temp
     indices = np.linspace(0, len(result)-1, num).round().astype(int)
     return [result[i] for i in indices] 
+
+def soc_pitch_divisions(ax, grids = False):
+    '''
+    This function returns a vertical football pitch
+    divided in specific locations.
+
+    Args:
+        ax (obj): a matplotlib axes.
+        grids (bool): should we draw the grid lines?
+    '''
+
+    # Notice the extra parameters passed to the object
+    pitch = VerticalPitch(
+        pitch_type = "uefa",
+        half = True,
+        goal_type='box',
+        linewidth = 1.5,
+        pitch_color='None',
+        line_color='w',
+        line_zorder=0
+    )
+
+    pitch.draw(ax = ax)
+
+    # Where we'll draw the lines
+    if grids:
+        y_lines = [105 - 5.5*x for x in range(1,10)]
+        x_lines = [68 - 6.8*x for x in range(1,10)]
+
+        for i in x_lines:
+            ax.plot(
+                [i, i], [45, 105], 
+                color = "#8E8E8E", 
+                ls = "--",
+                lw = 0.3,
+                zorder = -1
+            )
+        for j in y_lines:
+            ax.plot(
+                [68, 0], [j, j],
+                color = "#8E8E8E", 
+                ls = "--",
+                lw = 0.3,
+                zorder = -1
+            )
+
+    return ax
     
 #####################################################################################################################################################
 #####################################################################################################################################################
@@ -1017,33 +1064,33 @@ if selected == "Player Search":
         ColorOptionSel = "#FF0050"
         pltmain01, pltmain02 = st.columns(2)
         with pltmain01:
-            fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
-            ax.axis("off")
-            fig.patch.set_visible(False)
-            pitch = Pitch(pitch_color='None', pitch_type='custom', line_zorder=1, linewidth=0.5, goal_type='box', pitch_length=105, pitch_width=68)
-            pitch.draw(ax=ax)
-            #Adding directon arrow
-            ax29 = fig.add_axes([0.368,0.22,0.3,0.05])
-            ax29.axis("off")
-            ax29.set_xlim(0,10)
-            ax29.set_ylim(0,10)
-            ax29.annotate('', xy=(2, 6), xytext=(8, 6), arrowprops=dict(arrowstyle='<-', ls= '-', lw = 1, color = (1,1,1,0.5)))
-            ##ax29.annotate(s='', xy=(2, 5), xytext=(8, 5), arrowprops=dict(arrowstyle='<-', ls= '-', lw = 1, color = (1,1,1,0.5)))
-            ax29.text(5, 2, 'Attack Direction', fontproperties=prop3, c=(1,1,1,0.5), fontsize=10, ha='center')
-            #Adding winstats logo
-            ax53 = fig.add_axes([0.82, 0.14, 0.05, 0.05])
-            url53 = "https://i.postimg.cc/R0QjGByL/sZggzUM.png"
-            response = requests.get(url53)
-            img = Image.open(BytesIO(response.content))
-            ax53.imshow(img)
-            ax53.axis("off")
-            ax53.set_facecolor("#000")
             #st.dataframe(dfDOWN)
             ###df = df[(df['EfectiveMinute'] >= EfectMinSel[0]) & (df['EfectiveMinute'] <= EfectMinSel[1])]
             df = dfORIGINAL
             dfKK = df
             df_backup = df
-            if OptionPlotSel == 'Shots Location': 
+            if OptionPlotSel == "Shots Location": 
+                    fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
+                    ax.axis("off")
+                    fig.patch.set_visible(False)
+                    pitch = Pitch(pitch_color='None', pitch_type='custom', line_zorder=1, linewidth=0.5, goal_type='box', pitch_length=105, pitch_width=68)
+                    pitch.draw(ax=ax)
+                    #Adding directon arrow
+                    ax29 = fig.add_axes([0.368,0.22,0.3,0.05])
+                    ax29.axis("off")
+                    ax29.set_xlim(0,10)
+                    ax29.set_ylim(0,10)
+                    ax29.annotate('', xy=(2, 6), xytext=(8, 6), arrowprops=dict(arrowstyle='<-', ls= '-', lw = 1, color = (1,1,1,0.5)))
+                    ##ax29.annotate(s='', xy=(2, 5), xytext=(8, 5), arrowprops=dict(arrowstyle='<-', ls= '-', lw = 1, color = (1,1,1,0.5)))
+                    ax29.text(5, 2, 'Attack Direction', fontproperties=prop3, c=(1,1,1,0.5), fontsize=10, ha='center')
+                    #Adding winstats logo
+                    ax53 = fig.add_axes([0.82, 0.14, 0.05, 0.05])
+                    url53 = "https://i.postimg.cc/R0QjGByL/sZggzUM.png"
+                    response = requests.get(url53)
+                    img = Image.open(BytesIO(response.content))
+                    ax53.imshow(img)
+                    ax53.axis("off")
+                    ax53.set_facecolor("#000")
                     dfKKcleaned = df
                     df = df[df['Action'] == 'Shot'].reset_index(drop=True)
                     ax.scatter(df['X1'], df['Y1'], color = ColorOptionSel, edgecolors='w', s=30, zorder=2, alpha=1)
@@ -1057,6 +1104,12 @@ if selected == "Player Search":
                     ax9.text(2, -0.5, 'SHOTS', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
                     #ax9.scatter(8, 5, s=320, color=ColorOptionSel, edgecolors='#FFFFFF', lw=1, ls='--', marker='h')
                     #ax9.text(8, -0.5, 'RECOVERIES\nTERRITORY', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
+                    st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
+            if OptionPlotSel == "Shots Heatmap":
+                    fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
+                    ax.axis("off")
+                    fig.patch.set_visible(False)
+                    soc_pitch_divisions(ax2, grids = True)
                     st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
         with pltmain02:
             st.dataframe(df)
