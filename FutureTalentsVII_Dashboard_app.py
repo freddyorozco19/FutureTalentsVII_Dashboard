@@ -208,8 +208,8 @@ if selected == "Rankings":
         fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
         #ax.axis("off")
         fig.patch.set_visible(False)
-        event_counts = event_counts.sort_values(by=[MetricSel], ascending=True)
-        players_teams = [f'{player} - {team}' for player, team in event_counts[:-10].index]
+        event_counts = event_counts.sort_values(by=[MetricSel], ascending=False)
+        players_teams = [f'{player} - {team}' for player, team in event_counts[:10].index]
         #events = event_counts[MetricSel].head(-5)
         
         ##st.write(event_counts.columns)
@@ -217,7 +217,7 @@ if selected == "Rankings":
         #event_counts = event_counts.head(10)
         colors = colorlist((1, 0, 0.3137254901960784, 0), (1, 0, 0.3137254901960784, 1), 10)
         #PLY = event_counts['Players'].tail(10).str.upper()
-        Z = event_counts[MetricSel].tail(10)
+        Z = event_counts[MetricSel].head(10)
         ax.barh(players_teams, Z, edgecolor=(1,1,1,0.5), lw = 1, color=colors)
         mplt.setp(ax.get_yticklabels(), fontproperties=prop2, fontsize=18, color='#FFF')
         mplt.setp(ax.get_xticklabels(), fontproperties=prop2, fontsize=20, color=(1,1,1,1))
@@ -231,7 +231,7 @@ if selected == "Rankings":
                 ax.spines[x].set_visible(False)
         st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
     with p02:
-        st.write(event_counts[MetricSel][:-10])
+        st.write(event_counts[MetricSel])
 if selected == "Player Search":
     ###Data
     ##df = pd.read_excel("MatchesData/matches.xlsx")
