@@ -1192,7 +1192,7 @@ if selected == "Player Search":
                     ax53.axis("off")
                     ax53.set_facecolor("#000")
                     #Adding colorbar
-                    ax9 = fig.add_axes([0.145,0.14,0.20,0.07])
+                    ax9 = fig.add_axes([0.135,0.12,0.20,0.07])
                     ax9.scatter(6.75,5, c="#FF0050", marker='h', s=400, edgecolors='#121214', alpha=1)
                     ax9.scatter(5.00,5, c="#FF0050", marker='h', s=400, edgecolors='#121214', alpha=0.7)
                     ax9.scatter(3.25,5, c="#FF0050", marker='h', s=400, edgecolors='#121214', alpha=0.2)
