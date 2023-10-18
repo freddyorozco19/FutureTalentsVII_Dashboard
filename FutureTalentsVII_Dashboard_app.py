@@ -102,6 +102,18 @@ def get_continuous_cmap(hex_list, float_list=None):
         cdict[col] = col_list
     cmp = mcolors.LinearSegmentedColormap('my_cmp', segmentdata=cdict, N=256)
     return cmp
+
+def colorlist(color1, color2, num):
+    """Generate list of num colors blending from color1 to color2"""
+    result = [np.array(color1), np.array(color2)]
+    while len(result) < num:
+        temp = [result[0]]
+        for i in range(len(result)-1):
+            temp.append(np.sqrt((result[i]**2+result[i+1]**2)/2))
+            temp.append(result[i+1])
+        result = temp
+    indices = np.linspace(0, len(result)-1, num).round().astype(int)
+    return [result[i] for i in indices] 
     
 #####################################################################################################################################################
 #####################################################################################################################################################
