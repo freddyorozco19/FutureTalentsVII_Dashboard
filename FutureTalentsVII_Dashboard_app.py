@@ -209,7 +209,7 @@ if selected == "Rankings":
         #ax.axis("off")
         fig.patch.set_visible(False)
         event_counts = event_counts.sort_values(by=[MetricSel], ascending=True)
-        players_teams = [f'{player} - {team}' for player, team in event_counts[10:].index]
+        players_teams = [f'{player} - {team}' for player, team in event_counts[:-10].index]
         #events = event_counts[MetricSel].head(-5)
         
         ##st.write(event_counts.columns)
