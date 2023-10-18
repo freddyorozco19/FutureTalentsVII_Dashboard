@@ -189,6 +189,7 @@ if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
     st.write(event_counts)
+    st.write(len(event_counts))
     st.markdown("""----""")
     metricsearchbox01, metricsearchbox02, metricsearchbox03 = st.columns(3)
     with metricsearchbox01:
