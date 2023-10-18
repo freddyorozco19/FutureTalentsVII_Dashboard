@@ -387,7 +387,7 @@ if selected == "Rankings":
         colors = colorlist((1, 0, 0.3137254901960784, 0), (1, 0, 0.3137254901960784, 1), 10)
         PLY = df['PlayerID'].tail(10).str.upper()
         Z = event_counts[MetricSel].tail(10)
-        ax.barh(players_teams, Z, edgecolor=(1,1,1,0.5), lw = 1, color=colors)
+        ax.barh(PLY, Z, edgecolor=(1,1,1,0.5), lw = 1, color=colors)
         mplt.setp(ax.get_yticklabels(), fontproperties=prop2, fontsize=18, color='#FFF')
         mplt.setp(ax.get_xticklabels(), fontproperties=prop2, fontsize=20, color=(1,1,1,1))
         mplt.xlabel(MetricSel, color = 'w', fontproperties=prop2, fontsize=15, labelpad=20)
