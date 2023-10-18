@@ -962,7 +962,7 @@ if selected == "Player Search":
             df = dfORIGINAL
             dfKK = df
             df_backup = df
-            if OptionPlotSel == 'Territory Recoveries': 
+            if OptionPlotSel == 'Recoveries Location': 
 
                     dfKKcleaned = df
                     df = df[df['Action'] == 'Recovery'].reset_index(drop=True)
