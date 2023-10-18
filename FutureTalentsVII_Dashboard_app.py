@@ -209,7 +209,7 @@ if selected == "Rankings":
         #ax.axis("off")
         fig.patch.set_visible(False)
         event_counts = event_counts.sort_values(by=[MetricSel], ascending=True)
-        players_teams = [f'{player} - {team}' for player, team in event_counts[:10].index]
+        players_teams = [f'{player} - {team}' for player, team in event_counts[10:].index]
         #events = event_counts[MetricSel].head(-5)
         
         ##st.write(event_counts.columns)
@@ -231,7 +231,7 @@ if selected == "Rankings":
                 ax.spines[x].set_visible(False)
         st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
     with p02:
-        st.write(event_counts[MetricSel][:-10])
+        st.write(event_counts[MetricSel].tail(10))
 if selected == "Player Search":
     ###Data
     ##df = pd.read_excel("MatchesData/matches.xlsx")
