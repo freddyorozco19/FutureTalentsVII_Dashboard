@@ -1182,7 +1182,7 @@ if selected == "Player Search":
                             )
                     
                         counter += 1
-                    auxtitle = ax.text(52.5, 111, "" + PlayerPltSel.upper() + " - " + str(len(df)) + "SHOTS",c='w', fontproperties=prop2, fontsize=11, ha='center', va='center')
+                    auxtitle = ax.text(34, 110, "" + PlayerPltSel.upper() + " - " + str(len(df)) + " SHOTS",c='w', fontproperties=prop2, fontsize=11, ha='center', va='center')
                     ##Adding winstats logo
                     ax53 = fig.add_axes([0.82, 0.12, 0.05, 0.05])
                     url53 = "https://i.postimg.cc/R0QjGByL/sZggzUM.png"
