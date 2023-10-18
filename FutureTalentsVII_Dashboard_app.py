@@ -180,11 +180,17 @@ with st.sidebar:
 ###Data
 ##df = pd.read_excel("MatchesData/matches.xlsx")
 df = pd.read_excel("MatchesData/all_matches_prueba2.xlsx")
+df['X1'] = (df['X1']*105)/1
+df['Y1'] = (df['Y1']*68)/1
+df['X2'] = (df['X2']*105)/1
+df['Y2'] = (df['Y2']*68)/1
+
 df['Index'] = df['Index'].fillna("")
 df['Event'] = df['Action'] + ' - ' + df['Index']
 df['PlayerID'] = df['Players']+'-'+df['Team']
 event_counts = df.groupby(['PlayerID'])['Event'].agg('count').reset_index()
 event_counts2 = df.groupby(['PlayerID'])['Event'].value_counts().unstack(fill_value=0)
+dfORIGINAL = df
 #PASS FILTER
 df = df[(df['Action'] == 'Pass') | (df['Action'] == 'Type pass')].reset_index(drop=True)
 df_backup = df
