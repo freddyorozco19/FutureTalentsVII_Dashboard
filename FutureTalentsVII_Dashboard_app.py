@@ -366,7 +366,7 @@ if selected == "Rankings":
     with metricsearchbox02:
         minsel = st.slider('Filter by minutes (%):', 0, 100)
     with metricsearchbox03:
-      Player_Lst = df['Players'].drop_duplicates().tolist()
+      Player_Lst = df['PlayerID'].drop_duplicates().tolist()
       PlayerSel = st.selectbox("Choose range:", Player_Lst)
       #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     p01, p02 = st.columns(2)
@@ -378,14 +378,14 @@ if selected == "Rankings":
         fig.set_facecolor('#151517')
         ax.patch.set_facecolor('#151517')
         event_counts = event_counts.sort_values(by=[MetricSel], ascending=True)
-        players_teams = [f'{player} - {team}' for player, team in event_counts[-10:].index]
+        #players_teams = [f'{player} - {team}' for player, team in event_counts[-10:].index]
         #events = event_counts[MetricSel].head(-5)
         #players_teams = players_teams.str.upper()
         ##st.write(event_counts.columns)
         ##st.write(players_teams)
         #event_counts = event_counts.head(10)
         colors = colorlist((1, 0, 0.3137254901960784, 0), (1, 0, 0.3137254901960784, 1), 10)
-        #PLY = event_counts['Players'].tail(10).str.upper()
+        PLY = df['PlayerID'].tail(10).str.upper()
         Z = event_counts[MetricSel].tail(10)
         ax.barh(players_teams, Z, edgecolor=(1,1,1,0.5), lw = 1, color=colors)
         mplt.setp(ax.get_yticklabels(), fontproperties=prop2, fontsize=18, color='#FFF')
