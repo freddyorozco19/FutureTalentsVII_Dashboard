@@ -1069,7 +1069,7 @@ if selected == "Player Search":
             OptionPlot = ['Shots Location', 'Shots Heatmap']
             OptionPlotSel = st.selectbox('Choose viz:', OptionPlot)
         with pltmnop02_shots:
-            df_pltmnop02shots = df[df['Action'] == 'Shot'].reset_index(drop=True)
+            df_pltmnop02shots = dfORIGINAL[dfORIGINAL['Action'] == 'Shot'].reset_index(drop=True)
             IndexOption = df_pltmnop02shots['Index'].drop_duplicates().tolist()
             IndexSel = st.selectbox('Choose event:', IndexOption)
         with pltmnop03_shots:
