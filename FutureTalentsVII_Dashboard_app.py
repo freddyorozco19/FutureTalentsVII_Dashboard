@@ -1069,6 +1069,7 @@ if selected == "Player Search":
             OptionPlot = ['Shots Location', 'Shots Heatmap']
             OptionPlotSel = st.selectbox('Choose viz:', OptionPlot)
         with pltmnop02_shots:
+            df = df[df['Action'] == 'Shot'].reset_index(drop=True)
             IndexOption = df['Index'].drop_duplicates().tolist()
             IndexSel = st.selectbox('Choose event:', IndexOption)
         with pltmnop03_shots:
@@ -1104,7 +1105,7 @@ if selected == "Player Search":
                     ax53.axis("off")
                     ax53.set_facecolor("#000")
                     dfKKcleaned = df
-                    df = df[df['Action'] == 'Shot'].reset_index(drop=True)
+                    #df = df[df['Action'] == 'Shot'].reset_index(drop=True)
                     ax.scatter(df['X1'], df['Y1'], color = ColorOptionSel, edgecolors='w', s=30, zorder=2, alpha=1)
                     ax.text(52.5,70, "" + PlayerPltSel.upper() + " - " + str(len(df)) + " SHOTS", c='w', fontsize=10, fontproperties=prop2, ha='center')
                     ##Adding title
