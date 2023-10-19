@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 """
 Created on Tue Sep 26 20:46:32 2023
 
@@ -481,7 +481,7 @@ if selected == "Player Search":
             df.at[index, 'Y1'] = 68 - row['Y1']
             df.at[index, 'X2'] = 105 - row['X2']
             df.at[index, 'Y2'] = 68 - row['Y2']
-
+    df_shots = df[df['Action'] == 'Shot'].reset_index(drop=True)
     teamsearchbox01, teamsearchbox02, teamsearchbox03 = st.columns(3)
     with teamsearchbox01:
       Team_Lst = df['Team'].drop_duplicates().tolist()
@@ -1069,8 +1069,8 @@ if selected == "Player Search":
             OptionPlot = ['Shots Location', 'Shots Heatmap']
             OptionPlotSel = st.selectbox('Choose viz:', OptionPlot)
         with pltmnop02_shots:
-            df_pltmnop02shots = dfORIGINAL[dfORIGINAL['Action'] == 'Shot'].reset_index(drop=True)
-            IndexOption = df_pltmnop02shots['Index'].drop_duplicates().tolist()
+            #df_pltmnop02shots = dfORIGINAL[dfORIGINAL['Action'] == 'Shot'].reset_index(drop=True)
+            IndexOption = df_shots['Index'].drop_duplicates().tolist()
             IndexSel = st.selectbox('Choose event:', IndexOption)
         with pltmnop03_shots:
             Sel = st.slider('Expected Goals (xG):', 0, 10, (0, 10))
