@@ -462,7 +462,7 @@ st.divider()
 if selected == "Player Search":
     ###Data
     ##df = pd.read_excel("MatchesData/matches.xlsx")
-    df = pd.read_excel("MatchesData/all_matches_16102023_215800.xlsx")
+    df = pd.read_excel("MatchesData/all_matches_prueba3.xlsx")
     st.title("Search Player")
     
     #df['FieldXfrom'] = (df['FieldXfrom']*105)/1
