@@ -490,6 +490,7 @@ if selected == "Player Search":
     with teamsearchbox02:
       Positions_List = df['Position'].drop_duplicates().tolist()
       PositionsSel = st.selectbox("Choose position:", Positions_List)
+      df = df[df['Position'] == PositionsSel].reset_index(drop=True)
     with teamsearchbox03:
       Player_Lst = df['Players'].drop_duplicates().tolist()
       PlayerSel = st.selectbox("Choose player:", Player_Lst)
@@ -822,7 +823,6 @@ if selected == "Player Search":
                     
                 pitch.lines(x1a, y1a, x2a, y2a, cmap=get_continuous_cmap(hex_list2), ax=ax, lw=2, comet=True, transparent=True, zorder=3) 
                 ax.scatter(x2a, y2a, color=colorviz, edgecolors='#121214', zorder=3, lw=0.5)           
-                
                 
                 pitch.lines(x1k, y1k, x2k, y2k, cmap=get_continuous_cmap(hex_list1), ax=ax, lw=2, comet=True, transparent=True, zorder=10) 
                 ax.scatter(x2k, y2k, color="#C7B200", edgecolors='#121214', zorder=5, lw=0.5)
