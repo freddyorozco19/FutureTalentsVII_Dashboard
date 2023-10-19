@@ -488,7 +488,7 @@ if selected == "Player Search":
       TeamSel = st.selectbox("Choose team:", Team_Lst)
       df = df[df['Team'] == TeamSel].reset_index(drop=True)
     with teamsearchbox02:
-      Positions_List = ['DEF', 'MED' 'DEL']
+      Positions_List = df['Position'].drop_duplicates().tolist()
       PositionsSel = st.selectbox("Choose position:", Positions_List)
     with teamsearchbox03:
       Player_Lst = df['Players'].drop_duplicates().tolist()
