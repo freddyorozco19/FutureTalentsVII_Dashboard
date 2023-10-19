@@ -1072,7 +1072,7 @@ if selected == "Player Search":
             #df_pltmnop02shots = dfORIGINAL[dfORIGINAL['Action'] == 'Shot'].reset_index(drop=True)
             IndexOption = df_shots['Index'].drop_duplicates().tolist()
             IndexSel = st.selectbox('Choose event:', IndexOption)
-            df = df[df['Index'] == IndexSel].reset_index(drop=True)
+            
         with pltmnop03_shots:
             Sel = st.slider('Expected Goals (xG):', 0, 10, (0, 10))
         ColorOptionSel = "#FF0050"
@@ -1084,6 +1084,7 @@ if selected == "Player Search":
             dfKK = df
             df_backup = df
             if OptionPlotSel == "Shots Location": 
+                    df = df[df['Index'] == IndexSel].reset_index(drop=True)
                     fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
                     ax.axis("off")
                     fig.patch.set_visible(False)
