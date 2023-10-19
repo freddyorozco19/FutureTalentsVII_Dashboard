@@ -1071,7 +1071,7 @@ if selected == "Player Search":
         with pltmnop02_shots:
             #df_pltmnop02shots = dfORIGINAL[dfORIGINAL['Action'] == 'Shot'].reset_index(drop=True)
             IndexOption = df_shots['Index'].drop_duplicates().tolist()
-            IndexSel = st.multiselect('Choose event:', IndexOption)
+            IndexSel = st.multiselect('Choose type:', IndexOption)
             
         with pltmnop03_shots:
             Sel = st.slider('Expected Goals (xG):', 0, 10, (0, 10))
