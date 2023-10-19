@@ -1084,7 +1084,8 @@ if selected == "Player Search":
             dfKK = df
             df_backup = df
             if OptionPlotSel == "Shots Location": 
-                    df = df[df['Index'] == IndexSel].reset_index(drop=True)
+                    #df = df[df['Index'] == IndexSel].reset_index(drop=True)
+                    df = df[df['Pos1'].isin(possel)].reset_index(drop=True)
                     fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
                     ax.axis("off")
                     fig.patch.set_visible(False)
