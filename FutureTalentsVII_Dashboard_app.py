@@ -1069,6 +1069,9 @@ if selected == "Player Search":
             OptionPlot = ['Shots Location', 'Shots Heatmap']
             OptionPlotSel = st.selectbox('Choose viz:', OptionPlot)
         with pltmnop02_shots:
+            IndexOption = df['Index'].drop_duplicates().tolist()
+            IndexSel = st.selectbox('Choose event:', IndexOption)
+        with pltmnop03_shots:
             Sel = st.slider('Expected Goals (xG):', 0, 10, (0, 10))
         ColorOptionSel = "#FF0050"
         pltmain01, pltmain02 = st.columns(2)
