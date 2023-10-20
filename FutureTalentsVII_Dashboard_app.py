@@ -443,12 +443,16 @@ if selected == "Rankings":
     #st.write(len(event_counts))
     st.markdown("""----""")
     metricsearchbox01, metricsearchbox02, metricsearchbox03 = st.columns(3)
+    GroupOpt_Defensive = ['Aerial duel - Lost', 'Aerial duel - Won', 'Allow crosses - ', 'Anticipation - Complete', 'Anticipation - Half', 'Block - Cross', 'Block - Shot', 'Clearance - ', 'Coverage - Complete', 'Coverage - Half', 'Interception - Complete', 'Interception - Half', 'Tackles - Lost', 'Tackles - Won', 'Recovery - ']
     with metricsearchbox01:
       MetricGroupOption = ['Offensive', 'Defensive', 'Possesion', 'Distribution', 'Creation']
       MetricGroupSel = st.selectbox("Choose metrics group:", MetricGroupOption)
+      if MetricGroupSel == "Defensive":
+       Metric_Lst = GroupOpt_Defensive
+      else:
+       Metric_Lst = columnsevents 
     with metricsearchbox02:
         #Team_Lst = df['Team'].drop_duplicates().tolist()
-        Metric_Lst = columnsevents
         MetricSel = st.selectbox("Choose metric:", Metric_Lst)
         #event_counts = event_counts[event_counts[MetricSel]].reset_index(drop=True)
     with metricsearchbox03:
