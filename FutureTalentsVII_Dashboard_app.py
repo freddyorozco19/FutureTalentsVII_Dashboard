@@ -424,13 +424,13 @@ if selected == "Rankings":
     but0, but1 = st.columns(2)
     with but0:
         name = "MetricsData_FutureTalentsVII"
-        df_xlsx = to_excel(dfDOWN)
+        df_xlsx = to_excel(df)
         st.download_button(label='Descargar Archivo Excel',
                            data=df_xlsx,
                            file_name= ""+ name +".xlsx")
 
     with but1:
-        df_csv = convert_df(dfDOWN)
+        df_csv = convert_df(df)
         st.download_button(label="Descargar Archivo CSV",
                            data=df_csv,
                            file_name=""+ name +".csv",
