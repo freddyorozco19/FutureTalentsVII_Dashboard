@@ -418,15 +418,16 @@ df = merged_df
 df = df.fillna(0)
 
 dfplayer = pd.read_excel("MatchesData/all_squads.xlsx")
+dfplayer = dfplayer.dropna(subset=['PlayerID'])
+
 #event_counts = df.groupby(['Players', 'Team'])['Event'].value_counts().unstack(fill_value=0)
 columnsevents = df.columns[1:].tolist()
 
 if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
-    st.write(df)
-    #dfTTT = dfplayer.merge(df[['PlayerID', 'POSITION', 'MINUTES PLAYED']], on='PlayerID', how='outer')
-    #st.write(dfTTT)
+    dfTTT = df.merge(dfplayer[['PlayerID', 'POSITION', 'MINUTES PLAYED']], on='PlayerID', how='outer')
+    st.write(dfTTT)
     but0, but1 = st.columns(2)
     with but0:
         name = "MetricsData_FutureTalentsVII"
