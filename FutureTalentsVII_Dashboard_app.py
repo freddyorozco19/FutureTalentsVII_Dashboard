@@ -427,11 +427,12 @@ if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
     dfTTT = df.merge(dfplayer[['PlayerID', 'POSITION', 'MINUTES PLAYED']], on='PlayerID', how='outer')
-    #dfTTT = dfTTT.rename(columns={'POSITION': 'Position', 'MINUTES PLAYED': 'Minutes Played'})
     column_order = ['PlayerID', 'POSITION', 'MINUTES PLAYED'] + [col for col in dfTTT.columns if col not in ['PlayerID', 'POSITION', 'MINUTES PLAYED']]
     # Reorganiza las columnas del DataFrame
     dfTTT = dfTTT[column_order]
+    dfTTT = dfTTT.rename(columns={'POSITION': 'Position', 'MINUTES PLAYED': 'Minutes Played'})
     st.write(dfTTT)
+ 
     but0, but1 = st.columns(2)
     with but0:
         name = "MetricsData_FutureTalentsVII"
