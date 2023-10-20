@@ -445,8 +445,9 @@ if selected == "Rankings":
     metricsearchbox01, metricsearchbox02, metricsearchbox03 = st.columns(3)
     GroupOpt_Defensive = ['Aerial duel - Lost', 'Aerial duel - Won', 'Allow crosses - ', 'Anticipation - Complete', 'Anticipation - Half', 'Block - Cross', 'Block - Shot', 'Clearance - ', 'Coverage - Complete', 'Coverage - Half', 'Interception - Complete', 'Interception - Half', 'Tackles - Lost', 'Tackles - Won', 'Recovery - ']
     GroupOpt_Offensive = ['Shot - Goal', 'Shot - On target', 'Shot - Wide', 'Shot - Post', 'Touches in Penalty Area']
-    GroupOpt_Possesion = ['Touches', 'Touches in Final Third', 'Carries to Second Half', 'Carries to Final Third', 'Carries to Penalty Area', 'Carries - Ball', 'Carries - To space', 'Take-ons - Won', 'Take-ons - Lost', 'Received pass']
+    GroupOpt_Possesion = ['Duel - Won', 'Duel - Lost', 'Touches', 'Touches in Final Third', 'Carries to Second Half', 'Carries to Final Third', 'Carries to Penalty Area', 'Carries - Ball', 'Carries - To space', 'Take-ons - Won', 'Take-ons - Lost', 'Received pass']
     GroupOpt_Distribut = ['Pass - Complete', 'Pass - Miss', 'Type pass - Assist', 'Type pass - Key', 'Type pass - Second assist', 'Total Progressive Passes', 'Successful Progressive Passes', 'Unsuccessful Progressive Passes', '% Successful Progressive Passes', 'Total Passes to Final Third', 'Successful Passes to Final Third', 'Unsuccessful Passes to Final Third', '% Successful Passes to Final Third', 'Total Passes to Penalty Area', 'Successful Passes to Penalty Area', 'Unsuccessful Passes to Penalty Area', '% Successful Passes to Penalty Area', 'Total Long Passes', 'Successful Long Passes', 'Unsuccessful Long Passes', '% Successful Long Passes']
+    GroupOpt_SetPieces = ['Corner - Complete', 'Corner - Miss', 'Free kick - Complete', 'Free kick - Miss', 'Free kick - Shot', 'Throw-in - ', 'Throw-in - Complete', 'Throw-in - Miss']
     with metricsearchbox01:
       MetricGroupOption = ['Offensive', 'Defensive', 'Possesion', 'Distribution', 'Creation']
       MetricGroupSel = st.selectbox("Choose metrics group:", MetricGroupOption)
