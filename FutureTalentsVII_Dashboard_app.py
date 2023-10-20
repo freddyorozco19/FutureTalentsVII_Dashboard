@@ -476,10 +476,15 @@ if selected == "Rankings":
         MetricSel = st.selectbox("Choose metric:", Metric_Lst)
         #event_counts = event_counts[event_counts[MetricSel]].reset_index(drop=True)
     with metricsearchbox03:
-        minsel = st.slider('Filter by minutes (%):', 0, 100)
-        maxmin = df['Minutes Played'].max() + 5
-        minsel1 = (minsel*maxmin)/100
-        df = df[df['Minutes Played'] >= minsel1].reset_index(drop=True)
+        metricsearbox03_01, metricsearbox03_02 = st.columns(2)
+        with metricsearbox03_01:
+         minsel = st.slider('Filter by minutes (%):', 0, 100)
+         maxmin = df['Minutes Played'].max() + 5
+         minsel1 = (minsel*maxmin)/100
+         df = df[df['Minutes Played'] >= minsel1].reset_index(drop=True)
+        with metricsearchbox04:
+         agesel = st.slider('Filter by age:', 15, 20)
+     
       #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     p01, p02 = st.columns(2)
     with p01:
