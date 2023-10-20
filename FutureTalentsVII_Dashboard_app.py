@@ -554,7 +554,7 @@ if selected == "Player Search":
     with st.form(key='formpltev'):
         pltev01, pltev02, pltev03 = st.columns(3)
         with pltev01:
-            Eventlst = ['Actions', 'Passes', 'Shots', 'Dribbles', 'Recoveries']
+            Eventlst = ['Actions', 'Passes', 'Shots', 'Dribbles', 'Recoveries', 'Pressures']
             EventlstSel = st.selectbox('Choose metric:', Eventlst)
             #st.dataframe(dfDOWN)
     #with pltev02:
