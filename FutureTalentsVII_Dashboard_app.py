@@ -454,6 +454,10 @@ if selected == "Rankings":
        Metric_Lst = GroupOpt_Defensive
       elif MetricGroupSel == "Offensive":
        Metric_Lst = GroupOpt_Offensive
+      elif MetricGroupSel == "Possesion":
+       Metric_Lst = GroupOpt_Possesion
+      elif MetricGroupSel == "Distribution":
+       Metric_Lst = GroupOpt_Distribut
       else:
        Metric_Lst = columnsevents 
     with metricsearchbox02:
