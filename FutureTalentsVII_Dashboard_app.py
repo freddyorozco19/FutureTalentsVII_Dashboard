@@ -424,7 +424,7 @@ columnsevents = df.columns[1:].tolist()
 if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
-    st.write(dfplayer)
+    st.write(dfplayer['POSITION'])
     dfTTT = df.merge(dfplayer[['PlayerID', 'POSITION', 'MINUTES PLAYED']], on='PlayerID', how='outer')
     #st.write(dfTTT)
     but0, but1 = st.columns(2)
