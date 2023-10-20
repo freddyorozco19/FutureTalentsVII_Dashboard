@@ -426,12 +426,12 @@ columnsevents = df.columns[1:].tolist()
 if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
-    dfTTT = df.merge(dfplayer[['PlayerID', 'POSITION', 'MINUTES PLAYED']], on='PlayerID', how='outer')
-    column_order = ['PlayerID', 'POSITION', 'MINUTES PLAYED'] + [col for col in dfTTT.columns if col not in ['PlayerID', 'POSITION', 'MINUTES PLAYED']]
+    df = df.merge(dfplayer[['PlayerID', 'POSITION', 'MINUTES PLAYED']], on='PlayerID', how='outer')
+    column_order = ['PlayerID', 'POSITION', 'MINUTES PLAYED'] + [col for col in df.columns if col not in ['PlayerID', 'POSITION', 'MINUTES PLAYED']]
     # Reorganiza las columnas del DataFrame
-    dfTTT = dfTTT[column_order]
-    dfTTT = dfTTT.rename(columns={'POSITION': 'Position', 'MINUTES PLAYED': 'Minutes Played'})
-    st.write(dfTTT)
+    df = df[column_order]
+    df = df.rename(columns={'POSITION': 'Position', 'MINUTES PLAYED': 'Minutes Played'})
+    st.write(df)
  
     but0, but1 = st.columns(2)
     with but0:
@@ -477,7 +477,9 @@ if selected == "Rankings":
         #event_counts = event_counts[event_counts[MetricSel]].reset_index(drop=True)
     with metricsearchbox03:
         minsel = st.slider('Filter by minutes (%):', 0, 100)
-    
+        maxmin = df['Minutes Played'].max() + 5
+        minsel1 = (minsel*maxmin)/100
+        df = df[df['Minutes Played'] >= minsel1].reset_index(drop=True)
       #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     p01, p02 = st.columns(2)
     with p01:
