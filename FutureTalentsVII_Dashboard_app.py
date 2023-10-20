@@ -439,7 +439,7 @@ if selected == "Rankings":
                            data=df_csv,
                            file_name=""+ name +".csv",
                            mime='text/csv')
-   
+    st.markdown("<style> div { text-align: center } </style>", unsafe_allow_html=True)
     #st.write(len(event_counts))
     st.markdown("""----""")
     metricsearchbox01, metricsearchbox02, metricsearchbox03 = st.columns(3)
