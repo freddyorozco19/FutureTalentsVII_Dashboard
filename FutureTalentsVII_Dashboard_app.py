@@ -423,7 +423,7 @@ if selected == "Rankings":
     st.write(df)
     but0, but1 = st.columns(2)
     with but0:
-        name = TableName
+        name = "MetricsData_FutureTalentsVII"
         df_xlsx = to_excel(dfDOWN)
         st.download_button(label='Descargar Archivo Excel',
                            data=df_xlsx,
