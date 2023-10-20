@@ -444,15 +444,16 @@ if selected == "Rankings":
     st.markdown("""----""")
     metricsearchbox01, metricsearchbox02, metricsearchbox03 = st.columns(3)
     with metricsearchbox01:
+      MetricGroupOption = ['Offensive', 'Defensive', 'Possesion', 'Distribution', 'Creation']
+      MetricGroupSel = st.selectbox("Choose metrics group:", MetricGroupOption)
+    with metricsearchbox02:
         #Team_Lst = df['Team'].drop_duplicates().tolist()
         Metric_Lst = columnsevents
         MetricSel = st.selectbox("Choose metric:", Metric_Lst)
         #event_counts = event_counts[event_counts[MetricSel]].reset_index(drop=True)
-    with metricsearchbox02:
-        minsel = st.slider('Filter by minutes (%):', 0, 100)
     with metricsearchbox03:
-      Player_Lst = df['PlayerID'].drop_duplicates().tolist()
-      PlayerSel = st.selectbox("Choose range:", Player_Lst)
+        minsel = st.slider('Filter by minutes (%):', 0, 100)
+    
       #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     p01, p02 = st.columns(2)
     with p01:
