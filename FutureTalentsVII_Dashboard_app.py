@@ -58,7 +58,18 @@ cmap = sns.cubehelix_palette(start=.25, rot=-.3, light=1, reverse=True, as_cmap=
 cmap2 = sns.diverging_palette(250, 344, as_cmap=True, center="dark")
 cmap3 = sns.color_palette("dark:#FF0046", as_cmap=True)
 
-
+def to_excel(df):
+    output = BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+    df.to_excel(writer, index=False, sheet_name='Sheet1')
+    workbook = writer.book
+    worksheet = writer.sheets['Sheet1']
+    format1 = workbook.add_format({'num_format': '0.00'}) 
+    worksheet.set_column('A:A', None, format1)  
+    writer.save()
+    processed_data = output.getvalue()
+    return processed_data
+ 
 def hex_to_rgb(value):
     '''
     Converts hex to rgb colours
@@ -410,6 +421,21 @@ if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
     st.write(df)
+    but0, but1 = st.columns(2)
+    with but0:
+        name = TableName
+        df_xlsx = to_excel(dfDOWN)
+        st.download_button(label='Descargar Archivo Excel',
+                           data=df_xlsx,
+                           file_name= ""+ name +".xlsx")
+
+    with but1:
+        df_csv = convert_df(dfDOWN)
+        st.download_button(label="Descargar Archivo CSV",
+                           data=df_csv,
+                           file_name=""+ name +".csv",
+                           mime='text/csv')
+   
     #st.write(len(event_counts))
     st.markdown("""----""")
     metricsearchbox01, metricsearchbox02, metricsearchbox03 = st.columns(3)
