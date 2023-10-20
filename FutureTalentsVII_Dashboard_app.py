@@ -778,9 +778,9 @@ if selected == "Player Search":
         with pltmnop11:
             OptionPlot = ['Passes Map', 'Progressive Passes Map', 'Passes to Final Third Map', 'Passes to Penalty Area', 'xT Passes Map']
             OptionPlotSel = st.selectbox('Choose viz:', OptionPlot)
+        #with pltmnop12:
+            #EfectMinSel = st.slider('Seleccionar rango de partido:', 0, 90, (0, 90))
         with pltmnop12:
-            EfectMinSel = st.slider('Seleccionar rango de partido:', 0, 90, (0, 90))
-        with pltmnop13:
                 MetOption = ['Pases Claves', 'Asistencias']
                 MetOptionSel = st.selectbox('Choose metric:', MetOption)
         pltmain11, pltmain12 = st.columns(2)
