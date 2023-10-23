@@ -439,8 +439,8 @@ columnsevents = df.columns[1:].tolist()
 if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
-    df = df.merge(dfplayer[['PlayerID', 'POSITION', 'MINUTES PLAYED']], on='PlayerID', how='outer')
-    column_order = ['PlayerID', 'POSITION', 'MINUTES PLAYED'] + [col for col in df.columns if col not in ['PlayerID', 'POSITION', 'MINUTES PLAYED']]
+    df = df.merge(dfplayer[['PlayerID', 'POSITION', 'MINUTES PLAYED', 'Age']], on='PlayerID', how='outer')
+    column_order = ['PlayerID', 'POSITION', 'MINUTES PLAYED', 'Age'] + [col for col in df.columns if col not in ['PlayerID', 'POSITION', 'MINUTES PLAYED', 'Age']]
     # Reorganiza las columnas del DataFrame
     df = df[column_order]
     df = df.rename(columns={'POSITION': 'Position', 'MINUTES PLAYED': 'Minutes Played'})
