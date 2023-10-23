@@ -531,7 +531,10 @@ if selected == "Rankings":
          minsel1 = (minsel*maxmin)/100
          df = df[df['Minutes Played'] >= minsel1].reset_index(drop=True)
         with metricsearbox03_02:
-         agesel = st.slider('Filter by age:', df['Year'].min(), df['Year'].max())
+         #df['Year'] = df['Year'].astype(str)
+         #agemin = str(df['Year'].min())
+         #agemax = str(df['Year'].max())
+         agesel = st.slider('Filter by age:', round(df['Year'].min()), round(df['Year'].max()))
      
       #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     p01, p02 = st.columns(2)
