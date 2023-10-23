@@ -30,6 +30,7 @@ import requests
 from PIL import Image
 from matplotlib.patches import Rectangle
 from streamlit_option_menu import option_menu
+from datetime import datetime
 
 #make it look nice from the start
 st.set_page_config(layout='wide')
@@ -429,6 +430,8 @@ df = df.fillna(0)
 
 dfplayer = pd.read_excel("MatchesData/all_squads.xlsx")
 dfplayer = dfplayer.dropna(subset=['PlayerID'])
+today = datetime.now()
+dfplayer['Age'] = (today - dfplayer['Date'])
 
 #event_counts = df.groupby(['Players', 'Team'])['Event'].value_counts().unstack(fill_value=0)
 columnsevents = df.columns[1:].tolist()
