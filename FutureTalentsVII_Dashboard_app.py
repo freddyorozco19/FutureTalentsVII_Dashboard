@@ -1338,7 +1338,7 @@ if selected == "Player Search":
         with pltmain02:
             st.dataframe(df)
     elif EventlstSel == 'Pressures':
-     pltmnop01_pressures, pltmnop02_pressures, pltmnop03_pressures = st.columns(3)
+        pltmnop01_pressures, pltmnop02_pressures, pltmnop03_pressures = st.columns(3)
         with pltmnop01_pressures:
             OptionPlot = ['Pressures Location', 'Heatmap - Zones']
             OptionPlotSel = st.selectbox('Choose viz:', OptionPlot)
