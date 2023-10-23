@@ -186,7 +186,7 @@ with st.sidebar:
     with open("Resources/logobk.png", "rb") as f:
             data = base64.b64encode(f.read()).decode("utf-8")
             sidebar_custom_width = 100
-            st.markdown(
+            st.sidebar.markdown(
                 f"""
                 <style>
                 .sidebar .sidebar-content {{
