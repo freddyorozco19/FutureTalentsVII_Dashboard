@@ -454,6 +454,7 @@ dfTotalM = dfTotalL.merge(dftotalaerialduels[['PlayerID', 'Total Aerial Duels']]
 #st.write(dfTotalL)
 merged_df = event_counts2.reset_index().merge(dfTotalM, on='PlayerID', how='outer')
 df = merged_df
+#dfMERGE = df
 df = df.fillna(0)
 
 dfplayer = pd.read_excel("MatchesData/all_squads.xlsx")
@@ -534,7 +535,10 @@ if selected == "Rankings":
          #df['Year'] = df['Year'].astype(str)
          #agemin = str(df['Year'].min())
          #agemax = str(df['Year'].max())
-         agesel = st.slider('Filter by age:', round(df['Year'].min()), round(df['Year'].max()))
+         agesel = st.slider('Filter by Year:', round(df['Year'].min()), round(df['Year'].max()), (round(df['Year'].min()), round(df['Year'].max())), 1)
+         #df = df[df['Year'] >= agesel].reset_index(drop=True)
+         df = df[df['Age'] <= agesel[1]]
+         df = df[df['Age'] >= agesel[0]]
      
       #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     p01, p02 = st.columns(2)
