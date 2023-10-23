@@ -433,8 +433,8 @@ dfplayer = dfplayer.dropna(subset=['PlayerID'])
 #today = datetime.now()
 #dfplayer['Age'] = (today - dfplayer['DATE']).astype('<m8[Y]')
 #dfplayer['DATE'] = pd.to_datetime(dfplayer['DATE'])
-#dfplayer['AgeYear'] = pd.to_datetime(dfplayer['DATE'], format='%d/%m/%Y').dt.year
-st.write(dfplayer['DATE'])
+dfplayer['AgeYear'] = dfplayer['DATE'].str.split('/').str[-1]
+st.write(dfplayer['AgeYear'])
 #event_counts = df.groupby(['Players', 'Team'])['Event'].value_counts().unstack(fill_value=0)
 columnsevents = df.columns[1:].tolist()
 
