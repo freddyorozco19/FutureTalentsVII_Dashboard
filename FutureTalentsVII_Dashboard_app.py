@@ -185,13 +185,13 @@ def soc_pitch_divisions(ax, grids = False):
 with st.sidebar:
     with open("Resources/logobk.png", "rb") as f:
             data = base64.b64encode(f.read()).decode("utf-8")
-            sidebar_custom_width = 100
+            #sidebar_custom_width = 100
             st.sidebar.markdown(
                 f"""
                 <style>
-                .sidebar .sidebar-content {{
-                    width: {sidebar_custom_width}px;
-                }}
+                .reportview-container .main .block-container {
+                    max-width: 100px;
+                }
                 </style>
                 """,
                 unsafe_allow_html=True,
