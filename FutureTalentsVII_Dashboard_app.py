@@ -1386,6 +1386,9 @@ if selected == "Player Search":
              #ax9.scatter(8, 5, s=320, color=ColorOptionSel, edgecolors='#FFFFFF', lw=1, ls='--', marker='h')
              #ax9.text(8, -0.5, 'RECOVERIES\nTERRITORY', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
              st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
+      with pltmain02:
+             st.dataframe(df)
+             
     st.markdown("""----""")
     metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
     #with metricplayerbox01:
