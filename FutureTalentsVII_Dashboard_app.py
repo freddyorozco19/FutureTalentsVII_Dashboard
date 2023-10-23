@@ -440,7 +440,7 @@ dfTotalI = dfTotalH.merge(dfcarriestofinthird[['PlayerID', 'Carries to Final Thi
 dfTotalJ = dfTotalI.merge(dfcarriestopenarea[['PlayerID', 'Carries to Penalty Area']], on='PlayerID', how='outer')
 dfTotalK = dfTotalJ.merge(dftotalshots[['PlayerID', 'Total Shots']], on='PlayerID', how='outer')
 dfTotalL = dfTotalK.merge(dftotalduels[['PlayerID', 'Total Duels']], on='PlayerID', how='outer')
-st.write(dfTotalL)
+#st.write(dfTotalL)
 merged_df = event_counts2.reset_index().merge(dfTotalL, on='PlayerID', how='outer')
 df = merged_df
 df = df.fillna(0)
@@ -459,8 +459,8 @@ columnsevents = df.columns[1:].tolist()
 if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
-    df = df.merge(dfplayer[['PlayerID', 'POSITION', 'MINUTES PLAYED']], on='PlayerID', how='outer')
-    column_order = ['PlayerID', 'Team', 'POSITION', 'MINUTES PLAYED'] + [col for col in df.columns if col not in ['PlayerID', 'Team', 'POSITION', 'MINUTES PLAYED']]
+    df = df.merge(dfplayer[['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED']], on='PlayerID', how='outer')
+    column_order = ['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED'] + [col for col in df.columns if col not in ['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED']]
     # Reorganiza las columnas del DataFrame
     df = df[column_order]
     df = df.rename(columns={'POSITION': 'Position', 'MINUTES PLAYED': 'Minutes Played'})
