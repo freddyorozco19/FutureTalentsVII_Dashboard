@@ -189,9 +189,9 @@ with st.sidebar:
             st.sidebar.markdown(
                 f"""
                 <style>
-                .reportview-container .main .block-container {
+                .reportview-container .main .block-container {{
                     max-width: 100px;
-                }
+                }}
                 </style>
                 """,
                 unsafe_allow_html=True,
