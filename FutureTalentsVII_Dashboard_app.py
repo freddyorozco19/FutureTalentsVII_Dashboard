@@ -430,8 +430,10 @@ df = df.fillna(0)
 
 dfplayer = pd.read_excel("MatchesData/all_squads.xlsx")
 dfplayer = dfplayer.dropna(subset=['PlayerID'])
-today = datetime.now()
-dfplayer['Age'] = (today - dfplayer['DATE']).astype('<m8[Y]')
+#today = datetime.now()
+#dfplayer['Age'] = (today - dfplayer['DATE']).astype('<m8[Y]')
+dfplayer['DATE'] = pd.to_datetime(df['DATE'])
+dfplayer['AgeYear'] = dfplayer['DATE'].dt.year
 
 #event_counts = df.groupby(['Players', 'Team'])['Event'].value_counts().unstack(fill_value=0)
 columnsevents = df.columns[1:].tolist()
@@ -439,8 +441,8 @@ columnsevents = df.columns[1:].tolist()
 if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
-    df = df.merge(dfplayer[['PlayerID', 'POSITION', 'MINUTES PLAYED', 'Age']], on='PlayerID', how='outer')
-    column_order = ['PlayerID', 'POSITION', 'MINUTES PLAYED', 'Age'] + [col for col in df.columns if col not in ['PlayerID', 'POSITION', 'MINUTES PLAYED', 'Age']]
+    df = df.merge(dfplayer[['PlayerID', 'POSITION', 'MINUTES PLAYED', 'AgeYear']], on='PlayerID', how='outer')
+    column_order = ['PlayerID', 'POSITION', 'MINUTES PLAYED', 'AgeYear'] + [col for col in df.columns if col not in ['PlayerID', 'POSITION', 'MINUTES PLAYED', 'AgeYear']]
     # Reorganiza las columnas del DataFrame
     df = df[column_order]
     df = df.rename(columns={'POSITION': 'Position', 'MINUTES PLAYED': 'Minutes Played'})
