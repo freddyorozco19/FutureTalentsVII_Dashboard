@@ -440,6 +440,7 @@ dfTotalI = dfTotalH.merge(dfcarriestofinthird[['PlayerID', 'Carries to Final Thi
 dfTotalJ = dfTotalI.merge(dfcarriestopenarea[['PlayerID', 'Carries to Penalty Area']], on='PlayerID', how='outer')
 dfTotalK = dfTotalJ.merge(dftotalshots[['PlayerID', 'Total Shots']], on='PlayerID', how='outer')
 dfTotalL = dfTotalK.merge(dftotalduels[['PlayerID', 'Total Duels']], on='PlayerID', how='outer')
+st.write(dfTotalL)
 merged_df = event_counts2.reset_index().merge(dfTotalL, on='PlayerID', how='outer')
 df = merged_df
 df = df.fillna(0)
