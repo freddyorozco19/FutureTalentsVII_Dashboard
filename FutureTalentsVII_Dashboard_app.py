@@ -382,11 +382,16 @@ df = df[(df['X1'] >= 88.5) & (df['Y1'] >= 13.84) & (df['Y2'] <= 54.16)].reset_in
 dftouchespenarea = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
 dftouchespenarea.columns = ['PlayerID', 'Team', 'Touches in Penalty Area']
 dftouchespenarea = dftouchespenarea.sort_values('Touches in Penalty Area', ascending=False)
-##CARRIES (FILTER)
+####CARRIES (FILTER)####
 df = dfORIGINAL
 df = df[(df['Action'] == 'Carries')].reset_index(drop=True)
 df_backup3 = df
-#CARRIES TO SECOND HALF
+##TOTAL CARRIES##
+df = df_backup3
+dftotalcarries = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalcarries.columns = ['PlayerID', 'Team', 'Total Carries']
+dftotalcarries = dftotalcarries.sort_values('Total Carries', ascending=False)
+##CARRIES TO SECOND HALF##
 df = df_backup3
 df = df[(df['X1'] <= 52.5) & (df['X2'] >= 52.5)].reset_index(drop=True)
 dfcarriestohalfpitch = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
@@ -429,12 +434,13 @@ dfTotalC = dfTotalB.merge(dfpasslargesB[['PlayerID', 'Total Long Passes', 'Succe
 dfTotalD = dfTotalC.merge(dftouches[['PlayerID', 'Touches']], on='PlayerID', how='outer')
 dfTotalE = dfTotalD.merge(dftouchesfinthird[['PlayerID', 'Touches in Final Third']], on='PlayerID', how='outer')
 dfTotalF = dfTotalE.merge(dftouchespenarea[['PlayerID', 'Touches in Penalty Area']], on='PlayerID', how='outer')
-dfTotalG = dfTotalF.merge(dfcarriestohalfpitch[['PlayerID', 'Carries to Second Half']], on='PlayerID', how='outer')
-dfTotalH = dfTotalG.merge(dfcarriestofinthird[['PlayerID', 'Carries to Final Third']], on='PlayerID', how='outer')
-dfTotalI = dfTotalH.merge(dfcarriestopenarea[['PlayerID', 'Carries to Penalty Area']], on='PlayerID', how='outer')
-dfTotalJ = dfTotalI.merge(dftotalshots[['PlayerID', 'Total Shots']], on='PlayerID', how='outer')
-dfTotalK = dfTotalJ.merge(dftotalduels[['PlayerID', 'Total Duels']], on='PlayerID', how='outer')
-merged_df = event_counts2.reset_index().merge(dfTotalK, on='PlayerID', how='outer')
+dfTotalG = dfTotalF.merge(dftotalcarries[['PlayerID', 'Total Carries']], on='PlayerID', how='outer')
+dfTotalH = dfTotalG.merge(dfcarriestohalfpitch[['PlayerID', 'Carries to Second Half']], on='PlayerID', how='outer')
+dfTotalI = dfTotalH.merge(dfcarriestofinthird[['PlayerID', 'Carries to Final Third']], on='PlayerID', how='outer')
+dfTotalJ = dfTotalI.merge(dfcarriestopenarea[['PlayerID', 'Carries to Penalty Area']], on='PlayerID', how='outer')
+dfTotalK = dfTotalJ.merge(dftotalshots[['PlayerID', 'Total Shots']], on='PlayerID', how='outer')
+dfTotalL = dfTotalK.merge(dftotalduels[['PlayerID', 'Total Duels']], on='PlayerID', how='outer')
+merged_df = event_counts2.reset_index().merge(dfTotalL, on='PlayerID', how='outer')
 df = merged_df
 df = df.fillna(0)
 
@@ -479,7 +485,7 @@ if selected == "Rankings":
     metricsearchbox01, metricsearchbox02, metricsearchbox03 = st.columns(3)
     GroupOpt_Defensive = ['Aerial duel - Lost', 'Aerial duel - Won', 'Allow crosses - ', 'Anticipation - Complete', 'Anticipation - Half', 'Block - Cross', 'Block - Shot', 'Clearance - ', 'Coverage - Complete', 'Coverage - Half', 'Interception - Complete', 'Interception - Half', 'Tackles - Lost', 'Tackles - Won', 'Recovery - ', 'Loses the mark - Normal', 'Loses the mark - Severity']
     GroupOpt_Offensive = ['Total Shots', 'Shot - Goal', 'Shot - On target', 'Shot - Wide', 'Shot - Post', 'Touches in Penalty Area']
-    GroupOpt_Possesion = ['Total Duels', 'Duel - Won', 'Duel - Lost', 'Touches', 'Touches in Final Third', 'Carries to Second Half', 'Carries to Final Third', 'Carries to Penalty Area', 'Carries - Ball', 'Carries - To space', 'Take-ons - Won', 'Take-ons - Lost', 'Received pass']
+    GroupOpt_Possesion = ['Total Duels', 'Duel - Won', 'Duel - Lost', 'Touches', 'Touches in Final Third', 'Total Carries', 'Carries to Second Half', 'Carries to Final Third', 'Carries to Penalty Area', 'Carries - Ball', 'Carries - To space', 'Take-ons - Won', 'Take-ons - Lost', 'Received pass']
     GroupOpt_Distribut = ['Pass - Complete', 'Pass - Miss', 'Type pass - Assist', 'Type pass - Key', 'Type pass - Second assist', 'Total Progressive Passes', 'Successful Progressive Passes', 'Unsuccessful Progressive Passes', '% Successful Progressive Passes', 'Total Passes to Final Third', 'Successful Passes to Final Third', 'Unsuccessful Passes to Final Third', '% Successful Passes to Final Third', 'Total Passes to Penalty Area', 'Successful Passes to Penalty Area', 'Unsuccessful Passes to Penalty Area', '% Successful Passes to Penalty Area', 'Total Long Passes', 'Successful Long Passes', 'Unsuccessful Long Passes', '% Successful Long Passes']
     GroupOpt_SetPieces = ['Corner - Complete', 'Corner - Miss', 'Free kick - Complete', 'Free kick - Miss', 'Free kick - Shot', 'Throw-in - ', 'Throw-in - Complete', 'Throw-in - Miss']
     with metricsearchbox01:
