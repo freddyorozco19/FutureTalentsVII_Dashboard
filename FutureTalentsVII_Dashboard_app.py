@@ -432,7 +432,7 @@ dfplayer = pd.read_excel("MatchesData/all_squads.xlsx")
 dfplayer = dfplayer.dropna(subset=['PlayerID'])
 #today = datetime.now()
 #dfplayer['Age'] = (today - dfplayer['DATE']).astype('<m8[Y]')
-dfplayer['DATE'] = pd.to_datetime(df['DATE'])
+dfplayer['DATE'] = pd.to_datetime(dfplayer['DATE'])
 dfplayer['AgeYear'] = dfplayer['DATE'].dt.year
 
 #event_counts = df.groupby(['Players', 'Team'])['Event'].value_counts().unstack(fill_value=0)
