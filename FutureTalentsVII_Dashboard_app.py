@@ -470,11 +470,11 @@ columnsevents = df.columns[1:].tolist()
 if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
-    df = df.merge(dfplayer[['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED']], on='PlayerID', how='outer')
-    column_order = ['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED'] + [col for col in df.columns if col not in ['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED']]
+    df = df.merge(dfplayer[['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR']], on='PlayerID', how='outer')
+    column_order = ['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR'] + [col for col in df.columns if col not in ['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR']]
     # Reorganiza las columnas del DataFrame
     df = df[column_order]
-    df = df.rename(columns={'POSITION': 'Position', 'MINUTES PLAYED': 'Minutes Played'})
+    df = df.rename(columns={'POSITION': 'Position', 'MINUTES PLAYED': 'Minutes Played', 'YEAR': 'Year'})
     st.write(df)
  
     but0, but1 = st.columns(2)
@@ -531,7 +531,7 @@ if selected == "Rankings":
          minsel1 = (minsel*maxmin)/100
          df = df[df['Minutes Played'] >= minsel1].reset_index(drop=True)
         with metricsearbox03_02:
-         agesel = st.slider('Filter by age:', 15, 20)
+         agesel = st.slider('Filter by age:', df['Year'].min(), df['Year'].max())
      
       #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     p01, p02 = st.columns(2)
