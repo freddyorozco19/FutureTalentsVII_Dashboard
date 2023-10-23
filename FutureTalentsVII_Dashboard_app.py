@@ -1337,6 +1337,55 @@ if selected == "Player Search":
                     st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
         with pltmain02:
             st.dataframe(df)
+    elif EventlstSel == 'Pressures':
+     pltmnop01_pressures, pltmnop02_pressures, pltmnop03_pressures = st.columns(3)
+        with pltmnop01_pressures:
+            OptionPlot = ['Pressures Location', 'Heatmap - Zones']
+            OptionPlotSel = st.selectbox('Choose viz:', OptionPlot)
+        ColorOptionSel = "#FF0050"
+        pltmain01, pltmain02 = st.columns(2)
+        with pltmain01:
+            fig, ax = mplt.subplots(figsize=(8, 8), dpi = 800)
+            ax.axis("off")
+            fig.patch.set_visible(False)
+            pitch = Pitch(pitch_color='None', pitch_type='custom', line_zorder=1, linewidth=0.5, goal_type='box', pitch_length=105, pitch_width=68)
+            pitch.draw(ax=ax)
+            #Adding directon arrow
+            ax29 = fig.add_axes([0.368,0.22,0.3,0.05])
+            ax29.axis("off")
+            ax29.set_xlim(0,10)
+            ax29.set_ylim(0,10)
+            ax29.annotate('', xy=(2, 6), xytext=(8, 6), arrowprops=dict(arrowstyle='<-', ls= '-', lw = 1, color = (1,1,1,0.5)))
+            ##ax29.annotate(s='', xy=(2, 5), xytext=(8, 5), arrowprops=dict(arrowstyle='<-', ls= '-', lw = 1, color = (1,1,1,0.5)))
+            ax29.text(5, 2, 'Attack Direction', fontproperties=prop3, c=(1,1,1,0.5), fontsize=10, ha='center')
+            #Adding winstats logo
+            ax53 = fig.add_axes([0.82, 0.14, 0.05, 0.05])
+            url53 = "https://i.postimg.cc/R0QjGByL/sZggzUM.png"
+            response = requests.get(url53)
+            img = Image.open(BytesIO(response.content))
+            ax53.imshow(img)
+            ax53.axis("off")
+            ax53.set_facecolor("#000")
+            #st.dataframe(dfDOWN)
+            ###df = df[(df['EfectiveMinute'] >= EfectMinSel[0]) & (df['EfectiveMinute'] <= EfectMinSel[1])]
+            df = dfORIGINAL
+            dfKK = df
+            df_backup = df
+            if OptionPlotSel == 'Pressures Location':
+             dfKKcleaned = df
+             df = df[df['Action'] == 'Pressure'].reset_index(drop=True)
+             ax.scatter(df['X1'], df['Y1'], color = ColorOptionSel, edgecolors='w', s=30, zorder=2, alpha=0.2)
+             ax.text(52.5,70, "" + PlayerPltSel.upper() + " - " + str(len(df)) + " PRESSURES", c='w', fontsize=10, fontproperties=prop2, ha='center')
+             ##Adding title
+             ax9 = fig.add_axes([0.17,0.16,0.20,0.07])
+             ax9.axis("off")
+             ax9.set_xlim(0,10)
+             ax9.set_ylim(0,10)
+             ax9.scatter(2, 5, s=120, color=ColorOptionSel, edgecolors='#FFFFFF', lw=1)
+             ax9.text(2, -0.5, 'PRESSURES', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
+             #ax9.scatter(8, 5, s=320, color=ColorOptionSel, edgecolors='#FFFFFF', lw=1, ls='--', marker='h')
+             #ax9.text(8, -0.5, 'RECOVERIES\nTERRITORY', fontproperties=prop2, fontsize=9, ha='center', va='center', c='w')
+             st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=400, format="png")
     st.markdown("""----""")
     metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
     #with metricplayerbox01:
