@@ -537,8 +537,8 @@ if selected == "Rankings":
          #agemax = str(df['Year'].max())
          agesel = st.slider('Filter by Year:', round(df['Year'].min()), round(df['Year'].max()), (round(df['Year'].min()), round(df['Year'].max())), 1)
          #df = df[df['Year'] >= agesel].reset_index(drop=True)
-         df = df[df['Age'] <= agesel[1]]
-         df = df[df['Age'] >= agesel[0]]
+         df = df[df['Year'] <= agesel[1]]
+         df = df[df['Year'] >= agesel[0]]
      
       #df = df[df['Players'] == PlayerSel].reset_index(drop=True)
     p01, p02 = st.columns(2)
