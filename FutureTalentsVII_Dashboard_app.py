@@ -413,6 +413,7 @@ df = df_backup4
 dftotalshots = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
 dftotalshots.columns = ['PlayerID', 'Team', 'Total Shots']
 dftotalshots = dftotalshots.sort_values('Total Shots', ascending=False)
+##DUEL
 ##JOIN DATAFRAMES##
 dfTotalA = dfprgB.merge(dfpatofithB[['PlayerID', 'Total Passes to Final Third', 'Successful Passes to Final Third', 'Unsuccessful Passes to Final Third', '% Successful Passes to Final Third']], on='PlayerID', how='outer')
 dfTotalB = dfTotalA.merge(dfpasspenareaB[['PlayerID', 'Total Passes to Penalty Area', 'Successful Passes to Penalty Area', 'Unsuccessful Passes to Penalty Area', '% Successful Passes to Penalty Area']], on='PlayerID', how='outer')
@@ -435,7 +436,7 @@ dfplayer = dfplayer.dropna(subset=['PlayerID'])
 #dfplayer['DATE'] = pd.to_datetime(dfplayer['DATE'])
 #dfplayer['AgeYear'] = dfplayer['DATE'].str.split('/').str[-1]
 #dfplayer 
-st.write(dfplayer['DATE'].astype())
+#st.write(dfplayer['DATE'].astype())
 #event_counts = df.groupby(['Players', 'Team'])['Event'].value_counts().unstack(fill_value=0)
 columnsevents = df.columns[1:].tolist()
 
