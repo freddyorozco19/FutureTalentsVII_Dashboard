@@ -452,7 +452,7 @@ dfTotalL = dfTotalK.merge(dftotalduels[['PlayerID', 'Total Duels']], on='PlayerI
 dfTotalM = dfTotalL.merge(dftotalaerialduels[['PlayerID', 'Total Aerial Duels']], on='PlayerID', how='outer')
 
 #st.write(dfTotalL)
-merged_df = event_counts2.reset_index().merge(dfTotalL, on='PlayerID', how='outer')
+merged_df = event_counts2.reset_index().merge(dfTotalM, on='PlayerID', how='outer')
 df = merged_df
 df = df.fillna(0)
 
