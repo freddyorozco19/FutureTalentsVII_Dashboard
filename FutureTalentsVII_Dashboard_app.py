@@ -575,6 +575,7 @@ if selected == "Rankings":
     with p02:
         event_counts22 = df000.sort_values(by=[MetricSel], ascending=False)
         st.write(event_counts22[['PlayerID', MetricSel]])
+        st.write(df[['PlayerID', MetricSel]])
 st.divider()
 if selected == "Player Search":
     ###Data
