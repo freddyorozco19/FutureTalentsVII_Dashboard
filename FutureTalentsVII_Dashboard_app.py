@@ -403,6 +403,15 @@ df = df[(df['X1'] >= 88.5) & (df['Y1'] >= 13.84) & (df['Y2'] <= 54.16)].reset_in
 dfcarriestopenarea = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
 dfcarriestopenarea.columns = ['PlayerID', 'Team', 'Carries to Penalty Area']
 dfcarriestopenarea = dfcarriestopenarea.sort_values('Carries to Penalty Area', ascending=False)
+##SHOTS (FILTER)##
+df = dfORIGINAL
+df = df[(df['Action'] == 'Shot')].reset_index(drop=True)
+df_backup4 = df
+##TOTAL SHOTS##
+df = df_backup4
+dftotalshots = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalshots.columns = ['PlayerID', 'Team', 'Total Shots']
+dftotalshots = dftotalshots.sort_values('Total Shots', ascending=False)
 ##JOIN DATAFRAMES##
 dfTotalA = dfprgB.merge(dfpatofithB[['PlayerID', 'Total Passes to Final Third', 'Successful Passes to Final Third', 'Unsuccessful Passes to Final Third', '% Successful Passes to Final Third']], on='PlayerID', how='outer')
 dfTotalB = dfTotalA.merge(dfpasspenareaB[['PlayerID', 'Total Passes to Penalty Area', 'Successful Passes to Penalty Area', 'Unsuccessful Passes to Penalty Area', '% Successful Passes to Penalty Area']], on='PlayerID', how='outer')
@@ -413,7 +422,8 @@ dfTotalF = dfTotalE.merge(dftouchespenarea[['PlayerID', 'Touches in Penalty Area
 dfTotalG = dfTotalF.merge(dfcarriestohalfpitch[['PlayerID', 'Carries to Second Half']], on='PlayerID', how='outer')
 dfTotalH = dfTotalG.merge(dfcarriestofinthird[['PlayerID', 'Carries to Final Third']], on='PlayerID', how='outer')
 dfTotalI = dfTotalH.merge(dfcarriestopenarea[['PlayerID', 'Carries to Penalty Area']], on='PlayerID', how='outer')
-merged_df = event_counts2.reset_index().merge(dfTotalI, on='PlayerID', how='outer')
+dfTotalJ = dfTotalI.merge(dftotalshots[['PlayerID', 'Total Shots']], on='PlayerID', how='outer')
+merged_df = event_counts2.reset_index().merge(dfTotalJ, on='PlayerID', how='outer')
 df = merged_df
 df = df.fillna(0)
 
