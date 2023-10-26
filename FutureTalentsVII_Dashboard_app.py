@@ -31,9 +31,10 @@ from PIL import Image
 from matplotlib.patches import Rectangle
 from streamlit_option_menu import option_menu
 from datetime import datetime
-
+from radar_chart2 import Radar
+import altair as alt
 #make it look nice from the start
-st.set_page_config(layout='wide')
+st.set_page_config(layout='wide', page_title='Future Talents VII - Dashboard', initial_sidebar_state='collapsed')
 
 #####################################################################################################################################################
 
@@ -427,7 +428,7 @@ df = df_backup5
 dftotalduels = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
 dftotalduels.columns = ['PlayerID', 'Team', 'Total Duels']
 dftotalduels = dftotalduels.sort_values('Total Duels', ascending=False)
-####AERIAL DUELS FILTER)####
+####AERIAL DUELS (FILTER)####
 df = dfORIGINAL
 df = df[(df['Action'] == 'Aerial duel')].reset_index(drop=True)
 df_backup6 = df
@@ -436,6 +437,133 @@ df = df_backup6
 dftotalaerialduels = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
 dftotalaerialduels.columns = ['PlayerID', 'Team', 'Total Aerial Duels']
 dftotalaerialduels = dftotalaerialduels.sort_values('Total Aerial Duels', ascending=False)
+####ANTICIPATIONS (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Anticipation')].reset_index(drop=True)
+df_backup7 = df
+##TOTAL ANTICIPATIONS##
+df = df_backup7
+dftotalanticipations = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalanticipations.columns = ['PlayerID', 'Team', 'Total Anticipations']
+dftotalanticipations = dftotalanticipations.sort_values('Total Anticipations', ascending=False)
+####BLOCKS (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Block')].reset_index(drop=True)
+df_backup8 = df
+##TOTAL BLOCKS##
+df = df_backup8
+dftotalblocks = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalblocks.columns = ['PlayerID', 'Team', 'Total Blocks']
+dftotalblocks = dftotalblocks.sort_values('Total Blocks', ascending=False)
+####INTERCEPTIONS (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Interception')].reset_index(drop=True)
+df_backup9 = df
+##TOTAL INTERCEPTIONS##
+df = df_backup9
+dftotalinterceptions = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalinterceptions.columns = ['PlayerID', 'Team', 'Total Interceptions']
+dftotalinterceptions = dftotalinterceptions.sort_values('Total Interceptions', ascending=False)
+####COVERAGES (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Coverage')].reset_index(drop=True)
+df_backup10 = df
+##TOTAL COVERAGES##
+df = df_backup10
+dftotalcoverages = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalcoverages.columns = ['PlayerID', 'Team', 'Total Coverages']
+dftotalcoverages = dftotalcoverages.sort_values('Total Coverages', ascending=False)
+####TACKLES (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Tackles')].reset_index(drop=True)
+df_backup11 = df
+##TOTAL TACKLES##
+df = df_backup11
+dftotaltackles = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotaltackles.columns = ['PlayerID', 'Team', 'Total Tackles']
+dftotaltackles = dftotaltackles.sort_values('Total Tackles', ascending=False)
+####PASSES (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Pass')].reset_index(drop=True)
+df_backup12 = df
+##TOTAL PASSES##
+df = df_backup12
+dftotalpasses = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalpasses.columns = ['PlayerID', 'Team', 'Total Passes']
+dftotalpasses = dftotalpasses.sort_values('Total Passes', ascending=False)
+####TYPE PASSES (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Type pass')].reset_index(drop=True)
+df_backup13 = df
+##TOTAL TYPE PASSES##
+df = df_backup13
+dftotaltypepasses = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotaltypepasses.columns = ['PlayerID', 'Team', 'Total Type Passes']
+dftotaltypepasses = dftotaltypepasses.sort_values('Total Type Passes', ascending=False)
+####PRESSURES (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Pressure')].reset_index(drop=True)
+df_backup14 = df
+##TOTAL PRESSURES##
+df = df_backup14
+dftotalpressures = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalpressures.columns = ['PlayerID', 'Team', 'Total Pressures']
+dftotalpressures = dftotalpressures.sort_values('Total Pressures', ascending=False)
+####SHOT AGAINST (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Shot against')].reset_index(drop=True)
+df_backup15 = df
+##TOTAL SHOT AGAINST##
+df = df_backup15
+dftotalshotagainst = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalshotagainst.columns = ['PlayerID', 'Team', 'Total Shot Against']
+dftotalshotagainst = dftotalshotagainst.sort_values('Total Shot Against', ascending=False)
+####TAKE-ONS (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Take-ons')].reset_index(drop=True)
+df_backup16 = df
+##TOTAL TAKE-ONS##
+df = df_backup16
+dftotaltakeons = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotaltakeons.columns = ['PlayerID', 'Team', 'Total Take-ons']
+dftotaltakeons = dftotaltakeons.sort_values('Total Take-ons', ascending=False)
+####FOULS DRAWN (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Foul drawn')].reset_index(drop=True)
+df_backup17 = df
+##TOTAL FOULS DRAWN##
+df = df_backup17
+dftotalfoulsdrawn = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalfoulsdrawn.columns = ['PlayerID', 'Team', 'Total Fouls Drawn']
+dftotalfoulsdrawn = dftotalfoulsdrawn.sort_values('Total Fouls Drawn', ascending=False)
+####CORNERS (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Corner')].reset_index(drop=True)
+df_backup18 = df
+##TOTAL CORNERS##
+df = df_backup18
+dftotalcorners = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalcorners.columns = ['PlayerID', 'Team', 'Total Corners']
+dftotalcorners = dftotalcorners.sort_values('Total Corners', ascending=False)
+####FREE KICKS (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Corner')].reset_index(drop=True)
+df_backup19 = df
+##TOTAL FREE KICKS##
+df = df_backup19
+dftotalfreekicks = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalfreekicks.columns = ['PlayerID', 'Team', 'Total Free Kicks']
+dftotalfreekicks = dftotalfreekicks.sort_values('Total Free Kicks', ascending=False)
+####PENALTIES (FILTER)####
+df = dfORIGINAL
+df = df[(df['Action'] == 'Penalty')].reset_index(drop=True)
+df_backup20 = df
+##TOTAL PENALTIES##
+df = df_backup20
+dftotalpenalties = df.groupby(['PlayerID', 'Team'])['Action'].agg('count').reset_index()
+dftotalpenalties.columns = ['PlayerID', 'Team', 'Total Penalties']
+dftotalpenalties = dftotalpenalties.sort_values('Total Penalties', ascending=False)
+
 ######JOIN DATAFRAMES######
 dfTotalA = dfprgB.merge(dfpatofithB[['PlayerID', 'Total Passes to Final Third', 'Successful Passes to Final Third', 'Unsuccessful Passes to Final Third', '% Successful Passes to Final Third']], on='PlayerID', how='outer')
 dfTotalB = dfTotalA.merge(dfpasspenareaB[['PlayerID', 'Total Passes to Penalty Area', 'Successful Passes to Penalty Area', 'Unsuccessful Passes to Penalty Area', '% Successful Passes to Penalty Area']], on='PlayerID', how='outer')
@@ -450,9 +578,22 @@ dfTotalJ = dfTotalI.merge(dfcarriestopenarea[['PlayerID', 'Carries to Penalty Ar
 dfTotalK = dfTotalJ.merge(dftotalshots[['PlayerID', 'Total Shots']], on='PlayerID', how='outer')
 dfTotalL = dfTotalK.merge(dftotalduels[['PlayerID', 'Total Duels']], on='PlayerID', how='outer')
 dfTotalM = dfTotalL.merge(dftotalaerialduels[['PlayerID', 'Total Aerial Duels']], on='PlayerID', how='outer')
-
+dfTotalN = dfTotalM.merge(dftotalanticipations[['PlayerID', 'Total Anticipations']], on='PlayerID', how='outer')
+dfTotalO = dfTotalN.merge(dftotalblocks[['PlayerID', 'Total Blocks']], on='PlayerID', how='outer')
+dfTotalP = dfTotalO.merge(dftotalinterceptions[['PlayerID', 'Total Interceptions']], on='PlayerID', how='outer')
+dfTotalQ = dfTotalP.merge(dftotalcoverages[['PlayerID', 'Total Coverages']], on='PlayerID', how='outer')
+dfTotalR = dfTotalQ.merge(dftotaltackles[['PlayerID', 'Total Tackles']], on='PlayerID', how='outer')
+dfTotalS = dfTotalR.merge(dftotalpasses[['PlayerID', 'Total Passes']], on='PlayerID', how='outer')
+dfTotalT = dfTotalS.merge(dftotaltypepasses[['PlayerID', 'Total Type Passes']], on='PlayerID', how='outer')
+dfTotalU = dfTotalT.merge(dftotalpressures[['PlayerID', 'Total Pressures']], on='PlayerID', how='outer')
+dfTotalV = dfTotalU.merge(dftotalshotagainst[['PlayerID', 'Total Shot Against']], on='PlayerID', how='outer')
+dfTotalW = dfTotalV.merge(dftotaltakeons[['PlayerID', 'Total Take-ons']], on='PlayerID', how='outer')
+dfTotalX = dfTotalW.merge(dftotalfoulsdrawn[['PlayerID', 'Total Fouls Drawn']], on='PlayerID', how='outer')
+dfTotalY = dfTotalX.merge(dftotalcorners[['PlayerID', 'Total Corners']], on='PlayerID', how='outer')
+dfTotalZ = dfTotalY.merge(dftotalfreekicks[['PlayerID', 'Total Free Kicks']], on='PlayerID', how='outer')
+dfTotalAA = dfTotalZ.merge(dftotalpenalties[['PlayerID', 'Total Penalties']], on='PlayerID', how='outer')
 #st.write(dfTotalL)
-merged_df = event_counts2.reset_index().merge(dfTotalM, on='PlayerID', how='outer')
+merged_df = event_counts2.reset_index().merge(dfTotalAA, on='PlayerID', how='outer')
 df = merged_df
 #dfMERGE = df
 df = df.fillna(0)
@@ -471,11 +612,11 @@ columnsevents = df.columns[1:].tolist()
 if selected == "Rankings":
     st.title("RANKINGS")
     st.markdown("""----""")
-    df = df.merge(dfplayer[['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR']], on='PlayerID', how='outer')
-    column_order = ['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR'] + [col for col in df.columns if col not in ['PlayerID', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR']]
+    df = df.merge(dfplayer[['PlayerID', 'NAME', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR']], on='PlayerID', how='outer')
+    column_order = ['PlayerID', 'NAME', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR'] + [col for col in df.columns if col not in ['PlayerID', 'NAME', 'TEAM', 'POSITION', 'MINUTES PLAYED', 'YEAR']]
     # Reorganiza las columnas del DataFrame
     df = df[column_order]
-    df = df.rename(columns={'POSITION': 'Position', 'MINUTES PLAYED': 'Minutes Played', 'YEAR': 'Year'})
+    df = df.rename(columns={'POSITION': 'Position', 'MINUTES PLAYED': 'Minutes Played', 'YEAR': 'Year', 'NAME': 'Name'})
     st.write(df)
  
     but0, but1 = st.columns(2)
@@ -496,9 +637,9 @@ if selected == "Rankings":
     #st.write(len(event_counts))
     st.markdown("""----""")
     metricsearchbox01, metricsearchbox02, metricsearchbox03 = st.columns(3)
-    GroupOpt_Defensive = ['Aerial duel - Lost', 'Aerial duel - Won', 'Allow crosses - ', 'Anticipation - Complete', 'Anticipation - Half', 'Block - Cross', 'Block - Shot', 'Clearance - ', 'Coverage - Complete', 'Coverage - Half', 'Interception - Complete', 'Interception - Half', 'Tackles - Lost', 'Tackles - Won', 'Recovery - ', 'Loses the mark - Normal', 'Loses the mark - Severity']
+    GroupOpt_Defensive = ['Total Anticipations', 'Anticipation - Complete', 'Anticipation - Half', 'Allow crosses - ', 'Total Blocks', 'Block - Cross', 'Block - Shot', 'Clearance - ', 'Total Coverages', 'Coverage - Complete', 'Coverage - Half', 'Total Interceptions', 'Interception - Complete', 'Interception - Half', 'Total Tackles', 'Tackles - Lost', 'Tackles - Won', 'Recovery - ', 'Loses the mark - Normal', 'Loses the mark - Severity']
     GroupOpt_Offensive = ['Total Shots', 'Shot - Goal', 'Shot - On target', 'Shot - Wide', 'Shot - Post', 'Touches in Penalty Area']
-    GroupOpt_Possesion = ['Total Duels', 'Duel - Won', 'Duel - Lost', 'Total Aerial Duels', 'Touches', 'Touches in Final Third', 'Total Carries', 'Carries to Second Half', 'Carries to Final Third', 'Carries to Penalty Area', 'Carries - Ball', 'Carries - To space', 'Take-ons - Won', 'Take-ons - Lost', 'Received pass']
+    GroupOpt_Possesion = ['Total Duels', 'Duel - Won', 'Duel - Lost', 'Total Aerial Duels', 'Aerial duel - Lost', 'Aerial duel - Won', 'Touches', 'Touches in Final Third', 'Total Carries', 'Carries to Second Half', 'Carries to Final Third', 'Carries to Penalty Area', 'Carries - Ball', 'Carries - To space', 'Take-ons - Won', 'Take-ons - Lost', 'Received pass']
     GroupOpt_Distribut = ['Pass - Complete', 'Pass - Miss', 'Type pass - Assist', 'Type pass - Key', 'Type pass - Second assist', 'Total Progressive Passes', 'Successful Progressive Passes', 'Unsuccessful Progressive Passes', '% Successful Progressive Passes', 'Total Passes to Final Third', 'Successful Passes to Final Third', 'Unsuccessful Passes to Final Third', '% Successful Passes to Final Third', 'Total Passes to Penalty Area', 'Successful Passes to Penalty Area', 'Unsuccessful Passes to Penalty Area', '% Successful Passes to Penalty Area', 'Total Long Passes', 'Successful Long Passes', 'Unsuccessful Long Passes', '% Successful Long Passes']
     GroupOpt_SetPieces = ['Corner - Complete', 'Corner - Miss', 'Free kick - Complete', 'Free kick - Miss', 'Free kick - Shot', 'Throw-in - ', 'Throw-in - Complete', 'Throw-in - Miss']
     with metricsearchbox01:
@@ -576,6 +717,46 @@ if selected == "Rankings":
         event_counts22 = df000.sort_values(by=[MetricSel], ascending=False)
         #st.write(event_counts22[['PlayerID', MetricSel]])
         st.write(event_counts22[['PlayerID', 'Minutes Played', 'Year', MetricSel]])
+    st.divider()
+    st.header("METRIC COMPARISON")
+    #df = pd.DataFrame(np.random.randn(200,3), columns=['a', 'b', 'c'])
+    #st.write(event_counts22)
+    with st.form(key='formScatter'):
+        fk01, fk02, fk03 = st.columns(3)
+        with fk01:
+            #SELECT METRIC
+            dftransp = event_counts22.transpose()            
+            dftransp = dftransp.reset_index()            
+            metricsFK = list(dftransp['index'].drop_duplicates())
+            metricsFK = metricsFK[6:]
+            metselFK = st.selectbox('Selecciona métrica uno:', metricsFK)
+        with fk02:
+            #SELECT METRIC TWO
+            metricsFK2 = list(dftransp['index'].drop_duplicates())
+            metricsFK2 = metricsFK2[6:]
+            metselFK2 = st.selectbox('Selecciona métrica dos:', metricsFK2)
+        with fk03:
+            #SELECT POSITION OPTION
+            positionsFK = list(event_counts22['Position'].drop_duplicates())
+            auxpos1 = "ALL"
+            positionsFK.append(auxpos1)
+            posselFK = st.multiselect("Seleccionar posición:", positionsFK)
+            #dfc = df
+            #if posselFK == "ALL":
+            #    df = dfc
+            #else:
+            event_counts22 = event_counts22[event_counts22['Position'].isin(posselFK)]
+        submit_buttonFK = st.form_submit_button(label='Aceptar') 
+    c = alt.Chart(event_counts22, width=800, height=400).mark_circle().encode(
+          x=metselFK, y=metselFK2, size='Minutes Played', color='Position', 
+          tooltip=['PlayerID', metselFK, metselFK2, 'Minutes Played'] # <--- tooltip part
+      )
+    
+    st.altair_chart(c, theme="streamlit")
+    
+ 
+    
+ 
 st.divider()
 if selected == "Player Search":
     ###Data
@@ -1389,10 +1570,331 @@ if selected == "Player Search":
         with pltmain02:
              st.dataframe(df)
              
-    st.markdown("""----""")
+    st.divider()
+    
+    ###SEGMENTAR POR GRUPO DE MÉTRICAS###
+    df = pd.read_excel("MatchesData/MetricsData_FutureTalentsVII.xlsx")
+    dfccc = df
+    df = df[df['Name'] == PlayerSel].reset_index(drop=True)
+    ###FILTRAR POR ACCIONES OFENSIVAS###
+    dfofe = df[['Total Shots', 'Shot - Goal', 'Shot - On target', 'Touches in Penalty Area']]
+    dfofel = dfofe.columns
+    dfofeccc = dfccc[['Total Shots', 'Shot - Goal', 'Shot - On target', 'Touches in Penalty Area']]
+    dfofelccc = dfofeccc.columns
+    ###FILTRAR POR ACCIONES DEFENSIVAS###
+    dfdef = df[['Total Anticipations', 'Anticipation - Complete', 'Clearance - ', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
+    dfdefl = dfdef.columns
+    dfdefccc = dfccc[['Total Anticipations', 'Anticipation - Complete', 'Clearance - ', 'Coverage - Complete', 'Interception - Complete', 'Tackles - Won', 'Recovery - ']]
+    dfdeflccc = dfdefccc.columns
+    ###FILTRAR POR ACCIONES DE POSESIÓN###
+    dfpos = df[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
+    dfposl = dfpos.columns
+    dfposccc = dfccc[['Total Duels', 'Total Aerial Duels', 'Touches', 'Total Carries', 'Received pass - ']]
+    dfposlccc = dfposccc.columns
+    ###FILTRAR POR ACCIONES DE CREACIÓN###
+    dfcre = df[['Type pass - Assist', 'Type pass - Key', 'Total Passes to Penalty Area', 'Successful Passes to Penalty Area']]
+    dfcrel = dfcre.columns
+    dfcreccc = dfccc[['Type pass - Assist', 'Type pass - Key', 'Total Passes to Penalty Area', 'Successful Passes to Penalty Area']]
+    dfcrelccc = dfcreccc.columns
+    ###FILTRAR POR ACCIONES DISTRIBUCIÓN###
+    dfdis = df[['Total Passes', 'Total Progressive Passes', 'Total Passes to Final Third', 'Total Long Passes']]
+    dfdisl = dfdis.columns
+    dfdisccc = dfccc[['Total Passes', 'Total Progressive Passes', 'Total Passes to Final Third', 'Total Long Passes']]
+    dfdislccc = dfdisccc.columns
+    ###FILTRAR POR ACCIONES OTRAS/SETPIECES###
+    dfoth = df[['Total Corners', 'Total Free Kicks', 'Total Penalties']]
+    dfothl = dfoth.columns
+    dfothccc = dfccc[['Total Corners', 'Total Free Kicks', 'Total Penalties']]
+    dfothlccc = dfothccc.columns
+    ###OBTENER MINIMOS Y MÁXIMOS MÉTRICAS OFENSIVAS###
+    lowwofe = []
+    highhofe = []
+    for an in range(len(dfofeccc.columns)):
+      lowwofe.append(min(dfofeccc.iloc[:,an]))
+      highhofe.append(max(dfofeccc.iloc[:,an]))
+    ###OBTENER MINIMOS Y MÁXIMOS MÉTRICAS DEFENSIVAS###
+    lowwdef = []
+    highhdef = []
+    for an in range(len(dfdefccc.columns)):
+      lowwdef.append(min(dfdefccc.iloc[:,an]))
+      highhdef.append(max(dfdefccc.iloc[:,an]))
+    ###OBTENER MINIMOS Y MÁXIMOS MÉTRICAS POSESIÓN###    
+    lowwpos = []
+    highhpos = []
+    for an in range(len(dfposccc.columns)):
+        lowwpos.append(min(dfposccc.iloc[:,an]))
+        highhpos.append(max(dfposccc.iloc[:,an]))
+    ###OBTENER MINIMOS Y MÁXIMOS MÉTRICAS CREACIÓN###    
+    lowwcre = []
+    highhcre = []
+    for an in range(len(dfcreccc.columns)):
+        lowwcre.append(min(dfcreccc.iloc[:,an]))
+        highhcre.append(max(dfcreccc.iloc[:,an]))
+    ###OBTENER MINIMOS Y MÁXIMOS MÉTRICAS DISTRIBUCIÓN###    
+    lowwdis = []
+    highhdis = []
+    for an in range(len(dfdisccc.columns)):
+        lowwdis.append(min(dfdisccc.iloc[:,an]))
+        highhdis.append(max(dfdisccc.iloc[:,an]))
+    ###OBTENER MINIMOS Y MÁXIMOS MÉTRICAS OTHER/SETPIECE###    
+    lowwoth = []
+    highhoth = []
+    for an in range(len(dfothccc.columns)):
+        lowwoth.append(min(dfothccc.iloc[:,an]))
+        highhoth.append(max(dfothccc.iloc[:,an]))
+    ###RANGO DE MÉTRICAS###
+    rangparamofe = len(dfofelccc)
+    rangparamdef = len(dfdeflccc)
+    rangparampos = len(dfposlccc)
+    rangparamcre = len(dfcrelccc)
+    rangparamdis = len(dfdislccc)
+    rangparamoth = len(dfothlccc)
+    ###VALORES MÉTRICAS OFENSIVAS###
+    valuessofe = dfofe.iloc[0,:]
+    valuessofe2 = round(dfofeccc.mean(), 2)
+    ###VALORES MÉTRICAS DEFENSIVAS###
+    valuessdef = dfdef.iloc[0,:]
+    valuessdef2 = round(dfdefccc.mean(), 2)
+    ###VALORES MÉTRICAS POSESIÓN###
+    valuesspos = dfpos.iloc[0,:]
+    valuesspos2 = round(dfposccc.mean(), 2)
+    ###VALORES MÉTRICAS CREACIÓN###
+    valuesscre = dfcre.iloc[0,:]
+    valuesscre2 = round(dfcreccc.mean(), 2)
+    ###VALORES MÉTRICAS DISTRIBUCIÓN###
+    valuessdis = dfdis.iloc[0,:]
+    valuessdis2 = round(dfdisccc.mean(), 2)
+    ###VALORES MÉTRICAS OTHER/SETPIECE###
+    valuessoth = dfoth.iloc[0,:]
+    valuessoth2 = round(dfothccc.mean(), 2)
+    ###RADAR MÉTRICAS OFENSIVAS###
+    radarofe = Radar(dfofelccc, lowwofe, highhofe,
+                  # whether to round any of the labels to integers instead of decimal places
+                  round_int=[False]*rangparamofe,
+                  num_rings=4,  # the number of concentric circles (excluding center circle)
+                  # if the ring_width is more than the center_circle_radius then
+                  # the center circle radius will be wider than the width of the concentric circles
+                  ring_width=1, center_circle_radius=1)
+    ###RADAR MÉTRICAS DEFENSIVAS###
+    radardef = Radar(dfdeflccc, lowwdef, highhdef,
+                  # whether to round any of the labels to integers instead of decimal places
+                  round_int=[False]*rangparamdef,
+                  num_rings=4,  # the number of concentric circles (excluding center circle)
+                  # if the ring_width is more than the center_circle_radius then
+                  # the center circle radius will be wider than the width of the concentric circles
+                  ring_width=1, center_circle_radius=1)
+    ###RADAR MÉTRICAS POSESIÓN###
+    radarpos = Radar(dfposlccc, lowwpos, highhpos,
+                  # whether to round any of the labels to integers instead of decimal places
+                  round_int=[False]*rangparampos,
+                  num_rings=4,  # the number of concentric circles (excluding center circle)
+                  # if the ring_width is more than the center_circle_radius then
+                  # the center circle radius will be wider than the width of the concentric circles
+                  ring_width=1, center_circle_radius=1)
+    ###RADAR MÉTRICAS CREACIÓN###
+    radarcre = Radar(dfcrelccc, lowwcre, highhcre,
+                  # whether to round any of the labels to integers instead of decimal places
+                  round_int=[False]*rangparamcre,
+                  num_rings=4,  # the number of concentric circles (excluding center circle)
+                  # if the ring_width is more than the center_circle_radius then
+                  # the center circle radius will be wider than the width of the concentric circles
+                  ring_width=1, center_circle_radius=1)
+    ###RADAR MÉTRICAS DISTRIBUCIÓN###
+    radardis = Radar(dfdislccc, lowwdis, highhdis,
+                   # whether to round any of the labels to integers instead of decimal places
+                   round_int=[False]*rangparamdis,
+                   num_rings=4,  # the number of concentric circles (excluding center circle)
+                   # if the ring_width is more than the center_circle_radius then
+                   # the center circle radius will be wider than the width of the concentric circles
+                   ring_width=1, center_circle_radius=1)
+    ###RADAR MÉTRICAS OTHER/SETPIECE###
+    radaroth = Radar(dfothlccc, lowwoth, highhoth,
+                  # whether to round any of the labels to integers instead of decimal places
+                  round_int=[False]*rangparamoth,
+                  num_rings=4,  # the number of concentric circles (excluding center circle)
+                  # if the ring_width is more than the center_circle_radius then
+                  # the center circle radius will be wider than the width of the concentric circles
+                  ring_width=1, center_circle_radius=1)
+    colorradar1 = "#FF0046"
+    colorradar2 = "#444444"
+    alpharradar1 = 0.5
+    alpharradar2 = 0.7
+    
+ 
     metricplayerbox01, metricplayerbox02, metricplayerbox03 = st.columns(3)
     #with metricplayerbox01:
         #Team_Lst = df['Team'].drop_duplicates().tolist()
         #Metric_Lst = columnsevents
         #MetricSel = st.selectbox("Choose metric:", Metric_Lst)
-    st.markdown("""----""")
+    
+    space0, space1, space2 = st.columns((0.6, 0.6, 0.6))
+    with space0:
+
+        fig, ax = radarofe.setup_axis()  # format axis as a radar
+        fig.set_facecolor('#050E1E')
+        fig.set_dpi(600)
+        st.markdown('<h1 style="font-size: 25px;">OFFENSIVE</h1>', unsafe_allow_html=True)
+    
+        rings_inner = radarofe.draw_circles(ax=ax, facecolor=(1,1,1,0), edgecolor='#222229')  # draw circles
+        radar_output = radarofe.draw_radar_compare(valuessofe, valuessofe2, ax=ax,
+                                                kwargs_radar={'facecolor': colorradar1, 'alpha' : alpharradar1},
+                                                kwargs_compare={'facecolor': colorradar2, 'alpha' : alpharradar2},
+                                                )  # draw the radar
+        radar_poly, radar_poly2, vertices, vertices2 = radar_output
+        # range_labels = radar.draw_range_labels(ax=ax, fontsize=18,
+        #                                        fontproperties=prop)  # draw the range labels
+        param_labels = radarofe.draw_param_labels(ax=ax, fontsize=15, color=(1,1,1,0.8),
+                                               fontproperties=prop2)  # draw the param labels
+    
+        vert = vertices.tolist()
+        dfver = pd.DataFrame(vert, columns=['X', 'Y'])
+        uno = dfver['X'].tolist()
+        dos = dfver['Y'].tolist()
+    
+        ax.scatter(vertices[:, 0], vertices[:, 1], c=colorradar1, edgecolors='#050E1E', s=120, alpha=alpharradar1, zorder=-1)
+        ax.scatter(vertices2[:, 0], vertices2[:, 1], c=colorradar2, edgecolors='#050E1E', s=120, alpha=alpharradar2, zorder=-1)
+    
+        #st.write(lowwofe)
+        #st.write(highhofe)
+    
+        st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=600, format="png")   
+    with space1:
+        fig, ax = radardef.setup_axis()  # format axis as a radar
+        fig.set_facecolor('#050E1E')
+        fig.set_dpi(600)
+        st.markdown('<h1 style="font-size: 25px;">DEFENSIVE</h1>', unsafe_allow_html=True)
+        rings_inner = radardef.draw_circles(ax=ax, facecolor=(1,1,1,0), edgecolor='#222229')  # draw circles
+        radar_output = radardef.draw_radar_compare(valuessdef, valuessdef2, ax=ax,
+                                                kwargs_radar={'facecolor': colorradar1, 'alpha' : alpharradar1},
+                                                kwargs_compare={'facecolor': colorradar2, 'alpha' : alpharradar2},
+                                                )  # draw the radar
+        radar_poly, radar_poly2, vertices, vertices2 = radar_output
+        # range_labels = radar.draw_range_labels(ax=ax, fontsize=18,
+        #                                        fontproperties=prop)  # draw the range labels
+        param_labels = radardef.draw_param_labels(ax=ax, fontsize=15, color=(1,1,1,0.8),
+                                               fontproperties=prop2)  # draw the param labels
+    
+        vert = vertices.tolist()
+        dfver = pd.DataFrame(vert, columns=['X', 'Y'])
+        uno = dfver['X'].tolist()
+        dos = dfver['Y'].tolist()
+    
+        ax.scatter(vertices[:, 0], vertices[:, 1], c=colorradar1, edgecolors='#050E1E', s=120, alpha=alpharradar1)
+        ax.scatter(vertices2[:, 0], vertices2[:, 1], c=colorradar2, edgecolors='#050E1E', s=120, alpha=alpharradar2)
+    
+        #st.write(lowwdef)
+        #st.write(highhdef)
+    
+        st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=600, format="png")
+    with space2:
+        fig, ax = radarpos.setup_axis()  # format axis as a radar
+        fig.set_facecolor('#050E1E')
+        fig.set_dpi(600)
+        st.markdown('<h1 style="font-size: 25px;">POSSESION</h1>', unsafe_allow_html=True)
+        rings_inner = radarpos.draw_circles(ax=ax, facecolor=(1,1,1,0), edgecolor='#222229')  # draw circles
+        radar_output = radarpos.draw_radar_compare(valuesspos, valuesspos2, ax=ax,
+                                                kwargs_radar={'facecolor': colorradar1, 'alpha' : alpharradar1},
+                                                kwargs_compare={'facecolor': colorradar2, 'alpha' : alpharradar2},
+                                                )  # draw the radar
+        radar_poly, radar_poly2, vertices, vertices2 = radar_output
+        # range_labels = radar.draw_range_labels(ax=ax, fontsize=18,
+        #                                        fontproperties=prop)  # draw the range labels
+        param_labels = radarpos.draw_param_labels(ax=ax, fontsize=15, color=(1,1,1,0.8),
+                                               fontproperties=prop2)  # draw the param labels
+    
+        vert = vertices.tolist()
+        dfver = pd.DataFrame(vert, columns=['X', 'Y'])
+        uno = dfver['X'].tolist()
+        dos = dfver['Y'].tolist()
+    
+        ax.scatter(vertices[:, 0], vertices[:, 1], c=colorradar1, edgecolors='#050E1E', s=120, alpha=alpharradar1)
+        ax.scatter(vertices2[:, 0], vertices2[:, 1], c=colorradar2, edgecolors='#050E1E', s=120, alpha=alpharradar2)
+    
+    
+        st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=600, format="png") 
+    space3, space4, space5 = st.columns(3)
+    with space3:
+        fig, ax = radarcre.setup_axis()  # format axis as a radar
+        fig.set_facecolor('#050E1E')
+        fig.set_dpi(600)
+        st.markdown('<h1 style="font-size: 25px;">CREATION</h1>', unsafe_allow_html=True)
+        rings_inner = radarcre.draw_circles(ax=ax, facecolor=(1,1,1,0), edgecolor='#222229')  # draw circles
+        radar_output = radarcre.draw_radar_compare(valuesscre, valuesscre2, ax=ax,
+                                                kwargs_radar={'facecolor': colorradar1, 'alpha' : alpharradar1},
+                                                kwargs_compare={'facecolor': colorradar2, 'alpha' : alpharradar2},
+                                                )  # draw the radar
+        radar_poly, radar_poly2, vertices, vertices2 = radar_output
+        # range_labels = radar.draw_range_labels(ax=ax, fontsize=18,
+        #                                        fontproperties=prop)  # draw the range labels
+        param_labels = radarcre.draw_param_labels(ax=ax, fontsize=15, color=(1,1,1,0.8),
+                                               fontproperties=prop2)  # draw the param labels
+    
+        vert = vertices.tolist()
+        dfver = pd.DataFrame(vert, columns=['X', 'Y'])
+        uno = dfver['X'].tolist()
+        dos = dfver['Y'].tolist()
+    
+        ax.scatter(vertices[:, 0], vertices[:, 1], c=colorradar1, edgecolors='#050E1E', s=120, alpha=alpharradar1)
+        ax.scatter(vertices2[:, 0], vertices2[:, 1], c=colorradar2, edgecolors='#050E1E', s=120, alpha=alpharradar2)
+    
+        #st.write(lowwcre)
+        #st.write(highhcre)
+    
+        st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=600, format="png")
+    with space4:
+        fig, ax = radardis.setup_axis()  # format axis as a radar
+        fig.set_facecolor('#050E1E')
+        fig.set_dpi(600)
+        st.markdown('<h1 style="font-size: 25px;">DISTRIBUTION</h1>', unsafe_allow_html=True)
+        rings_inner = radardis.draw_circles(ax=ax, facecolor=(1,1,1,0), edgecolor='#222229')  # draw circles
+        radar_output = radardis.draw_radar_compare(valuessdis, valuessdis2, ax=ax,
+                                                kwargs_radar={'facecolor': colorradar1, 'alpha' : alpharradar1},
+                                                kwargs_compare={'facecolor': colorradar2, 'alpha' : alpharradar2},
+                                                )  # draw the radar
+        radar_poly, radar_poly2, vertices, vertices2 = radar_output
+        # range_labels = radar.draw_range_labels(ax=ax, fontsize=18,
+        #                                        fontproperties=prop)  # draw the range labels
+        param_labels = radardis.draw_param_labels(ax=ax, fontsize=15, color=(1,1,1,0.8),
+                                               fontproperties=prop2)  # draw the param labels
+    
+        vert = vertices.tolist()
+        dfver = pd.DataFrame(vert, columns=['X', 'Y'])
+        uno = dfver['X'].tolist()
+        dos = dfver['Y'].tolist()
+    
+        ax.scatter(vertices[:, 0], vertices[:, 1], c=colorradar1, edgecolors='#050E1E', s=120, alpha=alpharradar1)
+        ax.scatter(vertices2[:, 0], vertices2[:, 1], c=colorradar2, edgecolors='#050E1E', s=120, alpha=alpharradar2)
+    
+        #st.write(lowwdis)
+        #st.write(highhdis)
+    
+        st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=600, format="png") 
+    with space5:
+        fig, ax = radaroth.setup_axis()  # format axis as a radar
+        fig.set_facecolor('#050E1E')
+        fig.set_dpi(600)
+        st.markdown('<h1 style="font-size: 25px;">OTHER</h1>', unsafe_allow_html=True)
+        rings_inner = radaroth.draw_circles(ax=ax, facecolor=(1,1,1,0), edgecolor='#222229')  # draw circles
+        radar_output = radaroth.draw_radar_compare(valuessoth, valuessoth2, ax=ax,
+                                                kwargs_radar={'facecolor': colorradar1, 'alpha' : alpharradar1},
+                                                kwargs_compare={'facecolor': colorradar2, 'alpha' : alpharradar2},
+                                                )  # draw the radar
+        radar_poly, radar_poly2, vertices, vertices2 = radar_output
+        # range_labels = radar.draw_range_labels(ax=ax, fontsize=18,
+        #                                        fontproperties=prop)  # draw the range labels
+        param_labels = radaroth.draw_param_labels(ax=ax, fontsize=15, color=(1,1,1,0.8),
+                                               fontproperties=prop2)  # draw the param labels
+    
+        vert = vertices.tolist()
+        dfver = pd.DataFrame(vert, columns=['X', 'Y'])
+        uno = dfver['X'].tolist()
+        dos = dfver['Y'].tolist()
+    
+        ax.scatter(vertices[:, 0], vertices[:, 1], c=colorradar1, edgecolors='#050E1E', s=120, alpha=alpharradar1)
+        ax.scatter(vertices2[:, 0], vertices2[:, 1], c=colorradar2, edgecolors='#050E1E', s=120, alpha=alpharradar2)
+    
+        #st.write(lowwoth)
+        #st.write(highhoth)
+    
+        st.pyplot(fig, bbox_inches="tight", pad_inches=0.05, dpi=600, format="png")
+    st.divider()
